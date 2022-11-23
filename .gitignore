@@ -11,3 +11,4 @@ build
 #complied files
 *.class
 app/build/**
+app/bin/**

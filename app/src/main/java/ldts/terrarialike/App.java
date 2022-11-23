@@ -3,8 +3,19 @@
  */
 package ldts.terrarialike;
 
+import ldts.terrarialike.GUI.GUILanterna;
+import ldts.terrarialike.controller.GameController;
+import ldts.terrarialike.model.World;
+import ldts.terrarialike.view.GameView;
+
 public class App {
-    public static void main(String[] args) {
-        System.out.println("Pog");
+
+    public static void main(String[] args) throws InterruptedException{
+        World world = new World();
+        GameController cGameController = new GameController();
+        GUILanterna gLanterna = new GUILanterna(200,100, "TerrariaLike");
+        GameView gView = new GameView(gLanterna, world);
+
+        Thread.sleep(1000*10);
     }
 }
