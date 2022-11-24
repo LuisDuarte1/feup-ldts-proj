@@ -10,7 +10,12 @@ public class Block {
 
     private static void checkColorValid(String color) throws InvalidColorStringException{
         if(color.charAt(0) == '#' && color.length() == 7){
+            boolean first = true;
             for (byte c : color.getBytes()) {
+                if(first){
+                    first = false;
+                    continue;
+                }
                 if(!(('a' <= c && c <= 'f') || ('A' <= c && c <= 'F') || ('0' <= c && c <= '9'))){
                     throw new InvalidColorStringException("Color String has a wrong format... it has a non hex format.");
                 }
