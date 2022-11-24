@@ -5,12 +5,13 @@ package ldts.terrarialike;
 
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.controller.GameController;
+import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.World;
 import ldts.terrarialike.view.GameView;
 
 public class App {
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException, InvalidPositionException{
         World world = new World();
         GameController cGameController = new GameController();
         GUILanterna gLanterna = new GUILanterna(200,100, "TerrariaLike");

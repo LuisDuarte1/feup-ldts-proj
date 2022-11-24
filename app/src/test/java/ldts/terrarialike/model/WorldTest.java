@@ -6,18 +6,20 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import ldts.terrarialike.exceptions.InvalidPositionException;
+
 public class WorldTest {
 
 
     @Test
-    public void seedGetterTest(){
+    public void seedGetterTest() throws InvalidPositionException{
         World w = new World(100);
 
         assertEquals(100, w.getSeed());
     }
 
     @Test
-    public void chunkAddOnceTest(){
+    public void chunkAddOnceTest() throws InvalidPositionException{
         World w = new World();
 
         Chunk c = new Chunk();
@@ -27,7 +29,7 @@ public class WorldTest {
 
 
     @Test
-    public void chunkAddDuplicateTest(){
+    public void chunkAddDuplicateTest() throws InvalidPositionException{
         World w = new World();
 
         Chunk c = new Chunk();
@@ -38,10 +40,10 @@ public class WorldTest {
     }
 
     @Test
-    public void addEnemyTest(){
+    public void addEnemyTest() throws InvalidPositionException{
         World w = new World();
 
-        Enemy e1 = new Enemy();
+        Enemy e1 = new Enemy(null, 0);
 
         w.addEnemy(e1);
 
@@ -49,10 +51,10 @@ public class WorldTest {
     }
 
     @Test
-    public void removeEnemyInList(){
+    public void removeEnemyInList() throws InvalidPositionException{
         World w = new World();
 
-        Enemy e1 = new Enemy();
+        Enemy e1 = new Enemy(null, 0);
 
         w.addEnemy(e1);
 
@@ -62,11 +64,11 @@ public class WorldTest {
     }
 
     @Test
-    public void removeEnemyNotInListTest(){
+    public void removeEnemyNotInListTest() throws InvalidPositionException{
         World w = new World();
 
 
-        Enemy e2 = new Enemy();
+        Enemy e2 = new Enemy(null, 0);
 
 
         w.removeEnemy(e2);

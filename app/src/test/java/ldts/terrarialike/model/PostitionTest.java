@@ -29,7 +29,7 @@ public class PostitionTest {
     }
 
     @Test
-    void positionYTooLowTest(){
+    void positionYInvalidTest(){
         assertThrows(InvalidPositionException.class,
          () -> {
             Position p = new Position(0, Position.Y_MIN - 1);
