@@ -9,7 +9,7 @@ public class Block {
     private char representation_char;
 
     private static void checkColorValid(String color) throws InvalidColorStringException{
-        if(color.charAt(0) == '#'){
+        if(color.charAt(0) == '#' && color.length() == 7){
             for (byte c : color.getBytes()) {
                 if(!(('a' <= c && c <= 'f') || ('A' <= c && c <= 'F') || ('0' <= c && c <= '9'))){
                     throw new InvalidColorStringException("Color String has a wrong format... it has a non hex format.");
@@ -18,7 +18,7 @@ public class Block {
             }
             return;
         }
-        throw new InvalidColorStringException("Color String has a wrong format... it doesn't start with #.");
+        throw new InvalidColorStringException("Color String has a wrong format... it doesn't start with # or an invalid size.");
     }
 
     public Block(Position position, String color, char representation_char) throws InvalidColorStringException{
