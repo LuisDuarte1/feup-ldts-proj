@@ -39,9 +39,6 @@ public class Block {
     public Position getPosition() {
         return position;
     }
-    public void setPosition(Position position) {
-        this.position = position;
-    }
     public boolean isCollision() {
         return collision;
     }
@@ -54,9 +51,6 @@ public class Block {
     }
     public char getRepresentation_char() {
         return representation_char;
-    }
-    public void setRepresentation_char(char representation_char) {
-        this.representation_char = representation_char;
     }
 
     
