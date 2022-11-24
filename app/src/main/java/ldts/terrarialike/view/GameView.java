@@ -12,4 +12,8 @@ public class GameView {
         this.gui = gui;
         this.world = world;
     }
+
+    public void drawGame(){
+
+    }
 }
