@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ldts.terrarialike.exceptions.InvalidPositionException;
+
 public class World {
     private List<Chunk> chunksList = new ArrayList<>();
     private int seed = 0;
@@ -16,15 +18,15 @@ public class World {
 
 
 
-    public World(){
+    public World() throws InvalidPositionException{
         Random random = new Random();
         this.seed = random.nextInt();
-        this.player = new Player();
+        this.player = new Player(new Position(0,0), 100);
     }
 
-    public World(int seed){
+    public World(int seed) throws InvalidPositionException{
         this.seed = seed;
-        this.player = new Player();
+        this.player = new Player(new Position(0,0), 100);
         
     }
     public Player getPlayer() {
