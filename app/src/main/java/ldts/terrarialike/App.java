@@ -9,14 +9,20 @@ import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.World;
 import ldts.terrarialike.view.GameView;
 
+import java.io.IOException;
+
 public class App {
 
-    public static void main(String[] args) throws InterruptedException, InvalidPositionException{
+    public static void main(String[] args) throws InterruptedException, InvalidPositionException, IOException {
         World world = new World();
         GameController cGameController = new GameController();
         GUILanterna gLanterna = new GUILanterna(200,100, "TerrariaLike");
         GameView gView = new GameView(gLanterna, world);
 
-        Thread.sleep(1000*10);
+        while (true){
+            gView.drawGame();
+            gLanterna.refresh();
+            Thread.sleep(100);
+        }
     }
 }

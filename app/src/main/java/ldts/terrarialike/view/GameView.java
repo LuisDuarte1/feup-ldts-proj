@@ -1,5 +1,6 @@
 package ldts.terrarialike.view;
 
+import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.World;
@@ -15,15 +16,18 @@ public class GameView {
 
     private Camera camera;
 
+
     public GameView(GUILanterna gui, World world){
         this.gui = gui;
         this.world = world;
-        this.playerStatsView = new PlayerStatsView(); //TODO: complete constructor
+        this.playerStatsView = new PlayerStatsView(world.getPlayer());
         this.camera = new Camera(world.getPlayer().getPosition(), new BoundlessPosition(gui.getTerminalSize().getColumns(), gui.getTerminalSize().getRows()));
 
     }
 
     public void drawGame(){
+        playerStatsView.draw(gui.getPercentageOfScreenVertical(0.82, 0, true));
+
 
     }
 }
