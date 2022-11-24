@@ -1,10 +1,12 @@
 package ldts.terrarialike.model;
-import com.jogamp.common.net.AssetURLConnection;
 import ldts.terrarialike.controller.ItemInteraction;
 import ldts.terrarialike.exceptions.InvalidIndexException;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.exceptions.InvalidSizeException;
 import ldts.terrarialike.exceptions.InventoryFullException;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -102,7 +104,30 @@ public class InventoryTest {
 
 
 
+    @Test
+    public void doesNotContainItemTest() throws InvalidSizeException{
+        this.inventorytest = new Inventory(1);
+        Item i1 = Mockito.mock(Item.class);
+        ItemStack s =  inventorytest.contains(i1);
+        Assertions.assertEquals(null, s);
 
+    }
+
+    @Test
+    public void containsItemTest() throws InvalidSizeException{
+        this.inventorytest = new Inventory(1);
+        Item i1 = Mockito.mock(Item.class);
+        try {
+            inventorytest.add(i1, ItemStack.MAXQUANTITY-1);
+            ItemStack is = inventorytest.contains(i1);
+            Assertions.assertEquals(i1, is.getItem());
+            Assertions.assertEquals(i1, is.getItem());
+            Assertions.assertEquals(ItemStack.MAXQUANTITY-1, is.getQuantity());
+        } catch (InventoryFullException | InvalidQuantityException e) {
+            fail(e.getMessage());
+        }
+
+    }
 
 
 

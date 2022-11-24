@@ -50,10 +50,10 @@ public class Inventory {
                 itemstack.add( (ItemStack.MAXQUANTITY - itemstack.getQuantity())); // ???
             }
         }
-        while (quantityleft > 64 && inventory.size() < MAX_SIZE) {
-            ItemStack itemstack = new ItemStack(item, 64);
+        while (quantityleft > ItemStack.MAXQUANTITY && inventory.size() < MAX_SIZE) {
+            ItemStack itemstack = new ItemStack(item, ItemStack.MAXQUANTITY);
             inventory.add(itemstack);
-            quantityleft -= 64;
+            quantityleft -= ItemStack.MAXQUANTITY;
             size++;
 
             
