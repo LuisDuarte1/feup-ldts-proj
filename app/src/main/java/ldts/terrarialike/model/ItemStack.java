@@ -1,65 +1,56 @@
 package ldts.terrarialike.model;
 
+import ldts.terrarialike.exceptions.InvalidQuantityException;
+
 public class ItemStack { // não esquecer para verificar o tipo de item que está a ser adicionado pode influenciar aspetos
     final private Item item;
-    final private static short maxquantity = 64;
-    private short quantity;
+    final public static int MAXQUANTITY = 64;
+    private int quantity;
 
     // checks if he can add the quantity to the stack
 
 
     // constructor
-    public ItemStack(Item item, short quantity) throws Exception {
+    public ItemStack(Item item, int quantity) throws InvalidQuantityException {
         this.item = item;
 
-        if(quantity <= maxquantity){
+        if(quantity <= MAXQUANTITY){
             this.quantity = quantity;
         }else{
-            throw new Exception("Invalid quantity");
+            throw new InvalidQuantityException("Invalid quantity");
         }
     }
 
-      public ItemStack(Item item) throws Exception {
-            this(item, (short)1);
-        }
+     /* public ItemStack(Item item) throws Exception {
+            this(item, 1);
+        }*/
 
         //add quantity to the stack
-    public void add(short quantity) throws Exception { // adds any quantity to the stack
-            if(quantity <= maxquantity){
+    public void add(int quantity) throws InvalidQuantityException { // adds any quantity to the stack
+            if(quantity + this.quantity <= MAXQUANTITY){
                 this.quantity += quantity;
             }else{
-                throw new Exception("Invalid quantity");
+                throw new InvalidQuantityException("Invalid quantity");
             }
-        }
-        public void add() throws Exception {  // add 1
-            add((short)1);
         }
         //remove quantity from the stack
-    public void remove(short quantity) throws Exception { // removes any quantity from the stack
-            if(this.quantity - quantity >= 0){
-                this.quantity -= quantity;
-            }else{
-                throw new Exception("Invalid quantity");
+    public void remove(int quantity) throws InvalidQuantityException { // removes any quantity from the stack
+        if (this.quantity - quantity >= 0) {
+            this.quantity -= quantity;
+            } else {
+                throw new InvalidQuantityException("Invalid quantity");
             }
-        }
-
-        public void remove() throws Exception {  // remove 1
-            remove((short)1);
         }
 
 
         //getters
-    public Item getItem() {
-        return item;
+        public Item getItem() {
+            return item;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+
     }
-
-    public short getQuantity() {
-        return quantity;
-    }
-
-    public short getMaxquantity() {
-        return maxquantity;
-    }
-
-
-}

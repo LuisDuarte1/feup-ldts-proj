@@ -1,64 +1,66 @@
 package ldts.terrarialike.model;
 
+import ldts.terrarialike.exceptions.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
 
-    private List<ItemStack> inventory;  //verificar o tamanho da lista  criar classe chamada itemstqack pega num item e quantidade e guardas os dois e guardas a lista de items stacks
-    private short size;   //tamanho da lista                       // ter um add item stack e remove item stack
+    private List<ItemStack> inventory = new ArrayList<>();  //verificar o tamanho da lista  criar classe chamada itemstqack pega num item e quantidade e guardas os dois e guardas a lista de items stacks
+    private int size;   //tamanho da lista                       // ter um add item stack e remove item stack
 
-    private Item selecteditem;
-
-    final private short maxsize = 10;
+    private int selecteditem = 0;
+    final public static int MAX_SIZE = 100;
 
     //constructor
-    public Inventory(short size) {
-        this.size = size;
+    public Inventory(int size) throws InvalidSizeException {
+        if(size <= MAX_SIZE){
+            this.size = size;
+        }else{
+            throw new InvalidSizeException("Invalid size");
+        }
     }
 
     //getters
-    public List<ItemStack> getInventory() {
+    public List<ItemStack> getInventory() { // criar um stub de inventario
         return inventory;
     }
 
-    public short getSize() {
+    public int getSize() {
         return size;
     }
 
-    public short getMaxsize() {
-        return maxsize;
-    }
 
-    public Item getselectedItem() {
-        return selecteditem;
-    }
+    // operations
+    public void add(Item item, int quantity) throws InventoryFullException, InvalidQuantityException { // a quantity vamos ter de passar por ref para controlar o que n entra
 
-    public void add(Item item, short quantity) throws Exception { // a quantity vamos ter de passar por ref para controlar o que n entra
-
-        short quantityleft = quantity;
+        int quantityleft = quantity;
 
         if (contains(item) != null) {
 
             ItemStack itemstack = contains(item);
 
-            if (itemstack.getQuantity() + quantityleft <= itemstack.getMaxquantity()) {
+            if (itemstack.getQuantity() + quantityleft <= ItemStack.MAXQUANTITY) {
                 itemstack.add(quantityleft);
                 return;
 
             } else {
-                quantityleft -= itemstack.getMaxquantity() - itemstack.getQuantity();
-                itemstack.add((short) (itemstack.getMaxquantity() - itemstack.getQuantity())); // ???
+                quantityleft -= ItemStack.MAXQUANTITY - itemstack.getQuantity();
+                itemstack.add( (ItemStack.MAXQUANTITY - itemstack.getQuantity())); // ???
             }
         }
-        while (quantityleft > 64 && inventory.size() < maxsize) {
-            ItemStack itemstack = new ItemStack(item, (short) 64);
+        while (quantityleft > 64 && inventory.size() < MAX_SIZE) {
+            ItemStack itemstack = new ItemStack(item, 64);
             inventory.add(itemstack);
             quantityleft -= 64;
             size++;
 
+            
+
         }
-        if (inventory.size() == maxsize) {
-            throw new Exception("Inventory is full");
+        if (inventory.size() == MAX_SIZE) {
+            throw new InventoryFullException("Inventory is full");
         } else {
             ItemStack itemstack = new ItemStack(item, quantityleft);
             inventory.add(itemstack);
@@ -72,7 +74,7 @@ public class Inventory {
 
 
 
-    public void remove(Item item, short quantity ) throws Exception {
+    public void remove(Item item, int quantity ) throws InvalidQuantityException,ItemNotFoundException {
         if(contains(item) != null){
             ItemStack itemstack = contains(item);
             if(itemstack.getQuantity() - quantity > 0){
@@ -81,17 +83,17 @@ public class Inventory {
                 this.inventory.remove(itemstack);
             }
             else {
-                throw new Exception("Invalid quantity");
+                throw new InvalidQuantityException("Invalid quantity");
             }
         }else{
-            throw new Exception("Item not found");
+            throw new ItemNotFoundException("Item not found");
         }
     }
 
     //check if the inventory contains the item
     public ItemStack contains(Item item){
         for (ItemStack itemStack : inventory) {
-            if(itemStack.getItem() == item){
+            if(itemStack.getItem().equals(item)){
                 return itemStack;
             }
         }
@@ -101,6 +103,16 @@ public class Inventory {
 
 
 
+    public int getSelecteditem() {
+        return selecteditem;
+    }
 
-    
+    public void setSelecteditem(int selecteditem) throws InvalidIndexException {
+        if(selecteditem < this.size && selecteditem >= 0)
+        this.selecteditem = selecteditem;
+
+        else{
+            throw new InvalidIndexException("Index not valid");
+        }
+    }
 }
