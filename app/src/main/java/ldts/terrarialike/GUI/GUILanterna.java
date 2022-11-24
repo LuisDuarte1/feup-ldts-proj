@@ -58,6 +58,9 @@ public class GUILanterna {
     public TextGraphics getTextGraphics(TerminalPosition topCorner, TerminalSize size){
         return textGraphics.newTextGraphics(topCorner, size);
     }
- 
-    
+
+
+    public TerminalSize getTerminalSize() {
+        return terminalSize;
+    }
 }
