@@ -1,5 +1,10 @@
 package ldts.terrarialike.controller;
 
-public class GameController {
-    
+import ldts.terrarialike.statemanager.StateManager;
+
+public class GameController extends AbstractStateController{
+
+    public GameController(StateManager stateManager) {
+        super(stateManager);
+    }
 }
