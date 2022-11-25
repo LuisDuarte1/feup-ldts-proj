@@ -12,6 +12,7 @@ public class BlockView implements ElementView {
 
     public BlockView(Block block, Camera camera){
         this.block = block;
+        this.camera = camera;
     }
 
     @Override

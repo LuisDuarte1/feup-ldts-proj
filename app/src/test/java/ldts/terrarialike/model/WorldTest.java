@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import ldts.terrarialike.exceptions.InvalidPositionException;
+import org.mockito.Mockito;
 
 public class WorldTest {
 
@@ -22,7 +23,7 @@ public class WorldTest {
     public void chunkAddOnceTest() throws InvalidPositionException{
         World w = new World();
 
-        Chunk c = new Chunk();
+        Chunk c = Mockito.mock(Chunk.class);
 
         assertEquals(true,w.tryAddChunk(c));
     }
@@ -32,7 +33,8 @@ public class WorldTest {
     public void chunkAddDuplicateTest() throws InvalidPositionException{
         World w = new World();
 
-        Chunk c = new Chunk();
+        Chunk c = Mockito.mock(Chunk.class);
+
 
         assertEquals(true,w.tryAddChunk(c));
         assertEquals(false,w.tryAddChunk(c));
@@ -43,7 +45,7 @@ public class WorldTest {
     public void addEnemyTest() throws InvalidPositionException{
         World w = new World();
 
-        Enemy e1 = new Enemy(null, 0);
+        Enemy e1 = Mockito.mock(Enemy.class);
 
         w.addEnemy(e1);
 
@@ -53,8 +55,8 @@ public class WorldTest {
     @Test
     public void removeEnemyInList() throws InvalidPositionException{
         World w = new World();
+        Enemy e1 = Mockito.mock(Enemy.class);
 
-        Enemy e1 = new Enemy(null, 0);
 
         w.addEnemy(e1);
 
@@ -68,7 +70,8 @@ public class WorldTest {
         World w = new World();
 
 
-        Enemy e2 = new Enemy(null, 0);
+        Enemy e2 = Mockito.mock(Enemy.class);
+
 
 
         w.removeEnemy(e2);
