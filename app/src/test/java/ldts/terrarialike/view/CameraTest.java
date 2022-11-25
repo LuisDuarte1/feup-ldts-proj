@@ -50,6 +50,30 @@ public class CameraTest {
 
         Assertions.assertEquals(new Position(1,0), newCameraPosition);
 
+    }
+
+    @Test
+    public void checkVisiblePositionTest() throws InvalidPositionException {
+        boolean visible = camera.isVisibleInCamera(new Position(0,1));
+        Assertions.assertEquals(true, visible);
+        visible = camera.isVisibleInCamera(new Position(1,0));
+        Assertions.assertEquals(true, visible);
+        visible = camera.isVisibleInCamera(new Position(50,0));
+        Assertions.assertEquals(true, visible);
+        visible = camera.isVisibleInCamera(new Position(0,50));
+        Assertions.assertEquals(true, visible);
+    }
+
+    @Test
+    public  void checkNonVisiblePosibleTest() throws  InvalidPositionException{
+        boolean visible = camera.isVisibleInCamera(new Position(51,0));
+        Assertions.assertEquals(false, visible);
+        visible = camera.isVisibleInCamera(new Position(51,51));
+        Assertions.assertEquals(false, visible);
+        visible = camera.isVisibleInCamera(new Position(0,51));
+        Assertions.assertEquals(false, visible);
+
+
 
     }
 }
