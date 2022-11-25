@@ -9,6 +9,10 @@ import ldts.terrarialike.model.Inventory;
 public class InventoryView implements ElementView{
 
     private Inventory inventory;
+
+    public InventoryView(Inventory inventory) {
+        this.inventory = inventory;
+    }
     final private int width = 3;
     final private int height = 3;
 
