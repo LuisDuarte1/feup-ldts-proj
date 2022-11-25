@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import ldts.terrarialike.exceptions.InvalidPositionException;
+import ldts.terrarialike.exceptions.InvalidSizeException;
 
 public class World {
     private List<Chunk> chunksList = new ArrayList<>();
@@ -18,13 +19,13 @@ public class World {
 
 
 
-    public World() throws InvalidPositionException{
+    public World() throws InvalidPositionException, InvalidSizeException {
         Random random = new Random();
         this.seed = random.nextInt();
         this.player = new Player(new Position(0,0), 100);
     }
 
-    public World(int seed) throws InvalidPositionException{
+    public World(int seed) throws InvalidPositionException, InvalidSizeException{
         this.seed = seed;
         this.player = new Player(new Position(0,0), 100);
         

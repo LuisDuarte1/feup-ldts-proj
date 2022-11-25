@@ -1,10 +1,18 @@
 package ldts.terrarialike.model;
 
 public class Enemy extends Entity{
+    private int damage;
 
-    public Enemy(Position position, int hp) {
+    public Enemy(Position position, int hp, int damage) {
         super(position, hp);
-        //TODO Auto-generated constructor stub
+        this.damage = damage;
     }
-    
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 }

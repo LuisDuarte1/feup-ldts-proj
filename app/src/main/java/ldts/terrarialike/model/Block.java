@@ -57,6 +57,4 @@ public class Block {
     public char getRepresentation_char() {
         return representation_char;
     }
-
-    
 }
