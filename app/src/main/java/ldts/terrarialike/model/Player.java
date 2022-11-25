@@ -1,11 +1,16 @@
 package ldts.terrarialike.model;
 
-public class Player extends Entity {
+import ldts.terrarialike.exceptions.InvalidSizeException;
 
-    public Player(Position position, int hp) {
+public class Player extends Entity {
+    private Inventory inventory;
+
+    public Player(Position position, int hp) throws InvalidSizeException {
         super(position, hp);
-        //TODO Auto-generated constructor stub
+        inventory = new Inventory(0);
     }
 
-    
+    public Inventory getInventory() {
+        return inventory;
+    }
 }
