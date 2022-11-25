@@ -74,7 +74,7 @@ public class InventoryTest {
     public void testGetSelectedItem(){ // ver se pode completar
             try{
                 this.inventorytest = new Inventory(1);
-                Assertions.assertEquals(0,inventorytest.getSelecteditem());
+                Assertions.assertEquals(0,inventorytest.getSelecteditemindex());
                 this.inventorytest = new Inventory(3);
                 Item i = Mockito.mock(Item.class);
                 Item i2 = Mockito.mock(Item.class);
@@ -83,7 +83,7 @@ public class InventoryTest {
                 inventorytest.add(i2,4);
                 inventorytest.add(i3,ItemStack.MAXQUANTITY);
                 inventorytest.setSelecteditem(2);
-                Assertions.assertEquals(2,inventorytest.getSelecteditem());
+                Assertions.assertEquals(2,inventorytest.getSelecteditemindex());
             } catch (InventoryFullException | InvalidQuantityException | InvalidIndexException | InvalidSizeException e) {
                 Assertions.fail(e.getStackTrace().toString());
             }
