@@ -1,5 +1,6 @@
 package ldts.terrarialike.model;
 
+import ldts.terrarialike.exceptions.BlockNotFoundException;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

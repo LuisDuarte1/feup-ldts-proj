@@ -9,19 +9,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class PlayerView implements EntityView {
 
-    private Player player;
     private Camera camera;
 
-    public PlayerView(Player player, Camera camera) {
-        this.player = player;
+    public PlayerView(Camera camera) {
         this.camera = camera;
     }
 
     @Override
     public void draw(TextGraphics graphics, Entity player) {
-        if(camera.isVisibleInCamera(player.getPosition())){
+        if(player instanceof Player  && camera.isVisibleInCamera(player.getPosition())){
             graphics.setForegroundColor(TextColor.ANSI.GREEN);
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(player.getPosition());
+            graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getY(), 'P');
         }
     }
 }

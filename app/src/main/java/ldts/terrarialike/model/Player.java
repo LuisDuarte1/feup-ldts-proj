@@ -7,7 +7,7 @@ public class Player extends Entity {
 
     public Player(Position position, int hp) throws InvalidSizeException {
         super(position, hp);
-        inventory = new Inventory(0);
+        inventory = new Inventory(30);
     }
 
     public Inventory getInventory() {

@@ -1,6 +1,7 @@
 package ldts.terrarialike.model;
 
 
+import ldts.terrarialike.exceptions.BlockNotFoundException;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 
 import java.util.ArrayList;
