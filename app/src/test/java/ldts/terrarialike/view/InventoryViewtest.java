@@ -2,6 +2,7 @@ package ldts.terrarialike.view;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.exceptions.InvalidSizeException;
@@ -33,48 +34,45 @@ public class InventoryViewtest {
 
     public void setup() {
 
+
             textGraphics = Mockito.mock(TextGraphics.class);
+            Mockito.when(textGraphics.newTextGraphics(Mockito.any(TerminalPosition.class), Mockito.any(TerminalSize.class))).thenReturn(textGraphics);
+            // Mockito for item
             item = Mockito.mock(Item.class);
             Mockito.when(item.getRepresentation()).thenReturn('a');
             Mockito.when(item.getName()).thenReturn("axe");
-            system.out.println(item.getRepresentation());
+
+
             item2 = Mockito.mock(Item.class);
             Mockito.when(item2.getRepresentation()).thenReturn('b');
             Mockito.when(item2.getName()).thenReturn("bow");
-            system.out.println(item2.getRepresentation());
+
+
             item3 = Mockito.mock(Item.class);
             Mockito.when(item3.getRepresentation()).thenReturn('s');
             Mockito.when(item3.getName()).thenReturn("sword");
-            system.out.println(item3.getRepresentation());
+
 
             //Mockito for ItemStack
             inventory = Mockito.mock(Inventory.class);
             ItemStack itemStack = Mockito.mock(ItemStack.class);
             Mockito.when(itemStack.getItem()).thenReturn(item);
             Mockito.when(itemStack.getQuantity()).thenReturn(10);
+
             ItemStack itemStack2 = Mockito.mock(ItemStack.class);
             Mockito.when(itemStack2.getItem()).thenReturn(item2);
             Mockito.when(itemStack2.getQuantity()).thenReturn(20);
+
             ItemStack itemStack3 = Mockito.mock(ItemStack.class);
             Mockito.when(itemStack3.getItem()).thenReturn(item3);
             Mockito.when(itemStack3.getQuantity()).thenReturn(30);
+
+            //Mockito for inventory ItemStack
             inventoryList = new ArrayList<ItemStack>(Arrays.asList(itemStack, itemStack2, itemStack3));
             Mockito.when(inventory.getInventory()).thenReturn(inventoryList);
-
-
-
-
-
-
             Mockito.when(inventory.getSize()).thenReturn(3);
-            Mockito.when(inventory.getInventory()).thenReturn(inventoryList);
 
-
-
-            inventoryView = new InventoryView();
-
-
-
+            inventoryView = new InventoryView(inventory);
     }
 
     @Test
@@ -85,17 +83,23 @@ public class InventoryViewtest {
         int width = 3;
         int column = 1;
         int row = 1;
+
+        Mockito.verify(textGraphics,Mockito.times(1)).setBackgroundColor(TextColor.Factory.fromString("#808080"));
+        Mockito.verify(textGraphics,Mockito.times(4)).setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
+        Mockito.verify(textGraphics,Mockito.times(3)).setBackgroundColor(TextColor.Factory.fromString("#8C2D19"));
         for(int i = 0; i < inventory.getSize(); i++) {
 
-            Mockito.verify(textGraphics).drawRectangle(new TerminalPosition(column, row), new TerminalSize(height, width), ' ');
-            Mockito.verify(textGraphics).setCharacter(column + 1, row + 1, inventory.getSelectedItem().getRepresentation());
-        }
-        Mockito.verify(textGraphics).drawRectangle(new TerminalPosition(1, 1), new TerminalSize(3, 3), ' ');
-        Mockito.verify(textGraphics).setCharacter(2, 2, item.getRepresentation());
-        Mockito.verify(textGraphics).drawRectangle(new TerminalPosition(5, 1), new TerminalSize(3, 3), ' ');
-        Mockito.verify(textGraphics).setCharacter(6, 2, item2.getRepresentation());
-        Mockito.verify(textGraphics).drawRectangle(new TerminalPosition(9, 1), new TerminalSize(3, 3), ' ');
-        Mockito.verify(textGraphics).setCharacter(10, 2, item3.getRepresentation());
+
+
+        Mockito.verify(textGraphics).drawRectangle(new TerminalPosition(column, row), new TerminalSize(height, width), ' ');
+        Mockito.verify(textGraphics).setCharacter(column + 1, row + 1, inventory.getInventory().get(i).getItem().getRepresentation());
+
+            column += 4;
+        if(column  == 25) {
+            column = 1;
+            row += 4;
+        }}
+
     }
 
 
