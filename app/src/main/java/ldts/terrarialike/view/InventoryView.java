@@ -25,7 +25,7 @@ public class InventoryView implements ElementView{
             textGraphics.setBackgroundColor(TextColor.Factory.fromString("#8C2D19"));
             textGraphics.setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
             textGraphics.drawRectangle(new TerminalPosition(column, row), new TerminalSize(height, width), ' ');
-            textGraphics.setCharacter(column + 1, row + 1, inventory.getSelectedItem().getRepresentation());
+            textGraphics.setCharacter(column + 1, row + 1, inventory.getInventory().get(i).getItem().getRepresentation());
 
             column += 4;
             if(column  == 25) {
