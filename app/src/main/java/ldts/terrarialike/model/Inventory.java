@@ -10,7 +10,7 @@ public class Inventory {
     private List<ItemStack> inventory = new ArrayList<>();  //verificar o tamanho da lista  criar classe chamada itemstqack pega num item e quantidade e guardas os dois e guardas a lista de items stacks
     private int size;   //tamanho da lista                       // ter um add item stack e remove item stack
 
-    private int selecteditem = 0;
+    private int selecteditemindex = 0;
     final public static int MAX_SIZE = 100;
 
     //constructor
@@ -103,13 +103,21 @@ public class Inventory {
 
 
 
-    public int getSelecteditem() {
-        return selecteditem;
+    public int getSelecteditemindex() {
+        return selecteditemindex;
     }
 
-    public void setSelecteditem(int selecteditem) throws InvalidIndexException {
-        if(selecteditem < this.size && selecteditem >= 0)
-        this.selecteditem = selecteditem;
+    public Item getSelectedItem(){
+        return inventory.get(selecteditemindex).getItem();
+    }
+
+    public ItemStack getSelectedItemStack(){
+        return inventory.get(selecteditemindex);
+    }
+
+    public void setSelecteditem(int selecteditemindex) throws InvalidIndexException {
+        if(selecteditemindex < this.size && selecteditemindex >= 0)
+        this.selecteditemindex = selecteditemindex;
 
         else{
             throw new InvalidIndexException("Index not valid");
