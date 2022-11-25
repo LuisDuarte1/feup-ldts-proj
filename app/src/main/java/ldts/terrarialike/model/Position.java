@@ -56,4 +56,11 @@ public class Position {
             return false;
         return true;
     }
+
+    public BoundlessPosition subtract(Position other){
+        int x_sub = this.x - other.x;
+        int y_sub = this.y - other.y;
+        return new BoundlessPosition(x_sub, y_sub);
+    }
+
 }

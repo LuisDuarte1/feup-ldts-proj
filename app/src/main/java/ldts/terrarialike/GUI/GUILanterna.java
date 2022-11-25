@@ -58,6 +58,22 @@ public class GUILanterna {
     public TextGraphics getTextGraphics(TerminalPosition topCorner, TerminalSize size){
         return textGraphics.newTextGraphics(topCorner, size);
     }
- 
-    
+
+    public TextGraphics getPercentageOfScreenVertical(double percentage, int offset_x, boolean inverted){
+        if(!inverted){
+            return textGraphics.newTextGraphics(new TerminalPosition(offset_x, (int) (percentage*terminalSize.getRows()))
+                    , new TerminalSize(terminalSize.getColumns(),(int) (percentage*terminalSize.getRows())));
+        }
+        return textGraphics.newTextGraphics(new TerminalPosition(offset_x, (int) (terminalSize.getRows() - percentage*terminalSize.getRows()))
+                , new TerminalSize(terminalSize.getColumns(),(int) (terminalSize.getRows() - percentage*terminalSize.getRows())));
+    }
+
+
+    public TerminalSize getTerminalSize() {
+        return terminalSize;
+    }
+
+    public void refresh() throws IOException {
+        screen.refresh();
+    }
 }
