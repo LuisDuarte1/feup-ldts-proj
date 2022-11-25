@@ -1,11 +1,16 @@
 package ldts.terrarialike.model;
 
-public class Enemy extends Entity{
+import ldts.terrarialike.controller.EnemyAI;
+
+public abstract class Enemy extends Entity{
     private int damage;
 
-    public Enemy(Position position, int hp, int damage) {
+    private EnemyAI ai;
+
+    public Enemy(Position position, int hp, int damage, EnemyAI ai) {
         super(position, hp);
         this.damage = damage;
+        this.ai = ai;
     }
 
     public int getDamage() {
@@ -14,5 +19,13 @@ public class Enemy extends Entity{
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public EnemyAI getAi() {
+        return ai;
+    }
+
+    public void setAi(EnemyAI ai) {
+        this.ai = ai;
     }
 }
