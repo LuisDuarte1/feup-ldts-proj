@@ -6,21 +6,34 @@ package ldts.terrarialike;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.controller.GameController;
 import ldts.terrarialike.exceptions.InvalidPositionException;
+import ldts.terrarialike.exceptions.NotInitializedStateException;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.statemanager.State;
+import ldts.terrarialike.statemanager.StateManager;
 import ldts.terrarialike.view.GameView;
 
 import java.io.IOException;
 
 public class App {
 
-    public static void main(String[] args) throws InterruptedException, InvalidPositionException, IOException {
-        World world = new World();
-        GameController cGameController = new GameController();
+    public static void main(String[] args) throws InterruptedException, InvalidPositionException, IOException, NotInitializedStateException {
         GUILanterna gLanterna = new GUILanterna(200,100, "TerrariaLike");
-        GameView gView = new GameView(gLanterna, world);
+
+        StateManager manager = new StateManager();
+        State gameState = new State(World.class, GameView.class,GameController.class);
+
+
+        gameState.initializeDataClass();
+        gameState.initializeControllerClass(manager);
+        gameState.initializeViewClass(gLanterna, gameState.getDataObject(World.class));
+
+        manager.addState(gameState);
+        manager.selectState(gameState);
+
+
 
         while (true){
-            gView.drawGame();
+            gameState.getViewObject(GameView.class).drawGame();
             gLanterna.refresh();
             Thread.sleep(100);
         }
