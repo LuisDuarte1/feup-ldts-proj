@@ -25,4 +25,9 @@ public class BoundlessPosition {
     public void setY(int y) {
         this.y = y;
     }
+
+    public void add(BoundlessPosition boundlessPosition){
+        x += boundlessPosition.getX();
+        y += boundlessPosition.getY();
+    }
 }

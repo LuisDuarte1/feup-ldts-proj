@@ -56,6 +56,25 @@ public class Camera {
 
     }
 
+    public boolean isVisibleInCamera(Position position){
+        BoundlessPosition p_sub = this.position.subtract(position);
+        p_sub.setX(abs(p_sub.getX()));
+        p_sub.setY(abs(p_sub.getY()));
+
+        if(p_sub.getX() > getGameScreenMiddle().getX()) return false;
+        if(p_sub.getY() > getGameScreenMiddle().getY()) return false;
+
+        return true;
+    }
+
+    public BoundlessPosition getRelativePositionToCamera(Position position){
+        BoundlessPosition p_sub = position.subtract(this.position);
+
+        BoundlessPosition r = getGameScreenMiddle();
+        r.add(p_sub);
+        return r;
+    }
+
     public void resizeScreen(BoundlessPosition gameScreenSize) {
         this.gameScreenSize = gameScreenSize;
     }
