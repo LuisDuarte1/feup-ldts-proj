@@ -50,21 +50,20 @@ public class Inventory {
                 itemstack.add( (ItemStack.MAXQUANTITY - itemstack.getQuantity())); // ???
             }
         }
-        while (quantityleft > ItemStack.MAXQUANTITY && inventory.size() < MAX_SIZE) {
+        while (quantityleft > ItemStack.MAXQUANTITY && inventory.size() > this.size) {
             ItemStack itemstack = new ItemStack(item, ItemStack.MAXQUANTITY);
             inventory.add(itemstack);
             quantityleft -= ItemStack.MAXQUANTITY;
-            size++;
+
 
             
 
         }
-        if (inventory.size() == MAX_SIZE) {
+        if (inventory.size() == this.size) {
             throw new InventoryFullException("Inventory is full");
-        } else {
+        } else if(quantityleft > 0) {
             ItemStack itemstack = new ItemStack(item, quantityleft);
             inventory.add(itemstack);
-            size++;
         }
     }
 
@@ -98,6 +97,10 @@ public class Inventory {
             }
         }
         return null;
+    }
+
+    public void setInventory(List<ItemStack> inventory) {
+        this.inventory = inventory;
     }
 
 
