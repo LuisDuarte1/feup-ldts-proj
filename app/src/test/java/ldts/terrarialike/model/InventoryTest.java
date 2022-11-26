@@ -1,9 +1,6 @@
 package ldts.terrarialike.model;
 import ldts.terrarialike.controller.ItemInteraction;
-import ldts.terrarialike.exceptions.InvalidIndexException;
-import ldts.terrarialike.exceptions.InvalidQuantityException;
-import ldts.terrarialike.exceptions.InvalidSizeException;
-import ldts.terrarialike.exceptions.InventoryFullException;
+import ldts.terrarialike.exceptions.*;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -12,6 +9,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryTest {
 
@@ -103,7 +103,6 @@ public class InventoryTest {
     }
 
 
-
     @Test
     public void doesNotContainItemTest() throws InvalidSizeException{
         this.inventorytest = new Inventory(1);
@@ -129,9 +128,88 @@ public class InventoryTest {
 
     }
 
+    @Test
 
+    public void removetest() throws InvalidSizeException, InvalidQuantityException, ItemNotFoundException {
+
+        this.inventorytest = new Inventory(11);
+        Item i1 = Mockito.mock(Item.class);
+        Item i2 = Mockito.mock(Item.class);
+        ItemStack itemStack = Mockito.mock(ItemStack.class);
+        ItemStack itemStack2 = Mockito.mock(ItemStack.class);
+        Mockito.when(itemStack.getItem()).thenReturn(i1);
+        Mockito.when(itemStack2.getItem()).thenReturn(i2);
+        Mockito.when(itemStack2.getQuantity()).thenReturn(10);
+        Mockito.when(itemStack.getQuantity()).thenReturn(1);
+
+        List<ItemStack> list = new ArrayList<>();
+
+        list.add(itemStack);
+        list.add(itemStack2);
+
+        this.inventorytest.setInventory(list);
+
+        inventorytest.remove(i1, 1);
+        inventorytest.remove(i2, 5);
+        Assertions.assertEquals(1, inventorytest.getInventory().size());
+        Assertions.assertNull( inventorytest.contains(i1));
+        Mockito.verify(itemStack2, Mockito.times(1)).remove(5);
 
     }
+
+    @Test
+
+    public void addtest() throws InvalidSizeException {
+
+        Item item1 = Mockito.mock(Item.class);
+        Item item2 = Mockito.mock(Item.class);
+        Item item3 = Mockito.mock(Item.class);
+        this.inventorytest = new Inventory(2);
+        try {
+            inventorytest.add(item1, 1);
+            inventorytest.add(item2, 1);
+            inventorytest.add(item3, 1);
+            Assertions.fail("InventoryFullException not thrown");
+        } catch (InventoryFullException | InvalidQuantityException e) {
+            Assertions.assertEquals("Inventory is full", e.getMessage());
+        }
+
+        this.inventorytest = new Inventory(2);
+        try {
+            inventorytest.add(item1, 64);
+            inventorytest.add(item1, 1);
+            Assertions.assertEquals(2, inventorytest.getInventory().size());
+            Assertions.assertEquals(64, inventorytest.getInventory().get(0).getQuantity());
+            Assertions.assertEquals(1, inventorytest.getInventory().get(1).getQuantity());
+
+        }   catch (InventoryFullException | InvalidQuantityException e) {
+            Assertions.fail(e.getMessage());
+        }
+
+        this.inventorytest = new Inventory(2);
+        try{
+            inventorytest.add(item1, 1);
+            inventorytest.add(item2, 1);
+            inventorytest.add(item1, 1);
+            Assertions.assertEquals(2, inventorytest.getInventory().size());
+            Assertions.assertEquals(2, inventorytest.getInventory().get(0).getQuantity());
+            Assertions.assertEquals(1, inventorytest.getInventory().get(1).getQuantity());
+        } catch (InventoryFullException | InvalidQuantityException e) {
+            Assertions.fail(e.getMessage());
+        }
+
+        this.inventorytest = new Inventory(2);
+        try{
+            inventorytest.add(item1, 64);
+            inventorytest.add(item2, 1);
+            inventorytest.add(item1, 1);
+            Assertions.fail("InventoryFullException not thrown");}
+            catch (InventoryFullException | InvalidQuantityException e) {
+            Assertions.assertEquals("Inventory is full", e.getMessage());
+
+    }
+    }
+}
 
 
 
