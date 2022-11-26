@@ -32,6 +32,23 @@ public class ChunkTest {
 
         Assertions.assertEquals(list, chunk.getBlocks());
     }
+
+    public void setBlocktest(){
+
+        Chunk chunk = new Chunk(0);
+        Block block = Mockito.mock(Block.class);
+        Block block1 = Mockito.mock(Block.class);
+        Block block2 = Mockito.mock(Block.class);
+        List<Block> list = new ArrayList<>();
+        list.add(block);
+        list.add(block1);
+        list.add(block2);
+
+        chunk.setBlocks(list);
+
+        Assertions.assertEquals(list, chunk.getBlocks());
+
+    }
     @Test
     public void getPositiontest() {
 
@@ -129,7 +146,31 @@ public class ChunkTest {
         Assertions.assertFalse(chunk.notIn(block));
     }
 
+    @Test
 
+    public void validCoordstest() throws InvalidPositionException {
+        Chunk chunk = new Chunk(1);
+        Block block1 = Mockito.mock(Block.class);
+        Mockito.when(block1.getPosition()).thenReturn(new Position(16, 0));
+        Block block2 = Mockito.mock(Block.class);
+        Mockito.when(block2.getPosition()).thenReturn(new Position(16, 200));
+        Block block3 = Mockito.mock(Block.class);
+        Mockito.when(block3.getPosition()).thenReturn(new Position(32, 0));
+        Block block4 = Mockito.mock(Block.class);
+        Mockito.when(block4.getPosition()).thenReturn(new Position(32, 200));
+        Block block5 = Mockito.mock(Block.class);
+        Mockito.when(block5.getPosition()).thenReturn(new Position(33, 0));
+        Block block6 = Mockito.mock(Block.class);
+        Mockito.when(block6.getPosition()).thenReturn(new Position(15, 200));
+        Assertions.assertTrue(chunk.validCoords(block1));
+        Assertions.assertTrue(chunk.validCoords(block2));
+        Assertions.assertFalse(chunk.validCoords(block3));
+        Assertions.assertFalse(chunk.validCoords(block4));
+        Assertions.assertFalse(chunk.validCoords(block5));
+        Assertions.assertFalse(chunk.validCoords(block6));
+
+
+    }
 }
 
            /*     Chunk c = new Chunk(0);
