@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.exceptions.InvalidPositionException;
+import ldts.terrarialike.exceptions.InvalidSizeException;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,12 +18,12 @@ public class PlayerStatsViewTest {
     private TextGraphics textGraphics;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp()  {
         try {
             player = new Player(new Position(0, 0), 100);
             playerStatsView = new PlayerStatsView(player);
             textGraphics = Mockito.mock(TextGraphics.class);
-        } catch (InvalidPositionException e) {
+        } catch (InvalidSizeException | InvalidPositionException e) {
             e.printStackTrace();
         }
     }
