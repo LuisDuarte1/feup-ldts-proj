@@ -27,7 +27,7 @@ public class PlayerTest {
 
         Player p = new Player(position, 10);
 
-        p.setPosition(position);
+        p.setPosition(position2);
         p.setHp(20);
         Assertions.assertEquals(position2, p.getPosition());
         Assertions.assertEquals(20, p.getHp());

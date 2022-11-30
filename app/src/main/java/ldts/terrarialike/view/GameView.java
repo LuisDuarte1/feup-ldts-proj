@@ -4,7 +4,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.World;
-import org.checkerframework.checker.units.qual.C;
 
 public class GameView {
     
