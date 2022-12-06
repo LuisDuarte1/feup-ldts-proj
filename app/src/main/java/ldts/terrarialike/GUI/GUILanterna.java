@@ -8,7 +8,12 @@ import java.awt.*;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.gui2.DefaultWindowManager;
+import com.googlecode.lanterna.gui2.EmptySpace;
+import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
+import com.googlecode.lanterna.gui2.Window;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -22,6 +27,8 @@ public class GUILanterna {
     private TerminalSize terminalSize;
 
     private TextGraphics textGraphics;
+
+    private MultiWindowTextGUI multiWindowTextGUI;
 
     public GUILanterna(int width, int height, String windowName){
         terminalSize = new TerminalSize(width, height);
@@ -74,6 +81,33 @@ public class GUILanterna {
     }
 
     public void refresh() throws IOException {
-        screen.refresh();
+        if(multiWindowTextGUI == null){
+            screen.refresh();
+        } else{
+            multiWindowTextGUI.updateScreen();
+            multiWindowTextGUI.processInput();
+        }
+    }
+
+    public void removeCurrentWindowsStack(){
+        if(multiWindowTextGUI != null){
+            //first erase all previous windows because they are not needed and, maybe they must be released to not cause conflicts
+            for(Window old_window : multiWindowTextGUI.getWindows()){
+                multiWindowTextGUI.removeWindow(old_window);
+            }
+        }
+        multiWindowTextGUI.getScreen().clear();
+        multiWindowTextGUI = null;
+    }
+
+    public void removeWindowFromStack(Window window){
+        multiWindowTextGUI.removeWindow(window);
+    }
+
+    public void addWindowToStack(Window window){
+        if(multiWindowTextGUI == null){
+            multiWindowTextGUI = new MultiWindowTextGUI(screen, new DefaultWindowManager(), new EmptySpace(TextColor.ANSI.BLUE));
+        }
+        multiWindowTextGUI.addWindow(window);
     }
 }

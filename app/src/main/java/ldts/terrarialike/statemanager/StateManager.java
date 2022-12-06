@@ -40,4 +40,8 @@ public class StateManager {
             selectedState = t;
         }
     }
+
+    public State getSelectedState(){
+        return selectedState;
+    }
 }

@@ -5,7 +5,7 @@ import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.World;
 
-public class GameView {
+public class GameView implements StateView{
     
     private GUILanterna gui;
     private World world;
@@ -24,7 +24,7 @@ public class GameView {
 
     }
 
-    public void drawGame(){
+    public void draw(){
         playerStatsView.draw(gui.getPercentageOfScreenVertical(0.82, 0, true));
 
 
