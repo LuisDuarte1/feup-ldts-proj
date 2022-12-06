@@ -100,6 +100,10 @@ public class GUILanterna {
         multiWindowTextGUI = null;
     }
 
+    public void removeCurrentWindowFromStack(){
+        multiWindowTextGUI.removeWindow(multiWindowTextGUI.getActiveWindow());
+    }
+
     public void removeWindowFromStack(Window window){
         multiWindowTextGUI.removeWindow(window);
     }

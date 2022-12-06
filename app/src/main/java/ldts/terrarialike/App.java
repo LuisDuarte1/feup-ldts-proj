@@ -11,6 +11,8 @@ import ldts.terrarialike.model.World;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
 import ldts.terrarialike.view.GameView;
+import ldts.terrarialike.view.MainMenuView;
+import ldts.terrarialike.view.StateView;
 
 import java.io.IOException;
 
@@ -20,20 +22,19 @@ public class App {
         GUILanterna gLanterna = new GUILanterna(200,100, "TerrariaLike");
 
         StateManager manager = new StateManager();
-        State gameState = new State(World.class, GameView.class,GameController.class);
+        State gameMenuState = new State(Object.class,MainMenuView.class,Object.class);
 
+        gameMenuState.initializeDataClass();
+        gameMenuState.initializeControllerClass();
+        gameMenuState.initializeViewClass(gLanterna, manager);
 
-        gameState.initializeDataClass();
-        gameState.initializeControllerClass(manager);
-        gameState.initializeViewClass(gLanterna, gameState.getDataObject(World.class));
-
-        manager.addState(gameState);
-        manager.selectState(gameState);
-
+        manager.addState(gameMenuState);
+        manager.selectState(gameMenuState);
 
 
         while (true){
-            gameState.getViewObject(GameView.class).drawGame();
+            StateView view = manager.getSelectedState().getViewObject(StateView.class);
+            view.draw();
             gLanterna.refresh();
             Thread.sleep(100);
         }
