@@ -25,7 +25,7 @@ public class World {
         this.player = new Player(new Position(0,0), 100);
     }
 
-    public World(int seed) throws InvalidPositionException, InvalidSizeException{
+    public World(Integer seed) throws InvalidPositionException, InvalidSizeException{
         this.seed = seed;
         this.player = new Player(new Position(0,0), 100);
         

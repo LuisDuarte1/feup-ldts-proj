@@ -52,7 +52,6 @@ public class State{
                         dataObject = t.newInstance(arguments);
                     }
 
-
                 }
             }
         } catch ( InstantiationException | IllegalAccessException | InvocationTargetException e) {
