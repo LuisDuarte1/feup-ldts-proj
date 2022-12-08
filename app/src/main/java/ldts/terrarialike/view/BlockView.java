@@ -17,10 +17,17 @@ public class BlockView implements ElementView {
 
     @Override
     public void draw(TextGraphics graphics) {
-        if(camera.isVisibleInCamera(block.getPosition())){
+        if(camera.isVisibleInCamera(block.getPosition())) {
+            graphics.setForegroundColor(TextColor.Factory.fromString(block.getColor()));
             graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor()));
+
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(block.getPosition());
-            graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getX(), block.getRepresentation_char());
+            boundlessPosition = camera.invertYPosition(boundlessPosition);
+            graphics.putString(boundlessPosition.getX(), boundlessPosition.getY(), Character.toString(block.getRepresentation_char()));
+        }
+        else {
+            /*System.out.println(String.format("Block not drawable in position x:%d y:%d", block.getPosition().getX(),
+                    block.getPosition().getY()));*/
         }
     }
 }

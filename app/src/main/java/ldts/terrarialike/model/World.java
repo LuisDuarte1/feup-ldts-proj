@@ -47,6 +47,13 @@ public class World {
         return true;
     }
 
+
+    public List<Chunk> getChunks(){
+        return chunksList;
+    }
+        
+
+
     public void addEnemy(Enemy enemy){
         enemiesList.add(enemy);
     }

@@ -4,12 +4,10 @@ import ldts.terrarialike.exceptions.InvalidPositionException;
 
 
 public class Position {
-    static int Y_MIN = 0;
-    static int Y_MAX = 200;
-
+    public static final int Y_MIN = 0;
+    public static final int Y_MAX = 200;
 
     private int x;
-
 
     private int y;
 

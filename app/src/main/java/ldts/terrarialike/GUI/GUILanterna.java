@@ -36,12 +36,16 @@ public class GUILanterna {
             DefaultTerminalFactory  dFactory= new DefaultTerminalFactory();
             dFactory.setTerminalEmulatorFontConfiguration(loadSquareFont());
             dFactory.setTerminalEmulatorTitle(windowName);
+            //seems like inital terminal size is more of a suggestion to lanterna than a requirement so we must check
+            //final terminalSize when terminal is created
+            dFactory.setInitialTerminalSize(terminalSize);
             terminal = dFactory.createTerminal();
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
             screen.doResizeIfNecessary();
             textGraphics = screen.newTextGraphics();
+            terminalSize = textGraphics.getSize();
         } catch(Exception e){
             System.err.println("Error when creating the GUI:\n\n");
             e.printStackTrace();
@@ -68,10 +72,10 @@ public class GUILanterna {
 
     public TextGraphics getPercentageOfScreenVertical(double percentage, int offset_x, boolean inverted){
         if(!inverted){
-            return textGraphics.newTextGraphics(new TerminalPosition(offset_x, (int) (percentage*terminalSize.getRows()))
+            return textGraphics.newTextGraphics(new TerminalPosition(offset_x, 0)
                     , new TerminalSize(terminalSize.getColumns(),(int) (percentage*terminalSize.getRows())));
         }
-        return textGraphics.newTextGraphics(new TerminalPosition(offset_x, (int) (terminalSize.getRows() - percentage*terminalSize.getRows()))
+        return textGraphics.newTextGraphics(new TerminalPosition(offset_x, (int) (terminalSize.getRows() - (1-percentage)*terminalSize.getRows()))
                 , new TerminalSize(terminalSize.getColumns(),(int) (terminalSize.getRows() - percentage*terminalSize.getRows())));
     }
 
