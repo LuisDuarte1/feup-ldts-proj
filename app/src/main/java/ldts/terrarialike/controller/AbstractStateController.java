@@ -9,4 +9,6 @@ public abstract class AbstractStateController {
     public AbstractStateController(StateManager stateManager){
         this.stateManager = stateManager;
     }
+
+    abstract public void tick();
 }

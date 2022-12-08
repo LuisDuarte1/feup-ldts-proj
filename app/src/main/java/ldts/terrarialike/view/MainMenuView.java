@@ -39,7 +39,7 @@ public class MainMenuView implements StateView {
             } else{
                 worldState.initializeDataClass();
             }
-            worldState.initializeControllerClass(stateManager);
+            worldState.initializeControllerClass(stateManager, worldState.getDataObject(World.class));
             worldState.initializeViewClass(this.gui, worldState.getDataObject(World.class));
 
             try {

@@ -5,7 +5,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.Entity;
 import ldts.terrarialike.model.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class PlayerView implements EntityView {
 

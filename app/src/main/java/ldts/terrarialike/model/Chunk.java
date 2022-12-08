@@ -8,12 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chunk {
+        public static int CHUNK_SIZE = 16;    
+
+
         private final int position;
         private List<Block> blocks = new ArrayList<>(); // Lista de blocos no chunk
 
         public Chunk(int position) {
             this.position = position;
         }
+
+
+        public int getChunkID(){return position;}
 
         public List<Block> getBlocks() {
             return this.blocks;
@@ -57,7 +63,13 @@ public class Chunk {
 
         // Check if block coordinates are contained in assigned chunk
         public boolean validCoords(Block block) {
-            if (block.getPosition().getX() >= 16 * position && block.getPosition().getX() < 16 * position + 16 && block.getPosition().getY() >= Position.Y_MIN  && block.getPosition().getY() <= Position.Y_MAX) {
+            System.out.println(block.getPosition().getX());
+            System.out.println(block.getPosition().getY());
+
+            if (block.getPosition().getX() >= CHUNK_SIZE * position 
+            && block.getPosition().getX() < CHUNK_SIZE * position + CHUNK_SIZE 
+            && block.getPosition().getY() >= Position.Y_MIN  
+            && block.getPosition().getY() <= Position.Y_MAX) {
                 return true;
             }
         else {

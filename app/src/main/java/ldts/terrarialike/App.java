@@ -4,13 +4,10 @@
 package ldts.terrarialike;
 
 import ldts.terrarialike.GUI.GUILanterna;
-import ldts.terrarialike.controller.GameController;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.NotInitializedStateException;
-import ldts.terrarialike.model.World;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
-import ldts.terrarialike.view.GameView;
 import ldts.terrarialike.view.MainMenuView;
 import ldts.terrarialike.view.StateView;
 
