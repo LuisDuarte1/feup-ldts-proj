@@ -36,7 +36,7 @@ public class SimpleNoise1D {
         float minHeight = Math.max(prevPair.second-MAX_HEIGHT_DIFF, Position.Y_MIN);
         float maxHeight = Math.min(prevPair.second+MAX_HEIGHT_DIFF,Position.Y_MAX);
     
-        float nextHeight = Math.max(random.nextFloat() * maxHeight, minHeight);
+        float nextHeight = minHeight + random.nextFloat()*(maxHeight-minHeight);
         Pair<Integer,Float> nextPair = new Pair<Integer,Float>(i, nextHeight);
         points.add(nextPair);
         prevPair = nextPair;

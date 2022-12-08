@@ -62,18 +62,17 @@ public class WorldGenerator {
                     Block newBlock = null;
                     int baseXPos = chunk_id*Chunk.CHUNK_SIZE;
 
-                    if(chunk_id > 0){
+                    if(chunk_id != 0){
 
-                        newBlock = new Block(new Position(baseXPos - i, e), "#FF0000", 'B');
-                    } else if(chunk_id == 0){
-                        newBlock = new Block(new Position(Chunk.CHUNK_SIZE - i, e), "#FF0000", 'B');
-                        
-                    } else {
                         newBlock = new Block(new Position(baseXPos + i, e), "#FF0000", 'B');
+                    } else {
+                        newBlock = new Block(new Position(Chunk.CHUNK_SIZE - 1 - i, e), "#FF0000", 'B');
+                        
                     }
                     result.addBlock(newBlock);
                 } catch (InvalidColorStringException | InvalidPositionException e1) {
                     //FIXME do this correctly
+                    System.out.println(e1.getMessage());
                 }
                 
 

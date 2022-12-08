@@ -2,6 +2,8 @@ package ldts.terrarialike.model;
 
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 
+import java.util.Objects;
+
 public class Block {
     private Position position;
     private boolean collision;
@@ -56,5 +58,18 @@ public class Block {
     }
     public char getRepresentation_char() {
         return representation_char;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Block block = (Block) o;
+        return position.equals(block.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(position);
     }
 }

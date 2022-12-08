@@ -74,6 +74,10 @@ public class Camera {
         return true;
     }
 
+    public BoundlessPosition invertYPosition(BoundlessPosition oldPos){
+        return new BoundlessPosition(oldPos.getX(), gameScreenSize.getY()-oldPos.getY());
+    }
+
     public BoundlessPosition getRelativePositionToCamera(Position position){
         BoundlessPosition p_sub = position.subtract(this.position);
 

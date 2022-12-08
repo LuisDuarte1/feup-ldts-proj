@@ -34,12 +34,19 @@ public class Chunk {
         }
 
         public void addBlock(Block block) throws InvalidPositionException {
-            if (validCoords(block) && notIn(block)) {
-                blocks.add(block);
+            if (!validCoords(block)) {
+                throw new InvalidPositionException("Block invalid position at: x:"
+                        +Integer.toString(block.getPosition().getX())+
+                        " y:"+Integer.toString(block.getPosition().getY())
+                        +" chunk_id:"+Integer.toString(position));
             }
-            else {
-                throw new InvalidPositionException("Block has an invalid position");
+            if(!notIn(block)){
+                System.err.println("Block already there at: x:"
+                        +Integer.toString(block.getPosition().getX())+
+                        " y:"+Integer.toString(block.getPosition().getY())
+                        +" chunk_id:"+Integer.toString(position));
             }
+            blocks.add(block);
         }
 
         public void removeBlock(Position pos) throws BlockNotFoundException {

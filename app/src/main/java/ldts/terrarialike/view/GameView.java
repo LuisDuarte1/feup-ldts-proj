@@ -2,6 +2,7 @@ package ldts.terrarialike.view;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.GUI.GUILanterna;
+import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.Chunk;
@@ -17,18 +18,29 @@ public class GameView implements StateView{
 
     private Camera camera;
 
+    private TextGraphics gameScreenTextGraphics;
+
+    private TextGraphics statsScreenTextGraphics;
+
+
 
     public GameView(GUILanterna gui, World world){
         this.gui = gui;
         this.world = world;
         this.playerStatsView = new PlayerStatsView(world.getPlayer());
-        this.camera = new Camera(world.getPlayer().getPosition(), new BoundlessPosition(gui.getTerminalSize().getColumns(), gui.getTerminalSize().getRows()));
+        gameScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, false);
+        statsScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, true);
+        this.camera = new Camera(world.getPlayer().getPosition(), new BoundlessPosition(gameScreenTextGraphics.getSize().getColumns(),
+                gameScreenTextGraphics.getSize().getRows()));
 
     }
 
     public void draw(){
-        TextGraphics gameScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, false);
-        TextGraphics statsScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, true);
+        try {
+            camera.setNewPositionRelativeToPosition(world.getPlayer().getPosition());
+        } catch (InvalidPositionException e) {
+            throw new RuntimeException(e);
+        }
         playerStatsView.draw(statsScreenTextGraphics);
         for (Chunk chunk : world.getChunks()) {
             if(camera.isChunkVisible(chunk.getChunkID())){
