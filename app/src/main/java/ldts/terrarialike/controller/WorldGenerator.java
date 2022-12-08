@@ -15,6 +15,8 @@ public class WorldGenerator {
 
     private SimpleNoise1D noise;
 
+    private BlockFactory blockFactory;
+
     public static double[] interpolate(double start, double end, int count){
 
         if(count < 2){
@@ -34,6 +36,7 @@ public class WorldGenerator {
 
     public WorldGenerator(long worldSeed){
         this.noise = new SimpleNoise1D(worldSeed);
+        this.blockFactory = new BlockFactory(worldSeed);
     }
 
     public Chunk generateChunk(int chunk_id){
@@ -57,17 +60,14 @@ public class WorldGenerator {
 
         //TODO: generate diferent types of blocks 
         for(int i = 0; i < Chunk.CHUNK_SIZE; i++){
-            for(int e = Position.Y_MIN; e < finalHeights.get(i); e++){
+            for(int e = Position.Y_MIN; e <= finalHeights.get(i); e++){
                 try {
                     Block newBlock = null;
                     int baseXPos = chunk_id*Chunk.CHUNK_SIZE;
-
                     if(chunk_id != 0){
-
-                        newBlock = new Block(new Position(baseXPos + i, e), "#FF0000", 'B');
+                        newBlock = blockFactory.generateBlock(new Position(baseXPos + i, e),chunk_id ,finalHeights.get(i));
                     } else {
-                        newBlock = new Block(new Position(Chunk.CHUNK_SIZE - 1 - i, e), "#FF0000", 'B');
-                        
+                        newBlock = blockFactory.generateBlock(new Position(Chunk.CHUNK_SIZE - 1 - i, e),chunk_id ,finalHeights.get(i));
                     }
                     result.addBlock(newBlock);
                 } catch (InvalidColorStringException | InvalidPositionException e1) {

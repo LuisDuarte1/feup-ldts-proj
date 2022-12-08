@@ -30,8 +30,7 @@ public class Camera {
     }
 
     private Pair<Integer, Integer> getEdgesX(){
-        return new Pair<Integer,Integer>((getGameScreenMiddle().getX()/2 + position.getX())
-            ,(position.getX() - getGameScreenMiddle().getX()/2));
+        return new Pair<Integer,Integer>(position.getX()+getGameScreenMiddle().getX(),-(position.getX()+getGameScreenMiddle().getX()));
     }
 
     private int getBoundariesX() {

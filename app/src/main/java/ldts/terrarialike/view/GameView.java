@@ -1,5 +1,6 @@
 package ldts.terrarialike.view;
 
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.exceptions.InvalidPositionException;
@@ -42,11 +43,12 @@ public class GameView implements StateView{
             throw new RuntimeException(e);
         }
         playerStatsView.draw(statsScreenTextGraphics);
+        gameScreenTextGraphics.setBackgroundColor(TextColor.Factory.fromString("#07c0ed"));
+        gameScreenTextGraphics.fill(' ');
         for (Chunk chunk : world.getChunks()) {
             if(camera.isChunkVisible(chunk.getChunkID())){
                 for (Block block : chunk.getBlocks()) {
-                    
-                    BlockView blockView = new BlockView(block, camera) ;
+                    BlockView blockView = new BlockView(block, camera);
                     blockView.draw(gameScreenTextGraphics);
                     
                 }

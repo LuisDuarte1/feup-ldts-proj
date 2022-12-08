@@ -16,7 +16,7 @@ public class GameController extends AbstractStateController{
         super(stateManager);
         this.world = world;
         this.worldGenerator = new WorldGenerator(world.getSeed());
-        for(int i = -10; i <= 10; i++){
+        for(int i = -30; i <= 30; i++){
             world.tryAddChunk(worldGenerator.generateChunk(i));
         }
         //FIXME: make this boiler plate part of world?
