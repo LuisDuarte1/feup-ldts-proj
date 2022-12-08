@@ -18,9 +18,11 @@ public class BlockView implements ElementView {
     @Override
     public void draw(TextGraphics graphics) {
         if(camera.isVisibleInCamera(block.getPosition())){
+            graphics.setForegroundColor(TextColor.Factory.fromString(block.getColor()));
             graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor()));
+
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(block.getPosition());
-            graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getX(), block.getRepresentation_char());
+            graphics.putString(boundlessPosition.getX(), boundlessPosition.getY(), Character.toString(block.getRepresentation_char()));
         }
     }
 }

@@ -32,7 +32,6 @@ public class MainMenuView implements StateView {
 
         componentList.add(new Button("Create World!", () -> {
             State worldState = new State(World.class, GameView.class, GameController.class);
-            System.out.println(world_seed);
             if(world_seed != null){
                 Integer seedint = Integer.parseInt(world_seed);
                 worldState.initializeDataClass(seedint.intValue());

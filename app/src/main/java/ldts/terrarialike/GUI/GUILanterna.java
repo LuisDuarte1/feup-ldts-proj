@@ -36,12 +36,16 @@ public class GUILanterna {
             DefaultTerminalFactory  dFactory= new DefaultTerminalFactory();
             dFactory.setTerminalEmulatorFontConfiguration(loadSquareFont());
             dFactory.setTerminalEmulatorTitle(windowName);
+            //seems like inital terminal size is more of a suggestion to lanterna than a requirement so we must check
+            //final terminalSize when terminal is created
+            dFactory.setInitialTerminalSize(terminalSize);
             terminal = dFactory.createTerminal();
             screen = new TerminalScreen(terminal);
             screen.setCursorPosition(null);
             screen.startScreen();
             screen.doResizeIfNecessary();
             textGraphics = screen.newTextGraphics();
+            terminalSize = textGraphics.getSize();
         } catch(Exception e){
             System.err.println("Error when creating the GUI:\n\n");
             e.printStackTrace();

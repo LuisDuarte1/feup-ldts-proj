@@ -54,9 +54,6 @@ public class WorldGenerator {
             finalHeights.add((int) nextHalf[i]);
 
         }
-        for (Integer integer : finalHeights) {
-            System.out.println(integer);
-        }
 
         //TODO: generate diferent types of blocks 
         for(int i = 0; i < Chunk.CHUNK_SIZE; i++){
@@ -67,12 +64,12 @@ public class WorldGenerator {
 
                     if(chunk_id > 0){
 
-                        newBlock = new Block(new Position(baseXPos - i, e), "#FF0000", ' ');
+                        newBlock = new Block(new Position(baseXPos - i, e), "#FF0000", 'B');
                     } else if(chunk_id == 0){
-                        newBlock = new Block(new Position(Chunk.CHUNK_SIZE - i, e), "#FF0000", ' ');
+                        newBlock = new Block(new Position(Chunk.CHUNK_SIZE - i, e), "#FF0000", 'B');
                         
                     } else {
-                        newBlock = new Block(new Position(baseXPos + i, e), "#FF0000", ' ');
+                        newBlock = new Block(new Position(baseXPos + i, e), "#FF0000", 'B');
                     }
                     result.addBlock(newBlock);
                 } catch (InvalidColorStringException | InvalidPositionException e1) {

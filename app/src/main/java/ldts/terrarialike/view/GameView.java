@@ -27,13 +27,15 @@ public class GameView implements StateView{
     }
 
     public void draw(){
-        playerStatsView.draw(gui.getPercentageOfScreenVertical(0.82, 0, true));
+        TextGraphics gameScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, false);
+        TextGraphics statsScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, true);
+        playerStatsView.draw(statsScreenTextGraphics);
         for (Chunk chunk : world.getChunks()) {
             if(camera.isChunkVisible(chunk.getChunkID())){
                 for (Block block : chunk.getBlocks()) {
                     
                     BlockView blockView = new BlockView(block, camera) ;
-                    blockView.draw(gui.getTextGraphics(null, null));
+                    blockView.draw(gameScreenTextGraphics);
                     
                 }
             }

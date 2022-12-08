@@ -63,8 +63,6 @@ public class Chunk {
 
         // Check if block coordinates are contained in assigned chunk
         public boolean validCoords(Block block) {
-            System.out.println(block.getPosition().getX());
-            System.out.println(block.getPosition().getY());
 
             if (block.getPosition().getX() >= CHUNK_SIZE * position 
             && block.getPosition().getX() < CHUNK_SIZE * position + CHUNK_SIZE 

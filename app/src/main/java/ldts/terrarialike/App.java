@@ -4,6 +4,7 @@
 package ldts.terrarialike;
 
 import ldts.terrarialike.GUI.GUILanterna;
+import ldts.terrarialike.controller.AbstractStateController;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.NotInitializedStateException;
 import ldts.terrarialike.statemanager.State;
@@ -31,6 +32,14 @@ public class App {
 
         while (true){
             StateView view = manager.getSelectedState().getViewObject(StateView.class);
+            AbstractStateController stateController = null;
+            //not necessary for all states ig
+            try{
+                stateController = manager.getSelectedState().getControllerObject(AbstractStateController.class);
+                stateController.tick();
+            } catch (ClassCastException e){
+
+            }
             view.draw();
             gLanterna.refresh();
             Thread.sleep(100);
