@@ -58,7 +58,6 @@ public class WorldGenerator {
 
         }
 
-        //TODO: generate diferent types of blocks 
         for(int i = 0; i < Chunk.CHUNK_SIZE; i++){
             for(int e = Position.Y_MIN; e <= finalHeights.get(i); e++){
                 try {

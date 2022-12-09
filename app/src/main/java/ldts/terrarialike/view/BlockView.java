@@ -3,6 +3,7 @@ package ldts.terrarialike.view;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.model.Block;
+import ldts.terrarialike.model.BlockInfo;
 import ldts.terrarialike.model.BoundlessPosition;
 
 public class BlockView implements ElementView {
@@ -18,12 +19,14 @@ public class BlockView implements ElementView {
     @Override
     public void draw(TextGraphics graphics) {
         if(camera.isVisibleInCamera(block.getPosition())) {
-            graphics.setForegroundColor(TextColor.Factory.fromString(block.getColor()));
-            graphics.setBackgroundColor(TextColor.Factory.fromString(block.getColor()));
+            BlockInfo blockInfo = block.getBlockInfo();
+            graphics.setBackgroundColor(TextColor.Factory.fromString(blockInfo.getBackgroundcolor()));
+            graphics.setForegroundColor(TextColor.Factory.fromString(blockInfo.getForegroundColor()));
+
 
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(block.getPosition());
             boundlessPosition = camera.invertYPosition(boundlessPosition);
-            graphics.putString(boundlessPosition.getX(), boundlessPosition.getY(), Character.toString(block.getRepresentation_char()));
+            graphics.putString(boundlessPosition.getX(), boundlessPosition.getY(), Character.toString(blockInfo.getRepresentation_char()));
         }
         else {
             /*System.out.println(String.format("Block not drawable in position x:%d y:%d", block.getPosition().getX(),

@@ -19,29 +19,20 @@ public class GameController extends AbstractStateController{
         for(int i = -30; i <= 30; i++){
             world.tryAddChunk(worldGenerator.generateChunk(i));
         }
-        //FIXME: make this boiler plate part of world?
-        int maxZeroPosition = -1;
-        Chunk zero_chunk = null;
-        for(Chunk c: world.getChunks()){
-            if(c.getChunkID() == 0){
-                zero_chunk = c;
-            }
-        }
-        for (Block a :
-                zero_chunk.getBlocks()) {
-            if(a.getPosition().getX() == 0 && a.getPosition().getY() > maxZeroPosition) {
-                maxZeroPosition = a.getPosition().getY();
-            }
-        }
+        Integer yPos = this.world.findMaxHeightOfXPos(0);
         try {
-            this.world.getPlayer().setPosition(new Position(0,maxZeroPosition));
+            this.world.getPlayer().setPosition(new Position(0, yPos));
         } catch (InvalidPositionException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            //if this happens we should crash the game because the generation shouldn't let this happen
+            System.exit(1);
         }
 
 
 
     }
+
+
 
     @Override
     public void tick() {

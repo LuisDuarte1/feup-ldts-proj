@@ -13,7 +13,6 @@ import ldts.terrarialike.model.World;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;

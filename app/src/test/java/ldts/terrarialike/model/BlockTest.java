@@ -15,7 +15,7 @@ public class BlockTest {
         try {
             Block b = new Block(p, "#ffffff", 'a');
             assertEquals(p, b.getPosition());
-            assertEquals("#ffffff", b.getColor());
+            assertEquals("#ffffff", b.getBackgroundColor());
             assertEquals('a', b.getRepresentation_char());
         } catch (InvalidColorStringException e) {
             fail(e.getMessage());
