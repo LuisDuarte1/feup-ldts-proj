@@ -4,10 +4,7 @@ import ldts.terrarialike.exceptions.InvalidColorStringException;
 import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.BlockInfo;
 import ldts.terrarialike.model.BlockType;
-import ldts.terrarialike.model.InteractionType;
-import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.Position;
-import ldts.terrarialike.model.World;
 
 import java.util.Random;
 
