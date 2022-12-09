@@ -1,6 +1,6 @@
 package ldts.terrarialike.controller;
 
-import ldts.terrarialike.controller.events.MoveEvent;
+import ldts.terrarialike.controller.events.*;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.Entity;
@@ -27,19 +27,19 @@ public class MoveEventTest {
 
 
 
-        MoveEvent moveEvent = new MoveEvent(MovementType.UP, entity);
+        MoveEvent moveEvent = new MoveUpEvent( entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(1)).setPosition(new Position(5, 6));
 
-        moveEvent = new MoveEvent(MovementType.DOWN, entity);
+        moveEvent = new MoveDownEvent(entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(1)).setPosition(new Position(5,4));
 
-        moveEvent = new MoveEvent(MovementType.LEFT, entity);
+        moveEvent = new MoveLeftEvent(entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(1)).setPosition(new Position(4,5));
 
-        moveEvent = new MoveEvent(MovementType.RIGHT, entity);
+        moveEvent = new MoveRightEvent(entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(1)).setPosition(new Position(6,5));
 
@@ -47,23 +47,23 @@ public class MoveEventTest {
         Block blocktest = Mockito.mock(Block.class);
         Mockito.when(worldtest.getBlock(Mockito.any())).thenReturn(blocktest);
 
-        moveEvent = new MoveEvent(MovementType.UP, entity);
+        moveEvent = new MoveUpEvent(entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(0)).setPosition(null);
         Assertions.assertEquals(new Position(5,5), entity.getPosition());
 
 
-        moveEvent = new MoveEvent(MovementType.DOWN, entity);
+        moveEvent = new MoveDownEvent(entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(0)).setPosition(null);
         Assertions.assertEquals(new Position(5,5), entity.getPosition());
 
-        moveEvent = new MoveEvent(MovementType.LEFT, entity);
+        moveEvent = new MoveLeftEvent(entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(0)).setPosition(null);
         Assertions.assertEquals(new Position(5,5), entity.getPosition());
 
-        moveEvent = new MoveEvent(MovementType.RIGHT, entity);
+        moveEvent = new MoveRightEvent(entity);
         moveEvent.execute(worldtest);
         Mockito.verify(entity, Mockito.times(0)).setPosition(null);
         Assertions.assertEquals(new Position(5,5), entity.getPosition());

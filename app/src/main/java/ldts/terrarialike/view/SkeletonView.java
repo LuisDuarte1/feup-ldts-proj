@@ -19,7 +19,7 @@ public class SkeletonView implements EntityView{
     @Override
     public void draw(TextGraphics graphics, Entity skeleton) {
         if (skeleton instanceof Skeleton && camera.isVisibleInCamera(skeleton.getPosition())) {
-            graphics.setForegroundColor(TextColor.ANSI.MAGENTA);
+            graphics.setForegroundColor(TextColor.ANSI.BLACK);
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(skeleton.getPosition());
             boundlessPosition = camera.invertYPosition(boundlessPosition);
             graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getY(), 'S');
