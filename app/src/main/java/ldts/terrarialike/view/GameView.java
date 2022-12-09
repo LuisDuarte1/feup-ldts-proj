@@ -16,6 +16,7 @@ public class GameView implements StateView{
 
     //keep some views ready to use
     private PlayerStatsView playerStatsView;
+    private PlayerView playerView;
 
     private Camera camera;
 
@@ -33,6 +34,7 @@ public class GameView implements StateView{
         statsScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, true);
         this.camera = new Camera(world.getPlayer().getPosition(), new BoundlessPosition(gameScreenTextGraphics.getSize().getColumns(),
                 gameScreenTextGraphics.getSize().getRows()));
+        this.playerView = new PlayerView(camera);
 
     }
 
@@ -52,9 +54,10 @@ public class GameView implements StateView{
                     blockView.draw(gameScreenTextGraphics);
                     
                 }
-            }
-            
+            }   
         }
+        gameScreenTextGraphics.setBackgroundColor(TextColor.Factory.fromString("#07c0ed"));
+        playerView.draw(gameScreenTextGraphics, world.getPlayer());
 
     }
 }

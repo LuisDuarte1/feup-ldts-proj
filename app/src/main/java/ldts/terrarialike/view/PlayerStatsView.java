@@ -17,6 +17,7 @@ public class PlayerStatsView implements ElementView{
     @Override
     public void draw(TextGraphics graphics) {
         try {
+            graphics.fill(' ');
             graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
             graphics.setForegroundColor(TextColor.Factory.fromString("#FFFFFF"));
             graphics.putString(0, 0, "Player Stats");
