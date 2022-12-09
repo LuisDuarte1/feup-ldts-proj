@@ -1,7 +1,4 @@
-package ldts.terrarialike.controller;
-
-import ldts.terrarialike.model.Enemy;
-import ldts.terrarialike.model.Position;
+package ldts.terrarialike.model;
 
 public class Skeleton extends Enemy {
 
@@ -10,4 +7,3 @@ public class Skeleton extends Enemy {
         });
     }
 }
-

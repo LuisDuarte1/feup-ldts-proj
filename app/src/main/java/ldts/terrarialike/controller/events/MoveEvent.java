@@ -32,7 +32,7 @@ public class MoveEvent implements GameEvent{
 
 
 
-    //FIXME: retirar o caso switch case e colocar um metodo em cada entidade para fazer o movimento
+    //FIXME: retirar o caso switch case e abstrair para uma classe
 
     @Override
     public List<GameEvent> execute(World world) {
@@ -46,31 +46,48 @@ public class MoveEvent implements GameEvent{
 
                 case UP:
                      // como é que é suposto sabermos se o movimento é valido ou não?
+                    Position newPosition = new Position(entity.getPosition().getX(), entity.getPosition().getY() +1 );
 
+                    if(world.getBlock(newPosition) == null){
+                        entity.setPosition(newPosition);
+                    }
 
-                    entity.setPosition(new Position(entity.getPosition().getX(), entity.getPosition().getY() + 1));
 
                     break;
 
                 case DOWN:
 
-                    entity.setPosition(new Position(entity.getPosition().getX(), entity.getPosition().getY() - 1));
+                    newPosition = new Position(entity.getPosition().getX(), entity.getPosition().getY() -1 );
+
+                    if(world.getBlock(newPosition) == null){
+                        entity.setPosition(newPosition);
+                    }
 
                     break;
 
                 case LEFT:
+                    newPosition = new Position(entity.getPosition().getX() -1, entity.getPosition().getY() );
 
-                    entity.setPosition(new Position(entity.getPosition().getX() - 1, entity.getPosition().getY()));
+                    if(world.getBlock(newPosition) == null){
+                        entity.setPosition(newPosition);
+                    }
 
                     break;
 
                 case RIGHT:
 
-                    entity.setPosition(new Position(entity.getPosition().getX() + 1, entity.getPosition().getY()));
+                    newPosition = new Position(entity.getPosition().getX() +1 , entity.getPosition().getY() );
+
+                    if(world.getBlock(newPosition) == null){
+                        entity.setPosition(newPosition);
+                    }
 
                     break;
 
-            }}
+            }
+
+
+        }
          catch (InvalidPositionException e) {
 
         }

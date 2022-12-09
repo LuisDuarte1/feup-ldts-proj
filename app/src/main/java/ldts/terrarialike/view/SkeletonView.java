@@ -2,9 +2,9 @@ package ldts.terrarialike.view;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import ldts.terrarialike.controller.Skeleton;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.Entity;
+import ldts.terrarialike.model.Skeleton;
 import ldts.terrarialike.model.Zombie;
 
 public class SkeletonView implements EntityView{
@@ -21,7 +21,7 @@ public class SkeletonView implements EntityView{
         if (skeleton instanceof Skeleton && camera.isVisibleInCamera(skeleton.getPosition())) {
             graphics.setForegroundColor(TextColor.ANSI.MAGENTA);
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(skeleton.getPosition());
-           // boundlessPosition = camera.invertYPosition(boundlessPosition);
+            boundlessPosition = camera.invertYPosition(boundlessPosition);
             graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getY(), 'S');
         }
     }}

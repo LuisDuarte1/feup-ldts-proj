@@ -20,7 +20,7 @@ public class ZombieView implements EntityView {
         if(zombie instanceof Zombie && camera.isVisibleInCamera(zombie.getPosition())){
             graphics.setForegroundColor(TextColor.ANSI.MAGENTA);
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(zombie.getPosition());
-           // boundlessPosition = camera.invertYPosition(boundlessPosition);
+            boundlessPosition = camera.invertYPosition(boundlessPosition);
             graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getY(), 'Z');
         }
 
