@@ -19,7 +19,8 @@ public abstract class Entity {
         return hp;
     }
     public void setHp(int hp) {
-        this.hp = hp;
+        //never let hp get to bellow 0
+        this.hp = Math.max(hp, 0);
     }
 
     public boolean collidesWith(Entity t){
