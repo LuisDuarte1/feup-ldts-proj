@@ -110,6 +110,26 @@ public class Inventory {
         return selecteditemindex;
     }
 
+    public Item getItem(int index) throws InvalidIndexException {
+
+        if( index < inventory.size()){
+            return inventory.get(index).getItem();
+        }
+        else {
+            throw new InvalidIndexException("Invalid Index");
+        }
+    }
+
+    public ItemStack getItemStack(int index) throws InvalidIndexException {
+
+        if( index < inventory.size()){
+            return inventory.get(index);
+        }
+        else {
+            throw new InvalidIndexException("Invalid Index");
+        }
+    } // fazer testes!!!!!!!!!!!!!!!!!!!!1
+
     public Item getSelectedItem(){
         return inventory.get(selecteditemindex).getItem();
     }
