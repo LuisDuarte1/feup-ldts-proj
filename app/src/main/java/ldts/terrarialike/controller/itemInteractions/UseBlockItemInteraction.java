@@ -14,19 +14,25 @@ import ldts.terrarialike.model.World;
 public class UseBlockItemInteraction implements ItemInteraction{
 
     private BlockInfo blockInfo;
+
+
     private Position desiredPosition;
 
 
 
-    public UseBlockItemInteraction(BlockInfo blockInfo, Position desiredPosition) {
+    public UseBlockItemInteraction(BlockInfo blockInfo) {
         this.blockInfo = blockInfo;
-        this.desiredPosition = desiredPosition;
+        this.desiredPosition = null;
     }
 
 
 
     @Override
     public void execute(World one, InteractionType interactionType, Item item) {
+        if(desiredPosition == null){
+            System.err.println("BlockItemInteractionError: block has not desiredPosition... skipping event.");
+            return;
+        }
         if(interactionType == InteractionType.USE && one.getBlock(desiredPosition) == null){
             Integer chunkID = desiredPosition.getX() % Chunk.CHUNK_SIZE;
             Chunk desiredChunk = null;
@@ -45,6 +51,11 @@ public class UseBlockItemInteraction implements ItemInteraction{
                 return;
             }
         }
+    }
+
+
+    public void setDesiredPosition(Position desiredPosition) {
+        this.desiredPosition = desiredPosition;
     }
     
 }
