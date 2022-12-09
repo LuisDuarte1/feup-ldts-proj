@@ -12,7 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 public class BlockViewTest {
-
+    /*
     private Camera camera;
     private TextGraphics textGraphics;
 
@@ -56,4 +56,6 @@ public class BlockViewTest {
         Mockito.verify(textGraphics, Mockito.never()).setCharacter(0,0, block.getRepresentation_char());
 
     }
+    */
+
 }

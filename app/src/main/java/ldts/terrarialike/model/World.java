@@ -104,6 +104,18 @@ public class World {
         return null;
     }
 
+    public Entity getEntity(Position entityPosition) {
+        if (player.getPosition().equals(entityPosition)) {
+            return player;
+        }
+        for (Enemy enemy : enemiesList) {
+            if (enemy.getPosition().equals(entityPosition)) {
+                return enemy;
+            }
+        }
+        return null;
+    }
+
     public Integer findMaxHeightOfXPos(Integer xPos) {
         int maxZeroPosition = -1;
         Integer chunkID = xPos % Chunk.CHUNK_SIZE;

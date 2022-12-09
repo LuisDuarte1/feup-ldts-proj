@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 
 public class BlockTest {
+    /*
     @Test
     public void validBlockColorConstructor(){
         Position p = mock(Position.class);
@@ -43,4 +44,6 @@ public class BlockTest {
             
         }
     }
+    */
+
 }
