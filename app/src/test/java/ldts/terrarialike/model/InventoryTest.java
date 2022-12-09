@@ -209,7 +209,28 @@ public class InventoryTest {
 
     }
     }
+
+    @Test
+
+    public void getItemTest(){
+
+        try {
+            this.inventorytest = new Inventory(2);
+            Item i1 = Mockito.mock(Item.class);
+            Item i2 = Mockito.mock(Item.class);
+            inventorytest.add(i1, 1);
+            inventorytest.add(i2, 1);
+
+            Assertions.assertEquals(i1, inventorytest.getItem(0));
+            Assertions.assertEquals(i2, inventorytest.getItem(1));
+        } catch (InvalidSizeException | InventoryFullException | InvalidQuantityException | InvalidIndexException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
+
 
 
 
