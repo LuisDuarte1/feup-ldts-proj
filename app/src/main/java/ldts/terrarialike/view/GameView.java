@@ -29,8 +29,8 @@ public class GameView implements StateView{
         this.gui = gui;
         this.world = world;
         this.playerStatsView = new PlayerStatsView(world.getPlayer());
-        gameScreenTextGraphics = this.gui.getPercentageOfScreenVertical(0.82, 0, false);
-        statsScreenTextGraphics = this.gui.getPercentageOfScreenVertical(0.82, 0, true);
+        gameScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, false);
+        statsScreenTextGraphics = gui.getPercentageOfScreenVertical(0.82, 0, true);
         this.camera = new Camera(world.getPlayer().getPosition(), new BoundlessPosition(gameScreenTextGraphics.getSize().getColumns(),
                 gameScreenTextGraphics.getSize().getRows()));
 
