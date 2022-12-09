@@ -2,7 +2,9 @@ package ldts.terrarialike.view;
 
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.BoundlessPosition;
+import ldts.terrarialike.model.Chunk;
 import ldts.terrarialike.model.Position;
+import ldts.terrarialike.utils.Pair;
 
 import static java.lang.Math.abs;
 
@@ -25,6 +27,10 @@ public class Camera {
 
     private BoundlessPosition getGameScreenMiddle(){
         return new BoundlessPosition(gameScreenSize.getX()/2, gameScreenSize.getY()/2);
+    }
+
+    private Pair<Integer, Integer> getEdgesX(){
+        return new Pair<Integer,Integer>(position.getX()+getGameScreenMiddle().getX(),-(position.getX()+getGameScreenMiddle().getX()));
     }
 
     private int getBoundariesX() {
@@ -67,6 +73,10 @@ public class Camera {
         return true;
     }
 
+    public BoundlessPosition invertYPosition(BoundlessPosition oldPos){
+        return new BoundlessPosition(oldPos.getX(), gameScreenSize.getY()-oldPos.getY());
+    }
+
     public BoundlessPosition getRelativePositionToCamera(Position position){
         BoundlessPosition p_sub = position.subtract(this.position);
 
@@ -78,4 +88,15 @@ public class Camera {
     public void resizeScreen(BoundlessPosition gameScreenSize) {
         this.gameScreenSize = gameScreenSize;
     }
+
+    public Boolean isChunkVisible(int chunk_id){
+        Pair<Integer,Integer> edges = getEdgesX();
+        if(chunk_id >= 0 && (chunk_id*Chunk.CHUNK_SIZE)-15 <= edges.first){
+            return true;
+        } else if(chunk_id < 0 && (chunk_id*Chunk.CHUNK_SIZE)+15 >= edges.second) {
+            return true;
+        }
+        return false;
+
+    } 
 }

@@ -8,12 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Chunk {
+        public static int CHUNK_SIZE = 16;    
+
+
         private final int position;
         private List<Block> blocks = new ArrayList<>(); // Lista de blocos no chunk
 
         public Chunk(int position) {
             this.position = position;
         }
+
+
+        public int getChunkID(){return position;}
 
         public List<Block> getBlocks() {
             return this.blocks;
@@ -28,12 +34,19 @@ public class Chunk {
         }
 
         public void addBlock(Block block) throws InvalidPositionException {
-            if (validCoords(block) && notIn(block)) {
-                blocks.add(block);
+            if (!validCoords(block)) {
+                throw new InvalidPositionException("Block invalid position at: x:"
+                        +Integer.toString(block.getPosition().getX())+
+                        " y:"+Integer.toString(block.getPosition().getY())
+                        +" chunk_id:"+Integer.toString(position));
             }
-            else {
-                throw new InvalidPositionException("Block has an invalid position");
+            if(!notIn(block)){
+                System.err.println("Block already there at: x:"
+                        +Integer.toString(block.getPosition().getX())+
+                        " y:"+Integer.toString(block.getPosition().getY())
+                        +" chunk_id:"+Integer.toString(position));
             }
+            blocks.add(block);
         }
 
         public void removeBlock(Position pos) throws BlockNotFoundException {
@@ -57,12 +70,40 @@ public class Chunk {
 
         // Check if block coordinates are contained in assigned chunk
         public boolean validCoords(Block block) {
-            if (block.getPosition().getX() >= 16 * position && block.getPosition().getX() < 16 * position + 16 && block.getPosition().getY() >= Position.Y_MIN  && block.getPosition().getY() <= Position.Y_MAX) {
+
+            if (block.getPosition().getX() >= CHUNK_SIZE * position 
+            && block.getPosition().getX() < CHUNK_SIZE * position + CHUNK_SIZE 
+            && block.getPosition().getY() >= Position.Y_MIN  
+            && block.getPosition().getY() <= Position.Y_MAX) {
                 return true;
             }
         else {
                 return false;
             }
+        }
+
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + position;
+            return result;
+        }
+
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (getClass() != obj.getClass())
+                return false;
+            Chunk other = (Chunk) obj;
+            if (position != other.position)
+                return false;
+            return true;
         }
     }
 

@@ -5,7 +5,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.Entity;
 import ldts.terrarialike.model.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class PlayerView implements EntityView {
 
@@ -20,6 +19,7 @@ public class PlayerView implements EntityView {
         if(player instanceof Player  && camera.isVisibleInCamera(player.getPosition())){
             graphics.setForegroundColor(TextColor.ANSI.GREEN);
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(player.getPosition());
+            boundlessPosition = camera.invertYPosition(boundlessPosition);
             graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getY(), 'P');
         }
     }
