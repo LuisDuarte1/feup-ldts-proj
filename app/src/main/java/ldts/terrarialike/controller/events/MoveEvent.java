@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class MoveEvent implements GameEvent{
 
-    private Entity entity;
+    protected Entity entity;
 
     MovementType movementType;
 
