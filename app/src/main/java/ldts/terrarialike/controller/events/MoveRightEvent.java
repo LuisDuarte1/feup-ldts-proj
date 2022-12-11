@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MoveRightEvent extends MoveEvent{
 
-    Entity entity;
+
 
     public MoveRightEvent(Entity entity) {
         super(MovementType.RIGHT,entity);

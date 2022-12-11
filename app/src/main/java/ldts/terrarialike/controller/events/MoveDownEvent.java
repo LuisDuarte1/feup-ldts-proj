@@ -12,7 +12,6 @@ import java.util.List;
 
 public class MoveDownEvent extends MoveEvent{
 
-    Entity entity;
 
     public MoveDownEvent(Entity entity) {
         super(MovementType.DOWN,entity);
