@@ -1,5 +1,6 @@
 package ldts.terrarialike.view;
 
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.model.BoundlessPosition;
@@ -20,7 +21,9 @@ public class PlayerView implements EntityView {
             graphics.setForegroundColor(TextColor.ANSI.GREEN);
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(player.getPosition());
             boundlessPosition = camera.invertYPosition(boundlessPosition);
+            graphics.enableModifiers(SGR.BOLD, SGR.BORDERED);
             graphics.setCharacter(boundlessPosition.getX(), boundlessPosition.getY(), 'P');
+            graphics.disableModifiers(SGR.BOLD, SGR.BORDERED);
         }
     }
 }
