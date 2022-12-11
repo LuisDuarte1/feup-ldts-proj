@@ -33,14 +33,24 @@ public class SkeletonViewTest {
     }
 
     @Test
-    public void shouldDrawPlayer(){
+    public void shouldDrawSkeleton(){
+        BoundlessPosition originalPos = Mockito.mock(BoundlessPosition.class);
+        Mockito.when(originalPos.getX()).thenReturn(1);
+        Mockito.when(originalPos.getY()).thenReturn(1);
+
+        BoundlessPosition invertedPos = Mockito.mock(BoundlessPosition.class);
+        Mockito.when(invertedPos.getX()).thenReturn(1);
+        Mockito.when(invertedPos.getY()).thenReturn(99);
+
         Mockito.when(camera.isVisibleInCamera(Mockito.any())).thenReturn(true);
-        Mockito.when(camera.getRelativePositionToCamera(Mockito.any())).thenReturn(new BoundlessPosition(1,1));
+        Mockito.when(camera.getRelativePositionToCamera(Mockito.any())).thenReturn(originalPos);
+        Mockito.when(camera.invertYPosition(originalPos)).thenReturn(invertedPos);
+
 
         skeletonView.draw(textGraphics,skeleton);
 
 
         Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.BLACK);
-        Mockito.verify(textGraphics).setCharacter(1, 1, 'S');
+        Mockito.verify(textGraphics).setCharacter(1, 99, 'S');
     }
 }

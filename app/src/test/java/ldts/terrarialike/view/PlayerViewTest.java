@@ -36,13 +36,22 @@ public class PlayerViewTest {
 
     @Test
     public void shouldDrawPlayer(){
+        BoundlessPosition originalPos = Mockito.mock(BoundlessPosition.class);
+        Mockito.when(originalPos.getX()).thenReturn(1);
+        Mockito.when(originalPos.getY()).thenReturn(1);
+
+        BoundlessPosition invertedPos = Mockito.mock(BoundlessPosition.class);
+        Mockito.when(invertedPos.getX()).thenReturn(1);
+        Mockito.when(invertedPos.getY()).thenReturn(99);
+
         Mockito.when(camera.isVisibleInCamera(Mockito.any())).thenReturn(true);
-        Mockito.when(camera.getRelativePositionToCamera(Mockito.any())).thenReturn(new BoundlessPosition(1,1));
+        Mockito.when(camera.getRelativePositionToCamera(Mockito.any())).thenReturn(originalPos);
+        Mockito.when(camera.invertYPosition(originalPos)).thenReturn(invertedPos);
 
         playerView.draw(textGraphics,player);
 
 
         Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.GREEN);
-        Mockito.verify(textGraphics).setCharacter(1, 1, 'P');
+        Mockito.verify(textGraphics).setCharacter(1, 99, 'P');
     }
 }
