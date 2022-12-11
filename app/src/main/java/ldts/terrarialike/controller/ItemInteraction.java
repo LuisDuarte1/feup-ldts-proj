@@ -4,6 +4,8 @@ import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.World;
 
+import java.util.List;
+
 public interface ItemInteraction {
-    void execute(World one, InteractionType interactionType, Item item);
+    List<GameEvent> execute(World one, InteractionType interactionType, Item item);
 }
