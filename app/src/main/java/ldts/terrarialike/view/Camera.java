@@ -90,6 +90,7 @@ public class Camera {
     }
 
     public Boolean isChunkVisible(int chunk_id){
+        //FIXME: disapearing before the edge? sus probably on the negative side?
         Pair<Integer,Integer> edges = getEdgesX();
         if(chunk_id >= 0 && (chunk_id*Chunk.CHUNK_SIZE)-15 <= edges.first){
             return true;

@@ -1,5 +1,6 @@
 package ldts.terrarialike.controller;
 
+import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
@@ -11,9 +12,16 @@ public class GameController extends AbstractStateController{
     private PlayerController playerController;
     private World world;
 
-    public GameController(StateManager stateManager,World world) {
+    private InputHandler inputHandler;
+
+    private GameEventManager gameEventManager;
+
+
+    public GameController(StateManager stateManager, World world, GUILanterna gui) {
         super(stateManager);
         this.world = world;
+        this.gameEventManager = new GameEventManager();
+        this.inputHandler = new InputHandler(gui,stateManager,world.getPlayer());
         this.worldGenerator = new WorldGenerator(world.getSeed());
         this.playerController = new PlayerController(world.getPlayer());
         for(int i = -30; i <= 30; i++){
@@ -36,6 +44,8 @@ public class GameController extends AbstractStateController{
 
     @Override
     public void tick() {
+        gameEventManager.addMultipleGameEvents(inputHandler.handleInput());
+        gameEventManager.executeAllEvents(world);
         playerController.tick(world);
 
     }

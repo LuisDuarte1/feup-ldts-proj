@@ -84,7 +84,7 @@ public class World {
     }
 
     public Block getBlock(Position blockPosition){
-        Integer desiredChunkID = blockPosition.getX() % Chunk.CHUNK_SIZE;
+        Integer desiredChunkID = blockPosition.getX() / Chunk.CHUNK_SIZE;
         Chunk desiredChunk = null;
         //we have to do it this way because we can't guarentee that chunks will always be 
         //sequential
