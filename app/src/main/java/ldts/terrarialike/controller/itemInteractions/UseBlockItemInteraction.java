@@ -12,6 +12,7 @@ import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UseBlockItemInteraction implements ItemInteraction{
