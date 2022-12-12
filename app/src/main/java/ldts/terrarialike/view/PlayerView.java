@@ -18,7 +18,7 @@ public class PlayerView implements EntityView {
     @Override
     public void draw(TextGraphics graphics, Entity player) {
         if(player instanceof Player  && camera.isVisibleInCamera(player.getPosition())){
-            graphics.setForegroundColor(TextColor.ANSI.GREEN);
+            graphics.setForegroundColor(TextColor.ANSI.MAGENTA);
             BoundlessPosition boundlessPosition = camera.getRelativePositionToCamera(player.getPosition());
             boundlessPosition = camera.invertYPosition(boundlessPosition);
             graphics.enableModifiers(SGR.BOLD, SGR.BORDERED);

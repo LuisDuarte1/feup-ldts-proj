@@ -1,5 +1,6 @@
 package ldts.terrarialike.view;
 
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -24,23 +25,26 @@ public class SelectedInventorySlotView implements  ElementView{
                     " view");
         }
         ItemStack selectedItemStack = inventory.getSelectedItemStack();
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#8C2D19"));
-        graphics.setCharacter(0,0, ' ');
-        graphics.setCharacter(1,0, ' ');
-        graphics.setCharacter(2,0, ' ');
-        graphics.setCharacter(1,2, ' ');
-        graphics.setCharacter(0,1, ' ');
-        graphics.setCharacter(0,2, ' ');
-        graphics.setCharacter(2,1, ' ');
-        graphics.setCharacter(2,2, ' ');
+        graphics.enableModifiers(SGR.BOLD, SGR.BORDERED);
         graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+        graphics.setForegroundColor(TextColor.Factory.fromString("#8C2D19"));
+        graphics.setCharacter(0,0, '#');
+        graphics.setCharacter(1,0, '#');
+        graphics.setCharacter(2,0, '#');
+        graphics.setCharacter(1,2, '#');
+        graphics.setCharacter(0,1, '#');
+        graphics.setCharacter(0,2, '#');
+        graphics.setCharacter(2,1, '#');
+        graphics.setCharacter(2,2, '#');
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         if(selectedItemStack != null){
             graphics.setCharacter(1,1, selectedItemStack.getItem().getRepresentation());
-            graphics.putString(0,4, String.format("S:%d", selectedItemStack.getQuantity()));
+            graphics.putString(0,3, String.format("S:%d", selectedItemStack.getQuantity()));
         } else{
-            graphics.putString(0,4,String.format("Empty"));
+            graphics.putString(0,3,String.format("Empty"));
         }
+        graphics.disableModifiers(SGR.BOLD, SGR.BORDERED);
+
 
 
 

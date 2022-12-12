@@ -31,10 +31,9 @@ public class PlayerStatsView implements ElementView{
                     new TerminalSize((int) (statsSize.getColumns()*LOGS_PERCENTAGE),statsSize.getRows()));
 
             TextGraphics slotGraphics = graphics.newTextGraphics(
-                    new TerminalPosition(15, 0), new TerminalSize(5,5));
+                    new TerminalPosition(30, 0), new TerminalSize(5,5));
 
             playerLogsView.draw(logGraphics);
-            slotView.draw(slotGraphics);
 
             graphics.fillRectangle(new TerminalPosition(0,0),
                     new TerminalSize((int) (statsSize.getColumns()*(1-LOGS_PERCENTAGE) -1), statsSize.getRows()), ' ');
@@ -47,6 +46,7 @@ public class PlayerStatsView implements ElementView{
                     , player.getPosition().getY()));
             graphics.putString(0,4, "Inventory: "
                     + Integer.toString(player.getInventory().getSize()) + "/30");
+            slotView.draw(slotGraphics);
         } catch ( Exception e) {
             e.printStackTrace();
         }
