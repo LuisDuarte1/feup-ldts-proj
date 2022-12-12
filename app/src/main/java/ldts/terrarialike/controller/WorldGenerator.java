@@ -3,6 +3,7 @@ package ldts.terrarialike.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.source.tree.Tree;
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Block;
@@ -16,6 +17,8 @@ public class WorldGenerator {
     private SimpleNoise1D noise;
 
     private BlockFactory blockFactory;
+
+    private TreeFactory treeFactory;
 
     public static double[] interpolate(double start, double end, int count){
 
@@ -37,6 +40,7 @@ public class WorldGenerator {
     public WorldGenerator(long worldSeed){
         this.noise = new SimpleNoise1D(worldSeed);
         this.blockFactory = new BlockFactory(worldSeed);
+        this.treeFactory = new TreeFactory((int) worldSeed);
     }
 
     public Chunk generateChunk(int chunk_id){
@@ -73,11 +77,30 @@ public class WorldGenerator {
                     //FIXME do this correctly
                     System.out.println(e1.getMessage());
                 }
-                
 
             }
         }
-        
+        List<Pair<Integer, Integer>> pairList = new ArrayList<>();
+        for(int i = 0; i < Chunk.CHUNK_SIZE; i++){
+            int baseXPos = chunk_id * Chunk.CHUNK_SIZE;
+            Pair<Integer, Integer> integerPair = new Pair<>(0,0);
+            if(chunk_id != 0){
+                integerPair.first = baseXPos + i;
+            } else {
+                integerPair.first = Chunk.CHUNK_SIZE - 1 - i;
+            }
+            integerPair.second = finalHeights.get(i);
+            pairList.add(integerPair);
+        }
+        List<Block> treeBlocks = treeFactory.generateTrees(pairList);
+        for(Block tBlock : treeBlocks){
+            try {
+                result.addBlock(tBlock);
+            } catch (InvalidPositionException e) {
+                System.err.println(e.getMessage());
+
+            }
+        }
 
 
         
