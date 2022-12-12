@@ -36,6 +36,8 @@ public class PlayerStatsView implements ElementView{
             graphics.putString(0, 0, "Player Stats");
             graphics.drawLine(new TerminalPosition(0, 1), new TerminalPosition(5, 1), '-');
             graphics.putString(0, 2, "Hp: " + Integer.toString(player.getHp()));
+            graphics.putString(0,3, String.format("Pos X: %d Y:%d", player.getPosition().getX()
+                    , player.getPosition().getY()));
             graphics.putString(0,4, "Inventory: "
                     + Integer.toString(player.getInventory().getSize()) + "/30");
         } catch ( Exception e) {
