@@ -4,6 +4,8 @@ package ldts.terrarialike.controller.itemInteractions;
 import ldts.terrarialike.controller.GameEvent;
 import ldts.terrarialike.controller.ItemInteraction;
 import ldts.terrarialike.exceptions.InvalidPositionException;
+import ldts.terrarialike.exceptions.InvalidQuantityException;
+import ldts.terrarialike.exceptions.ItemNotFoundException;
 import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.BlockInfo;
 import ldts.terrarialike.model.Chunk;
@@ -41,12 +43,19 @@ public class UseBlockItemInteraction extends ItemInteraction{
                     break;
                 }
             }
-            if(desiredChunk == null) return null;
+            if(desiredChunk == null) return new ArrayList<>();
             try {
                 desiredChunk.addBlock(new Block(desiredPosition, blockInfo));
             } catch (InvalidPositionException e) {
                 e.printStackTrace();
                 return new ArrayList<>();
+            }
+            try {
+                one.getPlayer().getInventory().remove(item, 1);
+            } catch (InvalidQuantityException e) {
+                throw new RuntimeException(e);
+            } catch (ItemNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
         return new ArrayList<>();

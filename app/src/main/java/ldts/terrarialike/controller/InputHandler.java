@@ -143,6 +143,26 @@ public class InputHandler {
         return Arrays.asList(itemEventExecutorEvent);
     }
 
+    private List<GameEvent> processUseAction(List<KeyStroke> arrowKeys){
+        Position desiredPosition = null;
+        try {
+            desiredPosition = getDesiredPosition(arrowKeys);
+        } catch (InvalidPositionException e) {
+            System.err.println(String.format("Invalid position while getting the desiredPosition..."));
+            return new ArrayList<>();
+        }
+        if(desiredPosition == null) return new ArrayList<>();
+        Item selectedItem = player.getInventory().getSelectedItem();
+        ItemEventExecutorEvent itemEventExecutorEvent = null;
+        if(selectedItem == null){
+            //TODO: default item use interaction
+            return new ArrayList<>();
+        }
+        itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.USE, selectedItem);
+        selectedItem.getInteraction().setDesiredPosition(desiredPosition);
+        return Arrays.asList(itemEventExecutorEvent);
+    }
+
     public List<GameEvent> handleInput(){
         List<GameEvent> gameEvents = new ArrayList<>();
 
@@ -160,6 +180,8 @@ public class InputHandler {
         } else if(arrowKeys.size() != 0){
             if (activeAction.equals(DESTROY_KEY)) {
                 gameEvents.addAll(processDestroyAction(arrowKeys));
+            } else if(activeAction.equals(USE_KEY)){
+                gameEvents.addAll(processUseAction(arrowKeys));
             }
             resetActions();
         }
