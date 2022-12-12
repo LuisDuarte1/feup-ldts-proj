@@ -34,11 +34,11 @@ public class InventoryTest {
     public void testInventory() {
         try{
             this.inventorytest  = new Inventory(1);
-            Assertions.assertEquals(1, this.inventorytest.getSize());
+            Assertions.assertEquals(1, this.inventorytest.getMaxSize());
             this.inventorytest = new Inventory(0);
-            Assertions.assertEquals(0, this.inventorytest.getSize());
+            Assertions.assertEquals(0, this.inventorytest.getMaxSize());
             this.inventorytest = new Inventory(100);
-            Assertions.assertEquals(Inventory.MAX_SIZE, this.inventorytest.getSize());}
+            Assertions.assertEquals(Inventory.MAX_SIZE, this.inventorytest.getMaxSize());}
         catch(InvalidSizeException e) {
             Assertions.fail(e.getStackTrace().toString());
         }
@@ -58,7 +58,7 @@ public class InventoryTest {
     public void testGetSize() {
         try {
             this.inventorytest = new Inventory(1);
-            Assertions.assertEquals(1, inventorytest.getSize());
+            Assertions.assertEquals(1, inventorytest.getMaxSize());
         }
         catch(InvalidSizeException e){
             Assertions.fail(e.getStackTrace().toString());

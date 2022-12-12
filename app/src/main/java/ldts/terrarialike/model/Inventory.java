@@ -27,8 +27,12 @@ public class Inventory {
         return inventory;
     }
 
-    public int getSize() {
+    public int getMaxSize() {
         return size;
+    }
+
+    public int getSize() {
+        return inventory.size();
     }
 
 

@@ -1,7 +1,6 @@
-package ldts.terrarialike.view;
+package ldts.terrarialike.view.statsViews;
 
 import com.googlecode.lanterna.SGR;
-import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;

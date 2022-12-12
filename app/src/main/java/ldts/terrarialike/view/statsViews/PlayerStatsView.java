@@ -1,11 +1,9 @@
-package ldts.terrarialike.view;
+package ldts.terrarialike.view.statsViews;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import ldts.terrarialike.exceptions.InvalidPositionException;
-import ldts.terrarialike.model.Inventory;
 import ldts.terrarialike.model.Player;
 
 public class PlayerStatsView implements ElementView{
@@ -44,8 +42,7 @@ public class PlayerStatsView implements ElementView{
             graphics.putString(0, 2, "Hp: " + Integer.toString(player.getHp()));
             graphics.putString(0,3, String.format("Pos X: %d Y:%d", player.getPosition().getX()
                     , player.getPosition().getY()));
-            graphics.putString(0,4, "Inventory: "
-                    + Integer.toString(player.getInventory().getSize()) + "/30");
+            graphics.putString(0,4,String.format("Inventory: %d / %d",player.getInventory().getSize(),player.getInventory().getMaxSize()));
             slotView.draw(slotGraphics);
         } catch ( Exception e) {
             e.printStackTrace();
