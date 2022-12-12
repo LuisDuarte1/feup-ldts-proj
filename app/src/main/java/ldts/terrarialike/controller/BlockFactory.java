@@ -12,6 +12,10 @@ public class BlockFactory {
     private static BlockInfo dirtInfo;
     private static BlockInfo stoneInfo;
 
+    private static BlockInfo ironOreInfo;
+
+    private static BlockInfo coalOreInfo;
+
     private Random random;
 
 
@@ -31,6 +35,14 @@ public class BlockFactory {
                     "#5e5a5a", 'S');
             stoneInfo.setToDropItem(generateItemForBlock('S', "Stone block", grassInfo));
 
+
+            ironOreInfo = new BlockInfo(3, BlockType.ORE,
+                    "#5e5a5a", "#b7410e", '#');
+            ironOreInfo.setToDropItem(generateItemForBlock('i', "Iron ore", ironOreInfo));
+
+            coalOreInfo = new BlockInfo(2, BlockType.ORE,
+                    "#5e5a5a", "#000000", '#');
+            coalOreInfo.setToDropItem(generateItemForBlock('c', "Coal", coalOreInfo));
 
         } catch (InvalidColorStringException e) {
             e.printStackTrace();
@@ -58,12 +70,15 @@ public class BlockFactory {
             returnBlock = new Block(desiredPos,true, dirtInfo);
 
 
-        }else{
+        } else if (max_height - desiredPos.getY() > 20 && desiredPos.getY() <= 90 && mega_probability <= 0.05) {
+            returnBlock = new Block(desiredPos,true, ironOreInfo);
+        } else if (max_height - desiredPos.getY() > 8 && mega_probability <= 0.02) {
+            returnBlock = new Block(desiredPos, true, coalOreInfo);
+        } else {
             //if nothing is triggered generate stone
             returnBlock = new Block(desiredPos,true, stoneInfo);
 
-
-
+            
         }
 
         return returnBlock;
