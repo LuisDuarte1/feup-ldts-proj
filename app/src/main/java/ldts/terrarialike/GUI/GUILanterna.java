@@ -1,10 +1,12 @@
 package ldts.terrarialike.GUI;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -14,6 +16,7 @@ import com.googlecode.lanterna.gui2.DefaultWindowManager;
 import com.googlecode.lanterna.gui2.EmptySpace;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.gui2.Window;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -119,4 +122,22 @@ public class GUILanterna {
         }
         multiWindowTextGUI.addWindow(window);
     }
+
+    public List<KeyStroke> getAllKeyStrokes(){
+
+        List<KeyStroke> keyStrokes = new ArrayList<>();
+        try {
+            KeyStroke nextKeyStroke = screen.pollInput();
+            while(nextKeyStroke != null){
+                keyStrokes.add(nextKeyStroke);
+                nextKeyStroke = screen.pollInput();
+            }
+        } catch (IOException e){
+            //if this ever happens we will simply crash the program, because it shouldn't ever happen
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return  keyStrokes;
+    }
+
 }

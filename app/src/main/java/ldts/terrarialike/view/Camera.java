@@ -30,7 +30,7 @@ public class Camera {
     }
 
     private Pair<Integer, Integer> getEdgesX(){
-        return new Pair<Integer,Integer>(position.getX()+getGameScreenMiddle().getX(),-(position.getX()+getGameScreenMiddle().getX()));
+        return new Pair<Integer,Integer>(abs(position.getX())+getGameScreenMiddle().getX(),-(abs(position.getX())+getGameScreenMiddle().getX()));
     }
 
     private int getBoundariesX() {
@@ -91,9 +91,9 @@ public class Camera {
 
     public Boolean isChunkVisible(int chunk_id){
         Pair<Integer,Integer> edges = getEdgesX();
-        if(chunk_id >= 0 && (chunk_id*Chunk.CHUNK_SIZE)-15 <= edges.first){
+        if(chunk_id >= 0 && (chunk_id*Chunk.CHUNK_SIZE)-(Chunk.CHUNK_SIZE-1) <= edges.first){
             return true;
-        } else if(chunk_id < 0 && (chunk_id*Chunk.CHUNK_SIZE)+15 >= edges.second) {
+        } else if(chunk_id < 0 && (chunk_id*Chunk.CHUNK_SIZE)+(Chunk.CHUNK_SIZE-1) >= edges.second) {
             return true;
         }
         return false;

@@ -43,6 +43,10 @@ public class GameEventManager {
         gameEvents.add(event);
     }
 
+    public void addMultipleGameEvents(List<GameEvent> gameEvents){
+        this.gameEvents.addAll(gameEvents);
+    }
+
     public void removeGameEvent(GameEvent event) throws GameEventsIsNullException {
 
         if( gameEvents != null) {

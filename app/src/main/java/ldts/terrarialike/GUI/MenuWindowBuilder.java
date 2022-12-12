@@ -5,12 +5,14 @@ import com.googlecode.lanterna.gui2.Component;
 import com.googlecode.lanterna.gui2.Panel;
 import com.googlecode.lanterna.gui2.Window;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MenuWindowBuilder {
 
     public static Window build(String title, List<Component> componentList){
-        BasicWindow window = new BasicWindow();
+        BasicWindow window = new BasicWindow(title);
+        window.setHints(Arrays.asList(Window.Hint.CENTERED));
         Panel panel = new Panel();
         for(Component c: componentList){
             panel.addComponent(c);

@@ -1,7 +1,8 @@
-package ldts.terrarialike.controller.events;
+package ldts.terrarialike.controller.events.moveEvents;
 
 import ldts.terrarialike.controller.GameEvent;
 import ldts.terrarialike.controller.MovementType;
+import ldts.terrarialike.controller.events.MoveEvent;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Entity;
 import ldts.terrarialike.model.Position;
@@ -10,32 +11,34 @@ import ldts.terrarialike.model.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoveRightEvent extends MoveEvent{
+public class MoveUpEvent extends MoveEvent {
 
 
 
-    public MoveRightEvent(Entity entity) {
-        super(MovementType.RIGHT,entity);
+    public MoveUpEvent(Entity entity) {
+        super(entity);
     }
 
     @Override
 
     public List<GameEvent> execute(World world) {
 
-        List<GameEvent> list  = new ArrayList<>();
+       List<GameEvent> list  = new ArrayList<>();
 
         Position newPosition = null;
         try {
-            newPosition = new Position(entity.getPosition().getX() +1 , entity.getPosition().getY());
+            newPosition = new Position(entity.getPosition().getX(), entity.getPosition().getY() + 2);
 
-            if(world.getBlock(newPosition) == null){
+            if(world.getBlock(newPosition) == null && !entity.isFlying()){
                 entity.setPosition(newPosition);
             }
 
             return list;
 
         } catch (InvalidPositionException e) {
-            throw new RuntimeException(e);
+            return list;
         }
     }
+
 }
+

@@ -1,6 +1,10 @@
 package ldts.terrarialike.controller;
 
 import ldts.terrarialike.controller.events.*;
+import ldts.terrarialike.controller.events.moveEvents.MoveDownEvent;
+import ldts.terrarialike.controller.events.moveEvents.MoveLeftEvent;
+import ldts.terrarialike.controller.events.moveEvents.MoveRightEvent;
+import ldts.terrarialike.controller.events.moveEvents.MoveUpEvent;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.Entity;

@@ -12,12 +12,10 @@ public abstract class MoveEvent implements GameEvent{
 
     protected Entity entity;
 
-    MovementType movementType;
 
 
-    public MoveEvent(MovementType movementType, Entity entity) {
+    public MoveEvent(Entity entity) {
 
-        this.movementType = movementType;
 
         this.entity = entity;
 
