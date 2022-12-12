@@ -30,7 +30,7 @@ public class Camera {
     }
 
     private Pair<Integer, Integer> getEdgesX(){
-        return new Pair<Integer,Integer>(position.getX()+getGameScreenMiddle().getX(),-(position.getX()+getGameScreenMiddle().getX()));
+        return new Pair<Integer,Integer>(abs(position.getX())+getGameScreenMiddle().getX(),-(abs(position.getX())+getGameScreenMiddle().getX()));
     }
 
     private int getBoundariesX() {
@@ -48,15 +48,15 @@ public class Camera {
         int x_diff = 0;
         int y_diff = 0;
 
-        if(abs(p_sub.getX()) >= getBoundariesX()){
+        if(abs(p_sub.getX()) >= getBoundariesX()/2){
             x_diff = abs(p_sub.getX()) - getBoundariesX();
         }
-        if(abs(p_sub.getY()) >= getBoundariesY()){
+        if(abs(p_sub.getY()) >= getBoundariesY()/2){
             y_diff = abs(p_sub.getY()) - getBoundariesY();
         }
 
         x_diff = p_sub.getX() > 0 ? -x_diff : x_diff;
-        y_diff = p_sub.getY() > 0 ? -y_diff : y_diff;
+        y_diff = p_sub.getY() > 0 ? y_diff : -y_diff;
 
         this.position = new Position(this.position.getX() + x_diff, this.position.getY() + y_diff);
 
@@ -91,9 +91,9 @@ public class Camera {
 
     public Boolean isChunkVisible(int chunk_id){
         Pair<Integer,Integer> edges = getEdgesX();
-        if(chunk_id >= 0 && (chunk_id*Chunk.CHUNK_SIZE)-15 <= edges.first){
+        if(chunk_id >= 0 && (chunk_id*Chunk.CHUNK_SIZE)-(Chunk.CHUNK_SIZE-1) <= edges.first){
             return true;
-        } else if(chunk_id < 0 && (chunk_id*Chunk.CHUNK_SIZE)+15 >= edges.second) {
+        } else if(chunk_id < 0 && (chunk_id*Chunk.CHUNK_SIZE)+(Chunk.CHUNK_SIZE-1) >= edges.second) {
             return true;
         }
         return false;

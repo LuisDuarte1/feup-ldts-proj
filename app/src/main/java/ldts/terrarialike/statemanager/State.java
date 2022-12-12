@@ -4,6 +4,7 @@ package ldts.terrarialike.statemanager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 //FIXME: needs a refactor, was written in a bit of a rush
@@ -164,5 +165,18 @@ public class State{
 
     public String getDataClassName() {
         return dataClass.getName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        State state = (State) o;
+        return dataClass.equals(state.dataClass) && viewClass.equals(state.viewClass) && controllerClass.equals(state.controllerClass);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dataClass, viewClass, controllerClass);
     }
 }

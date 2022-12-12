@@ -2,22 +2,20 @@ package ldts.terrarialike.view;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
+import ldts.terrarialike.model.Skeleton;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-public class PlayerViewTest {
-
-    private Player player;
+public class SkeletonViewTest {
+    private Skeleton skeleton;
     private Camera camera;
 
     private TextGraphics textGraphics;
-    private PlayerView playerView;
+    private SkeletonView skeletonView;
 
     @BeforeEach
     public void setup(){
@@ -25,17 +23,17 @@ public class PlayerViewTest {
         Mockito.when(position.getX()).thenReturn(1);
         Mockito.when(position.getY()).thenReturn(1);
 
-        player = Mockito.mock(Player.class);
-        Mockito.when(player.getPosition()).thenReturn(position);
+        skeleton = Mockito.mock(Skeleton.class);
+        Mockito.when(skeleton.getPosition()).thenReturn(position);
         camera = Mockito.mock(Camera.class);
 
         textGraphics = Mockito.mock(TextGraphics.class);
 
-        playerView = new PlayerView(camera);
+        skeletonView = new SkeletonView(camera);
     }
 
     @Test
-    public void shouldDrawPlayer(){
+    public void shouldDrawSkeleton(){
         BoundlessPosition originalPos = Mockito.mock(BoundlessPosition.class);
         Mockito.when(originalPos.getX()).thenReturn(1);
         Mockito.when(originalPos.getY()).thenReturn(1);
@@ -48,10 +46,11 @@ public class PlayerViewTest {
         Mockito.when(camera.getRelativePositionToCamera(Mockito.any())).thenReturn(originalPos);
         Mockito.when(camera.invertYPosition(originalPos)).thenReturn(invertedPos);
 
-        playerView.draw(textGraphics,player);
+
+        skeletonView.draw(textGraphics,skeleton);
 
 
-        Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.GREEN);
-        Mockito.verify(textGraphics).setCharacter(1, 99, 'P');
+        Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.BLACK);
+        Mockito.verify(textGraphics).setCharacter(1, 99, 'S');
     }
 }

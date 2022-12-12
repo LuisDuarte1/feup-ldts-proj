@@ -83,8 +83,23 @@ public class World {
         });
     }
 
+    public Integer getChunkID(Integer xPos){
+        Integer desiredChunkID = Integer.MIN_VALUE;
+        if(xPos >= 0 && xPos <= Chunk.CHUNK_SIZE-1){
+            desiredChunkID = 0;
+        } else if(xPos >= Chunk.CHUNK_SIZE){
+            desiredChunkID = xPos / Chunk.CHUNK_SIZE;
+        } else if (xPos < 0 && xPos % Chunk.CHUNK_SIZE == 0) {
+            //on the negative size the edges of chunks are a bit different -1 to -16 for example is contained in -1
+            desiredChunkID = xPos / Chunk.CHUNK_SIZE;
+        } else{
+            desiredChunkID = (xPos / Chunk.CHUNK_SIZE)-1;
+        }
+        return desiredChunkID;
+    }
+
     public Block getBlock(Position blockPosition){
-        Integer desiredChunkID = blockPosition.getX() % Chunk.CHUNK_SIZE;
+        Integer desiredChunkID = getChunkID(blockPosition.getX());
         Chunk desiredChunk = null;
         //we have to do it this way because we can't guarentee that chunks will always be 
         //sequential
@@ -118,7 +133,7 @@ public class World {
 
     public Integer findMaxHeightOfXPos(Integer xPos) {
         int maxZeroPosition = -1;
-        Integer chunkID = xPos % Chunk.CHUNK_SIZE;
+        Integer chunkID = getChunkID(xPos);
         Chunk desiredChunk = null;
         for(Chunk c: chunksList){
             if(c.getChunkID() == chunkID){

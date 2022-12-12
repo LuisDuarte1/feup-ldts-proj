@@ -8,6 +8,7 @@ public class BlockInfo {
     private String backgroundcolor;
     private String foregroundColor; 
     private char representation_char;
+
     private Item toDropItem;
 
 
@@ -27,18 +28,6 @@ public class BlockInfo {
             return;
         }
         throw new InvalidColorStringException("Color String has a wrong format... it doesn't start with # or an invalid size.");
-    }
-
-    public BlockInfo(int durability, BlockType blockType, String backgroundcolor, String foregroundColor,
-            char representation_char, Item toDropItem) throws InvalidColorStringException {
-        this.durability = durability;
-        this.blockType = blockType;
-        checkColorValid(foregroundColor);
-        checkColorValid(backgroundcolor);
-        this.backgroundcolor = backgroundcolor;
-        this.foregroundColor = foregroundColor;
-        this.representation_char = representation_char;
-        this.toDropItem = toDropItem;
     }
     
     public BlockInfo(int durability, BlockType blockType, String backgroundcolor, String foregroundColor,
@@ -86,5 +75,9 @@ public class BlockInfo {
     }
     public void setForegroundColor(String foregroundColor) {
         this.foregroundColor = foregroundColor;
+    }
+
+    public void setToDropItem(Item toDropItem) {
+        this.toDropItem = toDropItem;
     }
 }

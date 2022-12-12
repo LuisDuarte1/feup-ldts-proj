@@ -2,22 +2,20 @@ package ldts.terrarialike.view;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
+import ldts.terrarialike.model.Zombie;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-public class PlayerViewTest {
-
-    private Player player;
+public class ZombieViewTest {
+    private Zombie zombie;
     private Camera camera;
 
     private TextGraphics textGraphics;
-    private PlayerView playerView;
+    private ZombieView zombieView;
 
     @BeforeEach
     public void setup(){
@@ -25,17 +23,17 @@ public class PlayerViewTest {
         Mockito.when(position.getX()).thenReturn(1);
         Mockito.when(position.getY()).thenReturn(1);
 
-        player = Mockito.mock(Player.class);
-        Mockito.when(player.getPosition()).thenReturn(position);
+        zombie = Mockito.mock(Zombie.class);
+        Mockito.when(zombie.getPosition()).thenReturn(position);
         camera = Mockito.mock(Camera.class);
 
         textGraphics = Mockito.mock(TextGraphics.class);
 
-        playerView = new PlayerView(camera);
+        zombieView = new ZombieView(camera);
     }
 
     @Test
-    public void shouldDrawPlayer(){
+    public void shouldDrawZombie(){
         BoundlessPosition originalPos = Mockito.mock(BoundlessPosition.class);
         Mockito.when(originalPos.getX()).thenReturn(1);
         Mockito.when(originalPos.getY()).thenReturn(1);
@@ -45,13 +43,14 @@ public class PlayerViewTest {
         Mockito.when(invertedPos.getY()).thenReturn(99);
 
         Mockito.when(camera.isVisibleInCamera(Mockito.any())).thenReturn(true);
+        Mockito.when(camera.getRelativePositionToCamera(Mockito.any())).thenReturn(new BoundlessPosition(1,1));
         Mockito.when(camera.getRelativePositionToCamera(Mockito.any())).thenReturn(originalPos);
         Mockito.when(camera.invertYPosition(originalPos)).thenReturn(invertedPos);
 
-        playerView.draw(textGraphics,player);
+        zombieView.draw(textGraphics,zombie);
 
 
-        Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.GREEN);
-        Mockito.verify(textGraphics).setCharacter(1, 99, 'P');
+        Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.MAGENTA);
+        Mockito.verify(textGraphics).setCharacter(1, 99, 'Z');
     }
 }

@@ -2,7 +2,7 @@ package ldts.terrarialike.model;
 
 import ldts.terrarialike.controller.EnemyAI;
 
-public abstract class Enemy extends Entity{
+public abstract class  Enemy extends Entity{
     private int damage;
 
     private EnemyAI ai;
