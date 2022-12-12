@@ -46,8 +46,10 @@ public abstract class EntityController {
         if(blockBelow == null){
             entity.setPosition(blockBelowPosition);
             startFallingHeight += 1;
+            entity.setFlying(true);
         } else{
             damagePlayerDueGravity();
+            entity.setFlying(false);
         }
     }
 
