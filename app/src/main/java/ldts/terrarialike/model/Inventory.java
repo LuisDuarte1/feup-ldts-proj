@@ -131,7 +131,15 @@ public class Inventory {
     } // fazer testes!!!!!!!!!!!!!!!!!!!!1
 
     public Item getSelectedItem(){
-        return inventory.get(selecteditemindex).getItem();
+        try{
+            return inventory.get(selecteditemindex).getItem();
+        } catch (IndexOutOfBoundsException e){
+            return null;
+        }
+    }
+
+    public void selectEmpty(){
+        selecteditemindex = size + 1;
     }
 
     public ItemStack getSelectedItemStack(){

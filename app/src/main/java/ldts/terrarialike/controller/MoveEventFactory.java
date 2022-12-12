@@ -13,19 +13,8 @@ public class MoveEventFactory {
 
 
     public static List<GameEvent> buildMoveEvents(Entity entity, List<KeyStroke> keyStrokes){
-        List<KeyStroke> keyStrokeFilteredList = new ArrayList<>();
+        List<KeyStroke> keyStrokeFilteredList = keyStrokes;
 
-        //filter list
-        for (KeyStroke keyStroke :
-                keyStrokes) {
-            switch (keyStroke.getKeyType()){
-                case ArrowLeft:
-                case ArrowUp:
-                case ArrowRight:
-                    keyStrokeFilteredList.add(keyStroke);
-                    break;
-            }
-        }
         List<GameEvent> gameEvents = new ArrayList<>();
 
         if(keyStrokeFilteredList.contains(new KeyStroke(KeyType.ArrowUp)) && keyStrokeFilteredList.size() == 2){

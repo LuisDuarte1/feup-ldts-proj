@@ -15,18 +15,14 @@ import ldts.terrarialike.model.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UseBlockItemInteraction implements ItemInteraction{
+public class UseBlockItemInteraction extends ItemInteraction{
 
     private BlockInfo blockInfo;
-
-
-    private Position desiredPosition;
 
 
 
     public UseBlockItemInteraction(BlockInfo blockInfo) {
         this.blockInfo = blockInfo;
-        this.desiredPosition = null;
     }
 
 
@@ -37,7 +33,7 @@ public class UseBlockItemInteraction implements ItemInteraction{
             return new ArrayList<>();
         }
         if(interactionType == InteractionType.USE && one.getBlock(desiredPosition) == null){
-            Integer chunkID = desiredPosition.getX() % Chunk.CHUNK_SIZE;
+            Integer chunkID = one.getChunkID(desiredPosition.getX());
             Chunk desiredChunk = null;
             for (Chunk chunk : one.getChunks()) {
                 if(chunk.getChunkID() == chunkID){
@@ -49,7 +45,6 @@ public class UseBlockItemInteraction implements ItemInteraction{
             try {
                 desiredChunk.addBlock(new Block(desiredPosition, blockInfo));
             } catch (InvalidPositionException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
                 return new ArrayList<>();
             }
@@ -57,9 +52,4 @@ public class UseBlockItemInteraction implements ItemInteraction{
         return new ArrayList<>();
     }
 
-
-    public void setDesiredPosition(Position desiredPosition) {
-        this.desiredPosition = desiredPosition;
-    }
-    
 }

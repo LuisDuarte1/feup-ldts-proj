@@ -83,7 +83,7 @@ public class World {
         });
     }
 
-    private Integer getChunkID(Integer xPos){
+    public Integer getChunkID(Integer xPos){
         Integer desiredChunkID = Integer.MIN_VALUE;
         if(xPos >= 0 && xPos <= Chunk.CHUNK_SIZE-1){
             desiredChunkID = 0;
