@@ -1,4 +1,4 @@
-package ldts.terrarialike.view;
+package ldts.terrarialike.view.statsViews;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
 

@@ -1,4 +1,4 @@
-package ldts.terrarialike.controller;
+package ldts.terrarialike.controller.generators;
 
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 import ldts.terrarialike.exceptions.InvalidPositionException;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static ldts.terrarialike.controller.BlockFactory.generateItemForBlock;
+import static ldts.terrarialike.controller.generators.BlockFactory.generateItemForBlock;
 
 public class TreeFactory {
 

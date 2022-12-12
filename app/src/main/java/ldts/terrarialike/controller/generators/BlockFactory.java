@@ -1,4 +1,4 @@
-package ldts.terrarialike.controller;
+package ldts.terrarialike.controller.generators;
 
 import ldts.terrarialike.controller.itemInteractions.UseBlockItemInteraction;
 import ldts.terrarialike.exceptions.InvalidColorStringException;

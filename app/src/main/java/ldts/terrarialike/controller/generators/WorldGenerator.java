@@ -1,9 +1,8 @@
-package ldts.terrarialike.controller;
+package ldts.terrarialike.controller.generators;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sun.source.tree.Tree;
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Block;
