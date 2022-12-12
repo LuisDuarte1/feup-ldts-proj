@@ -15,9 +15,12 @@ public class PlayerStatsView implements ElementView{
     private Player player;
     private PlayerLogsView playerLogsView;
 
+    private SelectedInventorySlotView slotView;
+
     public PlayerStatsView(Player player) {
         this.player = player;
         this.playerLogsView = new PlayerLogsView(player.getPlayerLogs());
+        this.slotView = new SelectedInventorySlotView(player.getInventory());
     }
     @Override
     public void draw(TextGraphics graphics) {
@@ -27,7 +30,11 @@ public class PlayerStatsView implements ElementView{
                     new TerminalPosition((int) (statsSize.getColumns()*(1-LOGS_PERCENTAGE)), 0),
                     new TerminalSize((int) (statsSize.getColumns()*LOGS_PERCENTAGE),statsSize.getRows()));
 
+            TextGraphics slotGraphics = graphics.newTextGraphics(
+                    new TerminalPosition(15, 0), new TerminalSize(5,5));
+
             playerLogsView.draw(logGraphics);
+            slotView.draw(slotGraphics);
 
             graphics.fillRectangle(new TerminalPosition(0,0),
                     new TerminalSize((int) (statsSize.getColumns()*(1-LOGS_PERCENTAGE) -1), statsSize.getRows()), ' ');

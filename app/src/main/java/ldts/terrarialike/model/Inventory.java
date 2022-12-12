@@ -143,7 +143,11 @@ public class Inventory {
     }
 
     public ItemStack getSelectedItemStack(){
-        return inventory.get(selecteditemindex);
+        try{
+            return inventory.get(selecteditemindex);
+        } catch (IndexOutOfBoundsException e){
+            return  null;
+        }
     }
 
     public void setSelecteditem(int selecteditemindex) throws InvalidIndexException {

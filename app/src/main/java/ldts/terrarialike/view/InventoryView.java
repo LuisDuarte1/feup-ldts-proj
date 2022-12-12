@@ -32,7 +32,7 @@ public class InventoryView implements ElementView{
             textGraphics.setCharacter(column + 1, row + 1, inventory.getInventory().get(i).getItem().getRepresentation());
 
             column += 4;
-            if(column  == 25) {
+            if(column  == graphics.getSize().getColumns()) {
                 column = 1;
                 row += 4;
             }

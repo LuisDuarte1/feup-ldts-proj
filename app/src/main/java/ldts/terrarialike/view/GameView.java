@@ -16,6 +16,7 @@ public class GameView implements StateView{
 
     //keep some views ready to use
     private PlayerStatsView playerStatsView;
+
     private PlayerView playerView;
 
     private Camera camera;
