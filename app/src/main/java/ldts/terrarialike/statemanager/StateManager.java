@@ -36,8 +36,10 @@ public class StateManager {
     }
 
     public void selectState(State t){
-        if(states.contains(t)){
-            selectedState = t;
+        for(State state : states){
+            if(state.equals(t)){
+                selectedState = state;
+            }
         }
     }
 

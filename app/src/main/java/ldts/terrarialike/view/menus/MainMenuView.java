@@ -24,7 +24,8 @@ public class MainMenuView extends AbstractMenuView {
     private String world_seed;
 
     public MainMenuView(StateManager stateManager, GUILanterna gui) {
-        super(stateManager, gui);
+        super(stateManager, gui, "TerrariaLike - Main Menu");
+        build();
     }
 
     @Override

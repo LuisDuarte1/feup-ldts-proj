@@ -16,14 +16,20 @@ public abstract class AbstractMenuView implements StateView {
     protected StateManager stateManager;
     protected GUILanterna gui;
 
+    private String title;
+
     protected Window mainWindow;
 
     protected abstract List<Component> mainWindowComponentBuilder();
 
-    public AbstractMenuView(StateManager stateManager, GUILanterna gui) {
+    public AbstractMenuView(StateManager stateManager, GUILanterna gui, String title) {
         this.stateManager = stateManager;
         this.gui = gui;
-        this.mainWindow = MenuWindowBuilder.build("TerrariaLike - Main Menu", mainWindowComponentBuilder());
+        this.title = title;
+    }
+
+    protected void build(){
+        this.mainWindow = MenuWindowBuilder.build(title, mainWindowComponentBuilder());
         gui.addWindowToStack(mainWindow);
     }
 

@@ -6,12 +6,16 @@ import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.controller.events.ItemEventExecutorEvent;
 import ldts.terrarialike.controller.itemInteractions.DefaultDestroyItemInteraction;
 import ldts.terrarialike.exceptions.InvalidPositionException;
+import ldts.terrarialike.exceptions.NotInitializedStateException;
 import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
+import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
 import ldts.terrarialike.utils.Pair;
+import ldts.terrarialike.view.menus.InventoryMenuView;
+import ldts.terrarialike.view.menus.MainMenuView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +28,8 @@ public class InputHandler {
     private static final KeyStroke ATTACK_KEY = new KeyStroke('s', false, false);
 
     private static final KeyStroke EMPTY_KEY = new KeyStroke('e',false,false);
+
+    private static final KeyStroke INVENTORY_KEY = new KeyStroke('i',false,false);
 
     private static final List<KeyStroke> ACTION_KEYS = Arrays.asList(USE_KEY,DESTROY_KEY,ATTACK_KEY);
 
@@ -125,7 +131,7 @@ public class InputHandler {
         try {
             desiredPosition = getDesiredPosition(arrowKeys);
         } catch (InvalidPositionException e) {
-            System.err.println(String.format("Invalid position while getting the desiredPosition..."));
+            System.err.println("Invalid position while getting the desiredPosition...");
             return new ArrayList<>();
         }
         if(desiredPosition == null) return new ArrayList<>();
@@ -140,7 +146,7 @@ public class InputHandler {
             Item item = new Item('-', "Nothing", destroyItemInteraction);
             itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.DESTROY, item);
         }
-        return Arrays.asList(itemEventExecutorEvent);
+        return List.of(itemEventExecutorEvent);
     }
 
     private List<GameEvent> processUseAction(List<KeyStroke> arrowKeys){
@@ -148,7 +154,7 @@ public class InputHandler {
         try {
             desiredPosition = getDesiredPosition(arrowKeys);
         } catch (InvalidPositionException e) {
-            System.err.println(String.format("Invalid position while getting the desiredPosition..."));
+            System.err.println("Invalid position while getting the desiredPosition...");
             return new ArrayList<>();
         }
         if(desiredPosition == null) return new ArrayList<>();
@@ -160,7 +166,7 @@ public class InputHandler {
         }
         itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.USE, selectedItem);
         selectedItem.getInteraction().setDesiredPosition(desiredPosition);
-        return Arrays.asList(itemEventExecutorEvent);
+        return List.of(itemEventExecutorEvent);
     }
 
     public List<GameEvent> handleInput(){
@@ -171,6 +177,21 @@ public class InputHandler {
         if(keyStrokes.size() == 0) return gameEvents;
         if(keyStrokes.contains(EMPTY_KEY)){
             player.getInventory().selectEmpty();
+        } else if (keyStrokes.contains(INVENTORY_KEY)) {
+            State inventoryManager = new State(Object.class, InventoryMenuView.class, Object.class);
+            if(stateManager.getStates().contains(inventoryManager)){
+                stateManager.removeState(inventoryManager);
+            }
+            inventoryManager.initializeDataClass();
+            inventoryManager.initializeControllerClass();
+            inventoryManager.initializeViewClass(player.getInventory(),stateManager,guiLanterna);
+            try {
+                stateManager.addState(inventoryManager);
+                stateManager.selectState(inventoryManager);
+            } catch (NotInitializedStateException e) {
+                throw new RuntimeException(e);
+            }
+            return gameEvents;
         }
         List<KeyStroke> arrowKeys = filterArrowKeys(keyStrokes);
         processActions(keyStrokes);
