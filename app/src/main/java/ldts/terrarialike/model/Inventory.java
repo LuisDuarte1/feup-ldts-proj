@@ -43,16 +43,19 @@ public class Inventory {
 
         if (contains(item) != null) {
 
-            ItemStack itemstack = contains(item);
+            List<ItemStack> itemStacks = inventory.stream().filter(
+                    (iStack) -> {return iStack.getItem().equals(item);}).toList();
+            for(ItemStack itemstack : itemStacks){
+                if (itemstack.getQuantity() + quantityleft <= ItemStack.MAXQUANTITY) {
+                    itemstack.add(quantityleft);
+                    return;
 
-            if (itemstack.getQuantity() + quantityleft <= ItemStack.MAXQUANTITY) {
-                itemstack.add(quantityleft);
-                return;
-
-            } else {
-                quantityleft -= ItemStack.MAXQUANTITY - itemstack.getQuantity();
-                itemstack.add( (ItemStack.MAXQUANTITY - itemstack.getQuantity())); // ???
+                } else {
+                    quantityleft -= ItemStack.MAXQUANTITY - itemstack.getQuantity();
+                    itemstack.add( (ItemStack.MAXQUANTITY - itemstack.getQuantity())); // ???
+                }
             }
+
         }
         while (quantityleft > ItemStack.MAXQUANTITY && inventory.size() > this.size) {
             ItemStack itemstack = new ItemStack(item, ItemStack.MAXQUANTITY);

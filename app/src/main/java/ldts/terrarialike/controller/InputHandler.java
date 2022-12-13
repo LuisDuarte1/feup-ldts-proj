@@ -14,6 +14,7 @@ import ldts.terrarialike.model.Position;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
 import ldts.terrarialike.utils.Pair;
+import ldts.terrarialike.view.menus.CraftingMenuView;
 import ldts.terrarialike.view.menus.InventoryMenuView;
 import ldts.terrarialike.view.menus.MainMenuView;
 
@@ -30,6 +31,8 @@ public class InputHandler {
     private static final KeyStroke EMPTY_KEY = new KeyStroke('e',false,false);
 
     private static final KeyStroke INVENTORY_KEY = new KeyStroke('i',false,false);
+
+    private static final KeyStroke CRAFTING_KEY = new KeyStroke('c', false,false);
 
     private static final List<KeyStroke> ACTION_KEYS = Arrays.asList(USE_KEY,DESTROY_KEY,ATTACK_KEY);
 
@@ -192,6 +195,20 @@ public class InputHandler {
                 throw new RuntimeException(e);
             }
             return gameEvents;
+        } else if (keyStrokes.contains(CRAFTING_KEY)) {
+            State craftingManager = new State(Object.class, CraftingMenuView.class, Object.class);
+            if(stateManager.getStates().contains(craftingManager)){
+                stateManager.removeState(craftingManager);
+            }
+            craftingManager.initializeDataClass();
+            craftingManager.initializeControllerClass();
+            craftingManager.initializeViewClass(stateManager,guiLanterna, player.getInventory());
+            try {
+                stateManager.addState(craftingManager);
+                stateManager.selectState(craftingManager);
+            } catch (NotInitializedStateException e) {
+                throw new RuntimeException(e);
+            }
         }
         List<KeyStroke> arrowKeys = filterArrowKeys(keyStrokes);
         processActions(keyStrokes);
