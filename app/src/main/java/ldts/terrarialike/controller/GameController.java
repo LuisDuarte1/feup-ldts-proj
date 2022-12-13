@@ -9,7 +9,9 @@ import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
 import ldts.terrarialike.statemanager.StateManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class GameController extends AbstractStateController{
 
@@ -39,7 +41,7 @@ public class GameController extends AbstractStateController{
         }
         Integer yPos = this.world.findMaxHeightOfXPos(0);
         try {
-            this.world.getPlayer().setPosition(new Position(0, yPos+20));
+            this.world.getPlayer().setPosition(new Position(0, yPos+1));
         } catch (InvalidPositionException e) {
             e.printStackTrace();
             //if this happens we should crash the game because the generation shouldn't let this happen
@@ -58,16 +60,25 @@ public class GameController extends AbstractStateController{
         gameEventManager.addMultipleGameEvents(inputHandler.handleInput());
         gameEventManager.executeAllEvents(world);
         playerController.tick(world);
+        List<Enemy> enemyToRemoveList = new ArrayList<>();
         for(Enemy e : world.getEnemiesList()){
             AIController aiController = new AIController(e);
             AIController aiControllerHash = aiControllerHashMap.get(aiController);
+            if(e.getHp() == 0) {
+                aiControllerHashMap.remove(aiControllerHash);
+                enemyToRemoveList.add(e);
+            }
+
             if(aiControllerHash == null){
                 aiControllerHashMap.put(aiController,aiController);
                 aiControllerHash = aiController;
             }
             aiController.tick(world);
-
         }
+        if(world.getPlayer().getHp() == 0){
+            System.out.println("Player died :( - exiting game...");
+        }
+        world.getEnemiesList().removeAll(enemyToRemoveList);
 
     }
 }

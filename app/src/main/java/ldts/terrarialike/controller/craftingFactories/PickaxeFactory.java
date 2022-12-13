@@ -9,6 +9,8 @@ import ldts.terrarialike.model.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ldts.terrarialike.controller.craftingFactories.OreIngotFactory.ironIngot;
+
 public class PickaxeFactory implements CraftingFactoryInteface{
 
     public static final Item woodenPickaxe
@@ -33,6 +35,12 @@ public class PickaxeFactory implements CraftingFactoryInteface{
         stonePickaxeInputs.add(new ItemStack(WoodenItemsFactory.stickItem, 2));
         stonePickaxeInputs.add(new ItemStack(new Item('S', "Stone block", null), 3));
         craftingRecipes.add(new CraftingRecipe(stonePickaxeInputs, List.of(new ItemStack(stonePickaxe,1))));
+
+        List<ItemStack> ironPickaxeInputs = new ArrayList<>();
+        ironPickaxeInputs.add(new ItemStack(WoodenItemsFactory.stickItem, 2));
+        ironPickaxeInputs.add(new ItemStack(ironIngot, 3));
+        craftingRecipes.add(new CraftingRecipe(ironPickaxeInputs, List.of(new ItemStack(ironPickaxe,1))));
+
 
 
 
