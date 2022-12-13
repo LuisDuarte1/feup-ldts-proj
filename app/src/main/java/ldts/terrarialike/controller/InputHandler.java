@@ -143,15 +143,17 @@ public class InputHandler {
         if(desiredPosition == null) return new ArrayList<>();
         Item selectedItem = player.getInventory().getSelectedItem();
         ItemEventExecutorEvent itemEventExecutorEvent = null;
+        ItemInteraction itemInteraction = null;
         if(selectedItem != null){
-            selectedItem.getInteraction().setDesiredPosition(desiredPosition);
+            itemInteraction = selectedItem.getInteraction();
+            if(itemInteraction == null) return new ArrayList<>();
             itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.DESTROY, selectedItem);
         } else {
-            DefaultDestroyItemInteraction destroyItemInteraction = new DefaultDestroyItemInteraction();
-            destroyItemInteraction.setDesiredPosition(desiredPosition);
-            Item item = new Item('-', "Nothing", destroyItemInteraction);
+            itemInteraction = new DefaultDestroyItemInteraction();
+            Item item = new Item('-', "Nothing", itemInteraction);
             itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.DESTROY, item);
         }
+        itemInteraction.setDesiredPosition(desiredPosition);
         return List.of(itemEventExecutorEvent);
     }
 
@@ -171,6 +173,7 @@ public class InputHandler {
             return new ArrayList<>();
         }
         itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.USE, selectedItem);
+        if(selectedItem.getInteraction() == null) return new ArrayList<>();
         selectedItem.getInteraction().setDesiredPosition(desiredPosition);
         return List.of(itemEventExecutorEvent);
     }
@@ -183,14 +186,16 @@ public class InputHandler {
         if(direction == null) return  new ArrayList<>();
         Item selectedItem = player.getInventory().getSelectedItem();
         ItemEventExecutorEvent itemEventExecutorEvent = null;
+        ItemInteraction itemInteraction = null;
         if(selectedItem == null){
-            ItemInteraction defaultItemInteraction = new DefaultAttackItem();
-            defaultItemInteraction.setDirection(direction);
+            itemInteraction = new DefaultAttackItem();
+            itemInteraction.setDirection(direction);
             itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.ATTACK,
-                    new Item(' ',"",defaultItemInteraction));
+                    new Item(' ',"",itemInteraction));
         } else{
 
             itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.ATTACK, selectedItem);
+            if(selectedItem.getInteraction() == null) return new ArrayList<>();
             selectedItem.getInteraction().setDirection(direction);
 
         }
