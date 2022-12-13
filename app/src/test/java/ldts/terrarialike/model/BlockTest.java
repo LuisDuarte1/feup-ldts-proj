@@ -9,7 +9,10 @@ import org.junit.jupiter.api.Test;
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 
 public class BlockTest {
+<<<<<<< HEAD
+=======
     //FIXME: add tests for Block
+>>>>>>> origin/main
     /*
     @Test
    public void validBlockColorConstructor(){
@@ -44,5 +47,11 @@ public class BlockTest {
         } catch (InvalidColorStringException e) {
             
         }
+<<<<<<< HEAD
+    }
+    */
+
+=======
     }*/
+>>>>>>> origin/main
 }

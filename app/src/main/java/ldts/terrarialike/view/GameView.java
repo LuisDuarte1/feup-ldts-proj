@@ -4,10 +4,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.exceptions.InvalidPositionException;
-import ldts.terrarialike.model.Block;
-import ldts.terrarialike.model.BoundlessPosition;
-import ldts.terrarialike.model.Chunk;
-import ldts.terrarialike.model.World;
+import ldts.terrarialike.model.*;
 import ldts.terrarialike.view.statsViews.PlayerStatsView;
 
 public class GameView implements StateView{
@@ -62,6 +59,15 @@ public class GameView implements StateView{
         }
         gameScreenTextGraphics.setBackgroundColor(TextColor.Factory.fromString("#07c0ed"));
         playerView.draw(gameScreenTextGraphics, world.getPlayer());
+        for(Enemy e: world.getEnemiesList()){
+            if(e instanceof Skeleton){
+                SkeletonView v = new SkeletonView(camera);
+                v.draw(gameScreenTextGraphics, e);
+            } else if (e instanceof Zombie) {
+                ZombieView v = new ZombieView(camera);
+                v.draw(gameScreenTextGraphics, e);
+            }
+        }
 
     }
 }
