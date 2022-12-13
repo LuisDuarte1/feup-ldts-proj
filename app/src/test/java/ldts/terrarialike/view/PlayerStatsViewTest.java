@@ -2,11 +2,11 @@ package ldts.terrarialike.view;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.InvalidSizeException;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
+import ldts.terrarialike.view.statsViews.PlayerStatsView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

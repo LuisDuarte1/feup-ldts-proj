@@ -1,4 +1,4 @@
-package ldts.terrarialike.view;
+package ldts.terrarialike.view.menus;
 
 import com.googlecode.lanterna.gui2.*;
 import com.googlecode.lanterna.gui2.Button;
@@ -12,21 +12,24 @@ import ldts.terrarialike.exceptions.NotInitializedStateException;
 import ldts.terrarialike.model.World;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
+import ldts.terrarialike.view.GameView;
+import ldts.terrarialike.view.StateView;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class MainMenuView implements StateView {
-    private GUILanterna gui;
-
-    private Window mainWindow;
-
-    private StateManager stateManager;
+public class MainMenuView extends AbstractMenuView {
 
     private String world_seed;
 
-    private List<Component> mainWindowComponentBuilder(){
+    public MainMenuView(StateManager stateManager, GUILanterna gui) {
+        super(stateManager, gui, "TerrariaLike - Main Menu");
+        build();
+    }
+
+    @Override
+    protected List<Component> mainWindowComponentBuilder(){
         List<Component> componentList = new ArrayList<>();
 
         componentList.add(new Button("Create World!", () -> {
@@ -68,12 +71,6 @@ public class MainMenuView implements StateView {
 
     }
 
-    public MainMenuView(GUILanterna gui, StateManager stateManager){
-        this.gui = gui;
-        this.stateManager = stateManager;
-        this.mainWindow = MenuWindowBuilder.build("TerrariaLike - Main Menu", mainWindowComponentBuilder());
-        this.gui.addWindowToStack(mainWindow);
-    }
 
     @Override
     public void draw() {

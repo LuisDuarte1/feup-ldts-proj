@@ -8,6 +8,7 @@ import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.BoundlessPosition;
 import ldts.terrarialike.model.Chunk;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.view.statsViews.PlayerStatsView;
 
 public class GameView implements StateView{
     
@@ -16,6 +17,7 @@ public class GameView implements StateView{
 
     //keep some views ready to use
     private PlayerStatsView playerStatsView;
+
     private PlayerView playerView;
 
     private Camera camera;
@@ -45,6 +47,8 @@ public class GameView implements StateView{
             throw new RuntimeException(e);
         }
         playerStatsView.draw(statsScreenTextGraphics);
+        statsScreenTextGraphics.putString(0,5,String.format("Seed: %d", world.getSeed()));
+
         gameScreenTextGraphics.setBackgroundColor(TextColor.Factory.fromString("#07c0ed"));
         gameScreenTextGraphics.fill(' ');
         for (Chunk chunk : world.getChunks()) {
@@ -52,9 +56,9 @@ public class GameView implements StateView{
                 for (Block block : chunk.getBlocks()) {
                     BlockView blockView = new BlockView(block, camera);
                     blockView.draw(gameScreenTextGraphics);
-                    
+
                 }
-            }   
+            }
         }
         gameScreenTextGraphics.setBackgroundColor(TextColor.Factory.fromString("#07c0ed"));
         playerView.draw(gameScreenTextGraphics, world.getPlayer());

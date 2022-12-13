@@ -1,6 +1,7 @@
 package ldts.terrarialike.controller;
 
 import ldts.terrarialike.GUI.GUILanterna;
+import ldts.terrarialike.controller.generators.WorldGenerator;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;

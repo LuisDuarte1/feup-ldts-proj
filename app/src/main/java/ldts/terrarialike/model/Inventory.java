@@ -27,8 +27,12 @@ public class Inventory {
         return inventory;
     }
 
-    public int getSize() {
+    public int getMaxSize() {
         return size;
+    }
+
+    public int getSize() {
+        return inventory.size();
     }
 
 
@@ -143,7 +147,11 @@ public class Inventory {
     }
 
     public ItemStack getSelectedItemStack(){
-        return inventory.get(selecteditemindex);
+        try{
+            return inventory.get(selecteditemindex);
+        } catch (IndexOutOfBoundsException e){
+            return  null;
+        }
     }
 
     public void setSelecteditem(int selecteditemindex) throws InvalidIndexException {

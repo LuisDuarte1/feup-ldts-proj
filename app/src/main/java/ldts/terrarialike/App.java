@@ -9,7 +9,7 @@ import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.NotInitializedStateException;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
-import ldts.terrarialike.view.MainMenuView;
+import ldts.terrarialike.view.menus.MainMenuView;
 import ldts.terrarialike.view.StateView;
 
 import java.io.IOException;
@@ -24,7 +24,7 @@ public class App {
 
         gameMenuState.initializeDataClass();
         gameMenuState.initializeControllerClass();
-        gameMenuState.initializeViewClass(gLanterna, manager);
+        gameMenuState.initializeViewClass(manager, gLanterna);
 
         manager.addState(gameMenuState);
         manager.selectState(gameMenuState);

@@ -5,6 +5,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.BlockInfo;
 import ldts.terrarialike.model.BoundlessPosition;
+import ldts.terrarialike.view.statsViews.ElementView;
 
 public class BlockView implements ElementView {
 
