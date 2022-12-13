@@ -13,13 +13,13 @@ import static ldts.terrarialike.controller.craftingFactories.OreIngotFactory.iro
 
 public class SwordFactory implements  CraftingFactoryInteface{
 
-    public static Item woodenSword = new Item('S', "Wooden Sword",
+    public static Item woodenSword = new Item('Z', "Wooden Sword",
             new SwordItemInteraction(4,10));
 
-    public static Item stoneSword = new Item('S', "Stone Sword",
+    public static Item stoneSword = new Item('Z', "Stone Sword",
             new SwordItemInteraction(5,15));
 
-    public static Item ironSword = new Item('S', "Iron Sword",
+    public static Item ironSword = new Item('Z', "Iron Sword",
             new SwordItemInteraction(5, 30));
 
     @Override
