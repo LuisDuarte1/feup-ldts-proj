@@ -76,10 +76,12 @@ public class InventoryMenuView extends AbstractMenuView{
         updateLabels(inventoryLabels);
         components.add(inventoryLabels);
         components.add(new Button("Swap...", ()->{
+            if(inventoryLabels.getCheckedItemIndex() == -1) return;
             this.gui.addWindowToStack(createItemActionsWindow(inventoryLabels.getCheckedItemIndex()));
         }));
         components.add(new Button("Select...", ()->{
             try {
+                if(inventoryLabels.getCheckedItemIndex() == -1) return;
                 this.inventory.setSelecteditem(inventoryLabels.getCheckedItemIndex());
             } catch (InvalidIndexException e) {
                 throw new RuntimeException("This shouldn't never happen because we guarrentee it :) java moment. Rust > java");

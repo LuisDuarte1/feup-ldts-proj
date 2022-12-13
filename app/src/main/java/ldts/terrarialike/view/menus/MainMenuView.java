@@ -76,4 +76,5 @@ public class MainMenuView extends AbstractMenuView {
     public void draw() {
 
     }
+
 }
