@@ -4,7 +4,7 @@ import ldts.terrarialike.statemanager.StateManager;
 
 public abstract class AbstractStateController {
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
     public AbstractStateController(StateManager stateManager){
         this.stateManager = stateManager;

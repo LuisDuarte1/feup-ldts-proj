@@ -6,6 +6,8 @@ import ldts.terrarialike.model.Entity;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
 
+import java.util.Objects;
+
 public abstract class EntityController {
 
     private Integer startFallingHeight;
@@ -56,4 +58,16 @@ public abstract class EntityController {
 
     abstract void tick(World world);
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EntityController that = (EntityController) o;
+        return Objects.equals(entity, that.entity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(entity);
+    }
 }
