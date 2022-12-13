@@ -6,7 +6,7 @@ public class CraftingFactories {
 
 
     public static final List<CraftingFactoryInteface> craftingFactoryInterfaces = List.of(
-            new PickaxeFactory(), new WoodenItemsFactory()
+            new PickaxeFactory(), new WoodenItemsFactory(), new SwordFactory(), new OreIngotFactory()
     );
 
 }

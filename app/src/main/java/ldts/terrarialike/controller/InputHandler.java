@@ -4,6 +4,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.controller.events.ItemEventExecutorEvent;
+import ldts.terrarialike.controller.itemInteractions.DefaultAttackItem;
 import ldts.terrarialike.controller.itemInteractions.DefaultDestroyItemInteraction;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.NotInitializedStateException;
@@ -17,6 +18,7 @@ import ldts.terrarialike.utils.Pair;
 import ldts.terrarialike.view.menus.CraftingMenuView;
 import ldts.terrarialike.view.menus.InventoryMenuView;
 import ldts.terrarialike.view.menus.MainMenuView;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -172,6 +174,42 @@ public class InputHandler {
         return List.of(itemEventExecutorEvent);
     }
 
+    private List<GameEvent> processAttackKey(List<KeyStroke> arrowKeys){
+        if(arrowKeys.size() != 1){
+            return new ArrayList<>();
+        }
+        Boolean direction = getDirection(arrowKeys);
+        if(direction == null) return  new ArrayList<>();
+        Item selectedItem = player.getInventory().getSelectedItem();
+        ItemEventExecutorEvent itemEventExecutorEvent = null;
+        if(selectedItem == null){
+            ItemInteraction defaultItemInteraction = new DefaultAttackItem();
+            defaultItemInteraction.setDirection(direction);
+            itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.ATTACK,
+                    new Item(' ',"",defaultItemInteraction));
+        } else{
+
+            itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.ATTACK, selectedItem);
+            selectedItem.getInteraction().setDirection(direction);
+
+        }
+        return List.of(itemEventExecutorEvent);
+    }
+
+    private static Boolean getDirection(List<KeyStroke> arrowKeys) {
+        switch (arrowKeys.get(0).getKeyType()){
+            case ArrowLeft -> {
+                return false;
+            }
+            case ArrowRight -> {
+                return true;
+            }
+            default -> {
+                return null;
+            }
+        }
+    }
+
     public List<GameEvent> handleInput(){
         List<GameEvent> gameEvents = new ArrayList<>();
 
@@ -220,6 +258,8 @@ public class InputHandler {
                 gameEvents.addAll(processDestroyAction(arrowKeys));
             } else if(activeAction.equals(USE_KEY)){
                 gameEvents.addAll(processUseAction(arrowKeys));
+            } else if(activeAction.equals(ATTACK_KEY)){
+                gameEvents.addAll(processAttackKey(arrowKeys));
             }
             resetActions();
         }
