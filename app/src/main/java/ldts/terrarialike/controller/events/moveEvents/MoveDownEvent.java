@@ -26,7 +26,7 @@ public class MoveDownEvent extends MoveEvent {
 
         Position newPosition = null;
         try {
-            newPosition = new Position(entity.getPosition().getX(), entity.getPosition().getY() - 1);
+            newPosition = new Position(entity.getPosition().getX(), entity.getPosition().getY() - 2);
 
             if(world.getBlock(newPosition) == null){
                 entity.setPosition(newPosition);

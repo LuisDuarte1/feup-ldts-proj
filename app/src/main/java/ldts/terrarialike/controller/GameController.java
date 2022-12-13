@@ -77,6 +77,7 @@ public class GameController extends AbstractStateController{
         }
         if(world.getPlayer().getHp() == 0){
             System.out.println("Player died :( - exiting game...");
+            System.exit(0);
         }
         world.getEnemiesList().removeAll(enemyToRemoveList);
 

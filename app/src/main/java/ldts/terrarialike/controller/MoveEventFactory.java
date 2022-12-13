@@ -36,6 +36,9 @@ public class MoveEventFactory {
                         case ArrowUp:
                             gameEvents.add(new MoveUpEvent(entity));
                             break;
+                        case ArrowDown:
+                            gameEvents.add(new MoveDownEvent(entity));
+                            break;
                     }
             }
 
