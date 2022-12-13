@@ -6,6 +6,7 @@ import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.controller.events.ItemEventExecutorEvent;
 import ldts.terrarialike.controller.itemInteractions.DefaultAttackItem;
 import ldts.terrarialike.controller.itemInteractions.DefaultDestroyItemInteraction;
+import ldts.terrarialike.exceptions.InvalidIndexException;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.NotInitializedStateException;
 import ldts.terrarialike.model.InteractionType;
@@ -247,6 +248,18 @@ public class InputHandler {
             } catch (NotInitializedStateException e) {
                 throw new RuntimeException(e);
             }
+        }
+        List<KeyStroke> numberKeys = keyStrokes.stream().filter((k1) -> {
+            return k1.getKeyType() == KeyType.Character && k1.getCharacter() >= '1' && k1.getCharacter() <= '9';
+        }).toList();
+        for(KeyStroke number : numberKeys){
+            Integer index = Integer.parseInt(number.getCharacter().toString()) - 1;
+            try {
+                player.getInventory().setSelecteditem(index);
+            } catch (InvalidIndexException e) {
+                player.getInventory().selectEmpty();
+            }
+
         }
         List<KeyStroke> arrowKeys = filterArrowKeys(keyStrokes);
         processActions(keyStrokes);

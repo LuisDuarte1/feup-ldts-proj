@@ -16,9 +16,12 @@ public class Camera {
 
     private BoundlessPosition gameScreenSize;
 
+    private Pair<Boolean, Boolean> boundaries;
+
     public Camera(Position relativePlayer, BoundlessPosition gameScreenSize){
         this.position = relativePlayer;
         this.gameScreenSize = gameScreenSize;
+        this.boundaries = new Pair<>(null, null);
     }
 
     public Position getPosition() {
@@ -43,22 +46,7 @@ public class Camera {
 
     // we consider that the position will be centered in the gameScreen
     public void setNewPositionRelativeToPosition(Position relativePlayer) throws InvalidPositionException {
-        BoundlessPosition p_sub = this.position.subtract(relativePlayer);
-        //if negative = player to the right; positive = player to the left
-        int x_diff = 0;
-        int y_diff = 0;
-
-        if(abs(p_sub.getX()) >= getBoundariesX()/2){
-            x_diff = abs(p_sub.getX()) - getBoundariesX();
-        }
-        if(abs(p_sub.getY()) >= getBoundariesY()/2){
-            y_diff = abs(p_sub.getY()) - getBoundariesY();
-        }
-
-        x_diff = p_sub.getX() > 0 ? -x_diff : x_diff;
-        y_diff = p_sub.getY() > 0 ? y_diff : -y_diff;
-
-        this.position = new Position(this.position.getX() + x_diff, this.position.getY() + y_diff);
+        this.position = relativePlayer;
 
     }
 
