@@ -1,12 +1,12 @@
 package ldts.terrarialike.model;
 
+import ldts.terrarialike.controller.FollowPlayerAI;
+
 public class Zombie extends Enemy {
 
 
-    public Zombie(Position position) {
-        //FIXME: turn this into a FollowPlayerAI
-        super(position, 100,10, e -> {
-        });
+    public Zombie(Position position, Player player) {
+        super(position, 100,10, new FollowPlayerAI(player, 25));
     }
 
 
