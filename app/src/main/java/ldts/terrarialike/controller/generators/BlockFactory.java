@@ -28,12 +28,12 @@ public class BlockFactory {
 
             dirtInfo = new BlockInfo(1,
                     BlockType.DIRT, "#523701", 'D');
-            dirtInfo.setToDropItem(generateItemForBlock('D', "Dirt block", grassInfo));
+            dirtInfo.setToDropItem(generateItemForBlock('D', "Dirt block", dirtInfo));
 
 
             stoneInfo = new BlockInfo(2, BlockType.STONE,
                     "#5e5a5a", 'S');
-            stoneInfo.setToDropItem(generateItemForBlock('S', "Stone block", grassInfo));
+            stoneInfo.setToDropItem(generateItemForBlock('S', "Stone block", stoneInfo));
 
 
             ironOreInfo = new BlockInfo(3, BlockType.ORE,
