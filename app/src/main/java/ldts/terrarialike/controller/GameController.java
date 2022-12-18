@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static ldts.terrarialike.utils.WorldUtils.findMaxHeightOfXPos;
+
 public class GameController extends AbstractStateController{
 
     private WorldGenerator worldGenerator;
@@ -39,7 +41,7 @@ public class GameController extends AbstractStateController{
         for(int i = -30; i <= 30; i++){
             world.tryAddChunk(worldGenerator.generateChunk(i));
         }
-        Integer yPos = this.world.findMaxHeightOfXPos(0);
+        Integer yPos = findMaxHeightOfXPos(0,world);
         try {
             this.world.getPlayer().setPosition(new Position(0, yPos+1));
         } catch (InvalidPositionException e) {

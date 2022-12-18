@@ -8,6 +8,8 @@ import ldts.terrarialike.model.World;
 
 import java.util.Objects;
 
+import static ldts.terrarialike.utils.WorldUtils.getBlock;
+
 public abstract class EntityController {
 
     private Integer startFallingHeight;
@@ -44,7 +46,7 @@ public abstract class EntityController {
             return;
         }
 
-        Block blockBelow = world.getBlock(blockBelowPosition);
+        Block blockBelow = getBlock(blockBelowPosition, world);
         if(blockBelow == null){
             entity.setPosition(blockBelowPosition);
             startFallingHeight += 1;

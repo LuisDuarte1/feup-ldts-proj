@@ -11,11 +11,13 @@ import ldts.terrarialike.model.BlockInfo;
 import ldts.terrarialike.model.Chunk;
 import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
-import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static ldts.terrarialike.utils.WorldUtils.getBlock;
+import static ldts.terrarialike.utils.WorldUtils.getChunkID;
 
 public class UseBlockItemInteraction extends ItemInteraction{
 
@@ -34,8 +36,8 @@ public class UseBlockItemInteraction extends ItemInteraction{
             System.err.println("BlockItemInteractionError: block has not desiredPosition... skipping event.");
             return new ArrayList<>();
         }
-        if(interactionType == InteractionType.USE && one.getBlock(desiredPosition) == null){
-            Integer chunkID = one.getChunkID(desiredPosition.getX());
+        if(interactionType == InteractionType.USE && getBlock(desiredPosition, one) == null){
+            Integer chunkID = getChunkID(desiredPosition.getX());
             Chunk desiredChunk = null;
             for (Chunk chunk : one.getChunks()) {
                 if(chunk.getChunkID() == chunkID){

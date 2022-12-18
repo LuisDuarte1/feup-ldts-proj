@@ -6,6 +6,9 @@ import ldts.terrarialike.model.*;
 import java.util.List;
 import java.util.Random;
 
+import static ldts.terrarialike.utils.WorldUtils.findMaxHeightOfXPos;
+import static ldts.terrarialike.utils.WorldUtils.getChunkID;
+
 public class EnemyGeneratorFactory {
 
     private static final int DISTANCE_TO_PLAYER=50;
@@ -41,7 +44,7 @@ public class EnemyGeneratorFactory {
         }
         Block randomBlock = desiredChunk.getBlocks().get(random.nextInt(0, desiredChunk.getBlocks().size()));
         Integer xPos = randomBlock.getPosition().getX();
-        Integer yPos = world.findMaxHeightOfXPos(xPos) + 1;
+        Integer yPos = findMaxHeightOfXPos(xPos, world) + 1;
 
         if(desiredChunk == null) throw new RuntimeException("Couldn't find chunkID");
         if(megaProb <= 0.10){
@@ -71,7 +74,7 @@ public class EnemyGeneratorFactory {
         List<Enemy> mobsNearPlayer = getMobsNearPlayer();
         if(mobsNearPlayer.size() <= MIN_ENEMIES){
             Player player = world.getPlayer();
-            Integer chunkID = world.getChunkID(player.getPosition().getX());
+            Integer chunkID = getChunkID(player.getPosition().getX());
             int chunkDiff = DISTANCE_TO_PLAYER/Chunk.CHUNK_SIZE;
             int count = 0;
             for(int i = -chunkDiff; i < chunkDiff; i++){
