@@ -10,6 +10,9 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.Temporal;
 
+import static ldts.terrarialike.utils.WorldUtils.getBlock;
+import static ldts.terrarialike.utils.WorldUtils.getEntity;
+
 public class FollowPlayerAI implements EnemyAI {
 
     private static final int WAIT_FRAMES = 4;
@@ -65,10 +68,10 @@ public class FollowPlayerAI implements EnemyAI {
         Position right = new Position(thisEnemy.getPosition().getX() + 1, thisEnemy.getPosition().getY());
         Position upRight =  new Position(thisEnemy.getPosition().getX() + 1, thisEnemy.getPosition().getY() + 1);
         Position up = new Position(thisEnemy.getPosition().getX(), thisEnemy.getPosition().getY() + 1);
-        if (world.getBlock(right) == null && world.getEntity(right) == null) {
+        if (getBlock(right, world) == null && getEntity(right, world) == null) {
             thisEnemy.setPosition(right);
         }
-        else if (world.getBlock(upRight) == null && world.getEntity(upRight) == null && world.getBlock(up) == null) {
+        else if (getBlock(upRight, world) == null && getEntity(upRight, world) == null && getBlock(up, world) == null) {
             thisEnemy.setPosition(upRight);
         }
     }
@@ -77,10 +80,10 @@ public class FollowPlayerAI implements EnemyAI {
         Position left = new Position(thisEnemy.getPosition().getX() - 1, thisEnemy.getPosition().getY());
         Position upLeft =  new Position(thisEnemy.getPosition().getX() - 1, thisEnemy.getPosition().getY() + 1);
         Position up = new Position(thisEnemy.getPosition().getX(), thisEnemy.getPosition().getY() + 1);
-        if (world.getBlock(left) == null && world.getEntity(left) == null) {
+        if (getBlock(left, world) == null && getEntity(left, world) == null) {
             thisEnemy.setPosition(left);
         }
-        else if (world.getBlock(upLeft) == null && world.getEntity(upLeft) == null && world.getBlock(up) == null) {
+        else if (getBlock(upLeft, world) == null && getEntity(upLeft, world) == null && getBlock(up, world) == null) {
             thisEnemy.setPosition(upLeft);
         }
     }

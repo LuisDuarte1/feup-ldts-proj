@@ -11,6 +11,8 @@ import ldts.terrarialike.model.World;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ldts.terrarialike.utils.WorldUtils.getBlock;
+
 public class MoveDownEvent extends MoveEvent {
 
 
@@ -28,7 +30,7 @@ public class MoveDownEvent extends MoveEvent {
         try {
             newPosition = new Position(entity.getPosition().getX(), entity.getPosition().getY() - 2);
 
-            if(world.getBlock(newPosition) == null){
+            if(getBlock(newPosition, world) == null){
                 entity.setPosition(newPosition);
             }
 

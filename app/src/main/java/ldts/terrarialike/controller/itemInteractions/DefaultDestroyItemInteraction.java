@@ -11,6 +11,9 @@ import org.mockito.internal.matchers.Null;
 import java.util.ArrayList;
 import java.util.List;
 
+import static ldts.terrarialike.utils.WorldUtils.getBlock;
+import static ldts.terrarialike.utils.WorldUtils.getChunkID;
+
 public class DefaultDestroyItemInteraction extends ItemInteraction {
     //defaultItemInteraction represents an empty selected item slot or an item that has no interaction
     private static final int DEFAULT_DURABILITY = 1;
@@ -21,7 +24,7 @@ public class DefaultDestroyItemInteraction extends ItemInteraction {
                 System.err.println("DefaultItemInteraction Error: no desiredPosition set.");
                 return new ArrayList<>();
             }
-            Integer chunkID = one.getChunkID(desiredPosition.getX());
+            Integer chunkID = getChunkID(desiredPosition.getX());
             Chunk desiredChunk = null;
             for (Chunk chunk : one.getChunks()) {
                 if(chunk.getChunkID() == chunkID){
@@ -34,7 +37,7 @@ public class DefaultDestroyItemInteraction extends ItemInteraction {
             }
 
             try {
-                Block desiredBlock = one.getBlock(desiredPosition);
+                Block desiredBlock = getBlock(desiredPosition, one);
                 Item droppedItem = desiredBlock.getBlockInfo().getToDropItem();
                 if(desiredBlock.getBlockInfo().getDurability() > DEFAULT_DURABILITY){
                     one.getPlayer().getPlayerLogs()
