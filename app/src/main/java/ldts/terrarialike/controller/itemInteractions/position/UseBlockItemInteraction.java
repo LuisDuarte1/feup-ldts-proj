@@ -1,8 +1,8 @@
-package ldts.terrarialike.controller.itemInteractions;
+package ldts.terrarialike.controller.itemInteractions.position;
 
 
 import ldts.terrarialike.controller.GameEvent;
-import ldts.terrarialike.controller.ItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.PositionItemInteraction;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.exceptions.ItemNotFoundException;
@@ -19,7 +19,7 @@ import java.util.List;
 import static ldts.terrarialike.utils.WorldUtils.getBlock;
 import static ldts.terrarialike.utils.WorldUtils.getChunkID;
 
-public class UseBlockItemInteraction extends ItemInteraction{
+public class UseBlockItemInteraction extends PositionItemInteraction {
 
     private BlockInfo blockInfo;
 

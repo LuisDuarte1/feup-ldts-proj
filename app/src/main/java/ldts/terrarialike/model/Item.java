@@ -1,6 +1,6 @@
 package ldts.terrarialike.model;
 
-import ldts.terrarialike.controller.ItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.ItemInteraction;
 
 import java.util.Objects;
 

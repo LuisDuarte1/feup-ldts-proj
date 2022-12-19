@@ -3,6 +3,7 @@ package ldts.terrarialike.controller.actions;
 import com.googlecode.lanterna.input.KeyStroke;
 import ldts.terrarialike.controller.GameEvent;
 import ldts.terrarialike.controller.events.ItemEventExecutorEvent;
+import ldts.terrarialike.controller.itemInteractions.PositionItemInteraction;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
@@ -37,7 +38,8 @@ public class UseAction extends AbstractAction {
         }
         itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.USE, selectedItem);
         if(selectedItem.getInteraction() == null) return new ArrayList<>();
-        selectedItem.getInteraction().setDesiredPosition(desiredPosition);
+        if(!(selectedItem.getInteraction() instanceof PositionItemInteraction positionItemInteraction)) return new ArrayList<>();
+        positionItemInteraction.setDesiredPosition(desiredPosition);
         return List.of(itemEventExecutorEvent);
     }
 }
