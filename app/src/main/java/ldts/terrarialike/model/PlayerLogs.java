@@ -31,10 +31,9 @@ public class PlayerLogs {
     public String getLogString(int index){
         try{
 
-            String logString = logList.get(index);
-            return logString;
+            return logList.get(index);
         } catch(IndexOutOfBoundsException e){
-            return new String("");
+            return "";
         }
 
     }

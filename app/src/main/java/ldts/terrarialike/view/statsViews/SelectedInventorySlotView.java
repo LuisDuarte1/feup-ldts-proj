@@ -40,7 +40,7 @@ public class SelectedInventorySlotView implements  ElementView{
             graphics.setCharacter(1,1, selectedItemStack.getItem().getRepresentation());
             graphics.putString(0,3, String.format("S:%d", selectedItemStack.getQuantity()));
         } else{
-            graphics.putString(0,3,String.format("Empty"));
+            graphics.putString(0,3, "Empty");
         }
         graphics.disableModifiers(SGR.BOLD, SGR.BORDERED);
 

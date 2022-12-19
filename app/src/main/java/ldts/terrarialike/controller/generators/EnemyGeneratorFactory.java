@@ -43,8 +43,8 @@ public class EnemyGeneratorFactory {
             }
         }
         Block randomBlock = desiredChunk.getBlocks().get(random.nextInt(0, desiredChunk.getBlocks().size()));
-        Integer xPos = randomBlock.getPosition().getX();
-        Integer yPos = findMaxHeightOfXPos(xPos, world) + 1;
+        int xPos = randomBlock.getPosition().getX();
+        int yPos = findMaxHeightOfXPos(xPos, world) + 1;
 
         if(desiredChunk == null) throw new RuntimeException("Couldn't find chunkID");
         if(megaProb <= 0.10){
@@ -58,7 +58,7 @@ public class EnemyGeneratorFactory {
             float prob = random.nextFloat();
             if(prob <= 0.25){
                 try {
-                    Integer numberOfEnemies = random.nextInt(3);
+                    int numberOfEnemies = random.nextInt(3);
                     for(int i= 0; i < numberOfEnemies; i++){
                         world.addEnemy(generateEnemy(chunk.getChunkID()));
                     }

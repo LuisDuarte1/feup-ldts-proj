@@ -3,7 +3,6 @@ package ldts.terrarialike.view;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.model.BoundlessPosition;
-import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.Zombie;
 import org.junit.jupiter.api.BeforeEach;

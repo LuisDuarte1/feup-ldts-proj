@@ -56,9 +56,7 @@ public class Camera {
         p_sub.setY(abs(p_sub.getY()));
 
         if(p_sub.getX() > getGameScreenMiddle().getX()) return false;
-        if(p_sub.getY() > getGameScreenMiddle().getY()) return false;
-
-        return true;
+        return p_sub.getY() <= getGameScreenMiddle().getY();
     }
 
     public BoundlessPosition invertYPosition(BoundlessPosition oldPos){
@@ -81,10 +79,7 @@ public class Camera {
         Pair<Integer,Integer> edges = getEdgesX();
         if(chunk_id >= 0 && (chunk_id*Chunk.CHUNK_SIZE)-(Chunk.CHUNK_SIZE-1) <= edges.first){
             return true;
-        } else if(chunk_id < 0 && (chunk_id*Chunk.CHUNK_SIZE)+(Chunk.CHUNK_SIZE-1) >= edges.second) {
-            return true;
-        }
-        return false;
+        } else return chunk_id < 0 && (chunk_id * Chunk.CHUNK_SIZE) + (Chunk.CHUNK_SIZE - 1) >= edges.second;
 
     } 
 }

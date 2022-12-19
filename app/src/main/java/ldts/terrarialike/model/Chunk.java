@@ -71,15 +71,10 @@ public class Chunk {
         // Check if block coordinates are contained in assigned chunk
         public boolean validCoords(Block block) {
 
-            if (block.getPosition().getX() >= CHUNK_SIZE * position 
-            && block.getPosition().getX() < CHUNK_SIZE * position + CHUNK_SIZE 
-            && block.getPosition().getY() >= Position.Y_MIN  
-            && block.getPosition().getY() <= Position.Y_MAX) {
-                return true;
-            }
-        else {
-                return false;
-            }
+            return block.getPosition().getX() >= CHUNK_SIZE * position
+                    && block.getPosition().getX() < CHUNK_SIZE * position + CHUNK_SIZE
+                    && block.getPosition().getY() >= Position.Y_MIN
+                    && block.getPosition().getY() <= Position.Y_MAX;
         }
 
 
@@ -101,9 +96,7 @@ public class Chunk {
             if (getClass() != obj.getClass())
                 return false;
             Chunk other = (Chunk) obj;
-            if (position != other.position)
-                return false;
-            return true;
+            return position == other.position;
         }
     }
 

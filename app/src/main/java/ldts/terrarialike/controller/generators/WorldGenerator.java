@@ -67,9 +67,9 @@ public class WorldGenerator {
                     Block newBlock = null;
                     int baseXPos = chunk_id*Chunk.CHUNK_SIZE;
                     if(chunk_id != 0){
-                        newBlock = blockFactory.generateBlock(new Position(baseXPos + i, e),chunk_id ,finalHeights.get(i));
+                        newBlock = blockFactory.generateBlock(new Position(baseXPos + i, e), finalHeights.get(i));
                     } else {
-                        newBlock = blockFactory.generateBlock(new Position(Chunk.CHUNK_SIZE - 1 - i, e),chunk_id ,finalHeights.get(i));
+                        newBlock = blockFactory.generateBlock(new Position(Chunk.CHUNK_SIZE - 1 - i, e), finalHeights.get(i));
                     }
                     result.addBlock(newBlock);
                 } catch (InvalidColorStringException | InvalidPositionException e1) {

@@ -1,7 +1,6 @@
 package ldts.terrarialike.controller.events.moveEvents;
 
 import ldts.terrarialike.controller.GameEvent;
-import ldts.terrarialike.controller.MovementType;
 import ldts.terrarialike.controller.events.MoveEvent;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.Entity;

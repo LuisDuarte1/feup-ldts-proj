@@ -23,7 +23,7 @@ public class DefaultDestroyItemInteraction extends PositionItemInteraction {
                 System.err.println("DefaultItemInteraction Error: no desiredPosition set.");
                 return new ArrayList<>();
             }
-            Integer chunkID = getChunkID(desiredPosition.getX());
+            int chunkID = getChunkID(desiredPosition.getX());
             Chunk desiredChunk = null;
             for (Chunk chunk : one.getChunks()) {
                 if(chunk.getChunkID() == chunkID){

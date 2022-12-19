@@ -29,9 +29,5 @@ public class BlockView implements ElementView {
             boundlessPosition = camera.invertYPosition(boundlessPosition);
             graphics.putString(boundlessPosition.getX(), boundlessPosition.getY(), Character.toString(blockInfo.getRepresentation_char()));
         }
-        else {
-            /*System.out.println(String.format("Block not drawable in position x:%d y:%d", block.getPosition().getX(),
-                    block.getPosition().getY()));*/
-        }
     }
 }

@@ -21,11 +21,7 @@ public class ItemStack { // n√£o esquecer para verificar o tipo de item que est√
         }
     }
 
-     /* public ItemStack(Item item) throws Exception {
-            this(item, 1);
-        }*/
-
-        //add quantity to the stack
+    //add quantity to the stack
     public void add(int quantity) throws InvalidQuantityException { // adds any quantity to the stack
             if(quantity + this.quantity <= MAXQUANTITY){
                 this.quantity += quantity;

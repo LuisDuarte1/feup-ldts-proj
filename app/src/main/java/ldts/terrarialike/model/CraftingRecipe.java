@@ -22,7 +22,7 @@ public class CraftingRecipe {
     public boolean isPossible(Inventory inventory){
         for (ItemStack i :
                 inputItems) {
-            Integer pog = inventory.getInventory().stream().mapToInt((itemStack) -> {
+            int pog = inventory.getInventory().stream().mapToInt((itemStack) -> {
                 if(itemStack.getItem().equals(i.getItem())) return itemStack.getQuantity();
                 return 0;
             }).reduce(0, Integer::sum);
@@ -56,13 +56,13 @@ public class CraftingRecipe {
 
     @Override
     public String toString() {
-        String inputString = new String();
+        StringBuilder inputString = new StringBuilder(new String());
         for(ItemStack input: inputItems){
-            inputString += String.format(" %s:%d",input.getItem().getName(),input.getQuantity());
+            inputString.append(String.format(" %s:%d", input.getItem().getName(), input.getQuantity()));
         }
-        String outputString = new String();
+        StringBuilder outputString = new StringBuilder(new String());
         for(ItemStack output: outputItems){
-            outputString += String.format(" %s:%d",output.getItem().getName(),output.getQuantity());
+            outputString.append(String.format(" %s:%d", output.getItem().getName(), output.getQuantity()));
         }
         return inputString + "-> " + outputString;
     }

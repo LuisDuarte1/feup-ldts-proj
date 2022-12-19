@@ -12,7 +12,7 @@ public class MenuWindowBuilder {
 
     public static Window build(String title, List<Component> componentList){
         BasicWindow window = new BasicWindow(title);
-        window.setHints(Arrays.asList(Window.Hint.CENTERED));
+        window.setHints(List.of(Window.Hint.CENTERED));
         Panel panel = new Panel();
         for(Component c: componentList){
             panel.addComponent(c);

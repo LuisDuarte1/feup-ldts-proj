@@ -2,6 +2,7 @@ package ldts.terrarialike.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -53,7 +54,7 @@ public class SimpleNoise1D {
 
     public Pair<Integer,Float> getChunkHeight(Integer chunkID){
         for (Pair<Integer,Float> pair : points) {
-            if(pair.first == chunkID){
+            if(Objects.equals(pair.first, chunkID)){
                 return pair;
             }
             

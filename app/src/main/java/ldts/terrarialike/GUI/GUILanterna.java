@@ -65,8 +65,7 @@ public class GUILanterna {
         ge.registerFont(font);
 
         Font loadedFont = font.deriveFont(Font.PLAIN, 25);
-        AWTTerminalFontConfiguration fontConfig = AWTTerminalFontConfiguration.newInstance(loadedFont);
-        return fontConfig;
+        return AWTTerminalFontConfiguration.newInstance(loadedFont);
     }
 
     public TextGraphics getTextGraphics(TerminalPosition topCorner, TerminalSize size){
