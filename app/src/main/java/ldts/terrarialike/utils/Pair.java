@@ -34,11 +34,8 @@ public class Pair<T1, T2> {
         } else if (!first.equals(other.first))
             return false;
         if (second == null) {
-            if (other.second != null)
-                return false;
-        } else if (!second.equals(other.second))
-            return false;
-        return true;
+            return other.second == null;
+        } else return second.equals(other.second);
     }
 
 }

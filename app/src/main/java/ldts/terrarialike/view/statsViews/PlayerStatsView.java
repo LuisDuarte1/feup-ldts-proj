@@ -10,7 +10,7 @@ public class PlayerStatsView implements ElementView{
 
     private static final double LOGS_PERCENTAGE = 0.60;
 
-    private Player player;
+    private final Player player;
     private PlayerLogsView playerLogsView;
 
     private SelectedInventorySlotView slotView;

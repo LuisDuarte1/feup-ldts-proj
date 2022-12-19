@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 
+/*
 public class BlockTest {
 <<<<<<< HEAD
 =======
@@ -49,9 +50,7 @@ public class BlockTest {
         }
 <<<<<<< HEAD
     }
-    */
+
 
 =======
     }*/
->>>>>>> origin/main
-}

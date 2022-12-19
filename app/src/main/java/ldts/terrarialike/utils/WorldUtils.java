@@ -6,7 +6,7 @@ public class WorldUtils {
 
 
     public static Integer getChunkID(Integer xPos){
-        Integer desiredChunkID = Integer.MIN_VALUE;
+        int desiredChunkID = Integer.MIN_VALUE;
         if(xPos >= 0 && xPos <= Chunk.CHUNK_SIZE-1){
             desiredChunkID = 0;
         } else if(xPos >= Chunk.CHUNK_SIZE){
@@ -21,7 +21,7 @@ public class WorldUtils {
     }
 
     public static Block getBlock(Position blockPosition, World world){
-        Integer desiredChunkID = getChunkID(blockPosition.getX());
+        int desiredChunkID = getChunkID(blockPosition.getX());
         Chunk desiredChunk = null;
         //we have to do it this way because we can't guarentee that chunks will always be
         //sequential
@@ -55,7 +55,7 @@ public class WorldUtils {
 
     public static Integer findMaxHeightOfXPos(Integer xPos, World world) {
         int maxZeroPosition = -1;
-        Integer chunkID = getChunkID(xPos);
+        int chunkID = getChunkID(xPos);
         Chunk desiredChunk = null;
         for(Chunk c: world.getChunks()){
             if(c.getChunkID() == chunkID){

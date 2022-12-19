@@ -37,7 +37,7 @@ public class UseBlockItemInteraction extends PositionItemInteraction {
             return new ArrayList<>();
         }
         if(interactionType == InteractionType.USE && getBlock(desiredPosition, one) == null){
-            Integer chunkID = getChunkID(desiredPosition.getX());
+            int chunkID = getChunkID(desiredPosition.getX());
             Chunk desiredChunk = null;
             for (Chunk chunk : one.getChunks()) {
                 if(chunk.getChunkID() == chunkID){

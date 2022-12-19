@@ -44,16 +44,15 @@ public class TreeFactory {
             throw  new RuntimeException("cope");
         }
         if(megaProbabilityPog <= 0.25){
-            Integer index = random.nextInt(0, maxHeights.size());
+            int index = random.nextInt(0, maxHeights.size());
             Pair<Integer, Integer> maxHeight = maxHeights.get(index);
             Integer treeSize = random.nextInt(3,6);
-            Integer leafWidth = random.nextInt(2,4);
+            int leafWidth = random.nextInt(2,4);
             try {
                 blocks.add(new Block(new Position(maxHeight.first, maxHeight.second+1), woodInfo));
             } catch (InvalidPositionException e) {
                 return new ArrayList<>();
             }
-            Integer maxTreeSize = treeSize;
             for(int i = 2; i < treeSize; i++){
                 try{
                     blocks.add(new Block(new Position(maxHeight.first, maxHeight.second+i), woodInfo));

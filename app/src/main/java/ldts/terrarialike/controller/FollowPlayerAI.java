@@ -45,14 +45,12 @@ public class FollowPlayerAI implements EnemyAI {
                 try {
                     moveLeft(thisEnemy, world);
                 } catch (InvalidPositionException e) {
-                    return;
                 }
             }
             else if(player.getPosition().getX() > thisEnemy.getPosition().getX()) {
                 try {
                     moveRight(thisEnemy, world);
                 } catch (InvalidPositionException e) {
-                    return;
                 }
             }
 

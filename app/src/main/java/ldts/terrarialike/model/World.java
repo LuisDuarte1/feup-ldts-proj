@@ -61,9 +61,7 @@ public class World {
 
     public void removeEnemy(Enemy enemy){
         //maybe check hp?
-        if(enemiesList.contains(enemy)){
-            enemiesList.remove(enemy);
-        }
+        enemiesList.remove(enemy);
  
     }
     public List<Enemy> getEnemiesList() {

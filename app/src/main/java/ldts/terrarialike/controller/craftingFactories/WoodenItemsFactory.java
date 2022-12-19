@@ -5,7 +5,6 @@ import ldts.terrarialike.model.CraftingRecipe;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.ItemStack;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WoodenItemsFactory implements CraftingFactoryInteface{

@@ -16,6 +16,7 @@ import java.io.IOException;
 
 public class App {
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws InterruptedException, InvalidPositionException, IOException, NotInitializedStateException {
         GUILanterna gLanterna = new GUILanterna(200,100, "TerrariaLike");
 
@@ -37,7 +38,7 @@ public class App {
             try{
                 stateController = manager.getSelectedState().getControllerObject(AbstractStateController.class);
                 stateController.tick();
-            } catch (ClassCastException e){
+            } catch (ClassCastException ignored){
 
             }
             view.draw();

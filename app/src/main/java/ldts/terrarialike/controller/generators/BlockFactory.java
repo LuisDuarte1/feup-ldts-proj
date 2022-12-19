@@ -54,7 +54,7 @@ public class BlockFactory {
         return  new Item(representation_char, object_name, new UseBlockItemInteraction(blockInfo));
     }
 
-    public Block generateBlock(Position desiredPos, int chunkID, int max_height) throws InvalidColorStringException {
+    public Block generateBlock(Position desiredPos, int max_height) throws InvalidColorStringException {
         Block returnBlock = null;
         float mega_probability = random.nextFloat();
         if(desiredPos.getY() == max_height){

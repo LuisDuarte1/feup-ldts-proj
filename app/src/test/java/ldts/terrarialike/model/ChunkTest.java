@@ -84,7 +84,7 @@ public class ChunkTest {
             chunk.addBlock(block1);
             Assertions.fail("InvalidPositionException not thrown");
 
-        } catch (InvalidPositionException e) {
+        } catch (InvalidPositionException ignored) {
 
         }
     }

@@ -1,10 +1,6 @@
 package ldts.terrarialike.view.menus;
 
 import com.googlecode.lanterna.gui2.*;
-import com.googlecode.lanterna.gui2.Button;
-import com.googlecode.lanterna.gui2.Component;
-import com.googlecode.lanterna.gui2.Label;
-import com.googlecode.lanterna.gui2.Window;
 import ldts.terrarialike.GUI.GUILanterna;
 import ldts.terrarialike.GUI.MenuWindowBuilder;
 import ldts.terrarialike.controller.GameController;
@@ -13,7 +9,6 @@ import ldts.terrarialike.model.World;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
 import ldts.terrarialike.view.GameView;
-import ldts.terrarialike.view.StateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +30,8 @@ public class MainMenuView extends AbstractMenuView {
         componentList.add(new Button("Create World!", () -> {
             State worldState = new State(World.class, GameView.class, GameController.class);
             if(world_seed != null){
-                Integer seedint = Integer.parseInt(world_seed);
-                worldState.initializeDataClass(seedint.intValue());
+                int seedint = Integer.parseInt(world_seed);
+                worldState.initializeDataClass((int) seedint);
             } else{
                 worldState.initializeDataClass();
             }

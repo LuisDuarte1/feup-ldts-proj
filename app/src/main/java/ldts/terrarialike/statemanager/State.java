@@ -4,6 +4,7 @@ package ldts.terrarialike.statemanager;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 
@@ -46,9 +47,7 @@ public class State{
                     Class[] p_lst = t.getParameterTypes();
 
                     ArrayList<Class> wanted_classes_list = new ArrayList<>();
-                    for(Class p : p_lst){
-                        wanted_classes_list.add(p);
-                    }
+                    Collections.addAll(wanted_classes_list, p_lst);
                     if(wanted_classes_list.equals(classes_list)){
                         dataObject = t.newInstance(arguments);
                     }
@@ -81,9 +80,7 @@ public class State{
                     Class[] p_lst = t.getParameterTypes();
 
                     ArrayList<Class> wanted_classes_list = new ArrayList<>();
-                    for(Class p : p_lst){
-                        wanted_classes_list.add(p);
-                    }
+                    Collections.addAll(wanted_classes_list, p_lst);
                     if(wanted_classes_list.equals(classes_list)){
                         viewObject = t.newInstance(arguments);
                         return;
@@ -118,9 +115,7 @@ public class State{
                     Class[] p_lst = t.getParameterTypes();
 
                     ArrayList<Class> wanted_classes_list = new ArrayList<>();
-                    for(Class p : p_lst){
-                        wanted_classes_list.add(p);
-                    }
+                    Collections.addAll(wanted_classes_list, p_lst);
                     if(wanted_classes_list.equals(classes_list)){
                         controllerObject = t.newInstance(arguments);
                         return;
