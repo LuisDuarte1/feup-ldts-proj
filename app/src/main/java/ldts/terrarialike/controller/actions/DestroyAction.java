@@ -2,9 +2,9 @@ package ldts.terrarialike.controller.actions;
 
 import com.googlecode.lanterna.input.KeyStroke;
 import ldts.terrarialike.controller.GameEvent;
-import ldts.terrarialike.controller.ItemInteraction;
 import ldts.terrarialike.controller.events.ItemEventExecutorEvent;
-import ldts.terrarialike.controller.itemInteractions.DefaultDestroyItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.position.DefaultDestroyItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.PositionItemInteraction;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
@@ -33,9 +33,10 @@ public class DestroyAction extends AbstractAction {
         if(desiredPosition == null) return new ArrayList<>();
         Item selectedItem = player.getInventory().getSelectedItem();
         ItemEventExecutorEvent itemEventExecutorEvent = null;
-        ItemInteraction itemInteraction = null;
+        PositionItemInteraction itemInteraction = null;
         if(selectedItem != null){
-            itemInteraction = selectedItem.getInteraction();
+            if(!(selectedItem.getInteraction() instanceof PositionItemInteraction)) return new ArrayList<>();
+            itemInteraction = (PositionItemInteraction) selectedItem.getInteraction();
             if(itemInteraction == null) return new ArrayList<>();
             itemEventExecutorEvent = new ItemEventExecutorEvent(InteractionType.DESTROY, selectedItem);
         } else {

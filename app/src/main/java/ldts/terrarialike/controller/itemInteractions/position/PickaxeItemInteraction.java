@@ -1,7 +1,7 @@
-package ldts.terrarialike.controller.itemInteractions;
+package ldts.terrarialike.controller.itemInteractions.position;
 
 import ldts.terrarialike.controller.GameEvent;
-import ldts.terrarialike.controller.ItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.PositionItemInteraction;
 import ldts.terrarialike.exceptions.BlockNotFoundException;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.exceptions.InventoryFullException;
@@ -13,7 +13,7 @@ import java.util.List;
 import static ldts.terrarialike.utils.WorldUtils.getBlock;
 import static ldts.terrarialike.utils.WorldUtils.getChunkID;
 
-public class PickaxeItemInteraction extends ItemInteraction {
+public class PickaxeItemInteraction extends PositionItemInteraction {
     private Integer durability;
 
     public PickaxeItemInteraction(Integer durability) {

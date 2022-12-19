@@ -1,6 +1,6 @@
 package ldts.terrarialike.controller.craftingFactories;
 
-import ldts.terrarialike.controller.itemInteractions.PickaxeItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.position.PickaxeItemInteraction;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.model.CraftingRecipe;
 import ldts.terrarialike.model.Item;

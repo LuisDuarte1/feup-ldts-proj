@@ -1,12 +1,11 @@
 package ldts.terrarialike.model;
-import ldts.terrarialike.controller.ItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.ItemInteraction;
 import ldts.terrarialike.exceptions.*;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

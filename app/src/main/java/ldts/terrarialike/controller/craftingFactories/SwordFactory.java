@@ -1,6 +1,6 @@
 package ldts.terrarialike.controller.craftingFactories;
 
-import ldts.terrarialike.controller.itemInteractions.SwordItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.direction.SwordItemInteraction;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.model.CraftingRecipe;
 import ldts.terrarialike.model.Item;

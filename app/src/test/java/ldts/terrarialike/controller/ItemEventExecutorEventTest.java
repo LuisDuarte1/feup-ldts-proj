@@ -1,6 +1,7 @@
 package ldts.terrarialike.controller;
 
 import ldts.terrarialike.controller.events.ItemEventExecutorEvent;
+import ldts.terrarialike.controller.itemInteractions.ItemInteraction;
 import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.World;

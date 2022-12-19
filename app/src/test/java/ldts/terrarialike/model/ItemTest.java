@@ -1,6 +1,6 @@
 package ldts.terrarialike.model;
 
-import ldts.terrarialike.controller.ItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.ItemInteraction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

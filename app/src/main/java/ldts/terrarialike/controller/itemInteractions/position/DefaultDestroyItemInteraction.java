@@ -1,12 +1,11 @@
-package ldts.terrarialike.controller.itemInteractions;
+package ldts.terrarialike.controller.itemInteractions.position;
 
 import ldts.terrarialike.controller.GameEvent;
-import ldts.terrarialike.controller.ItemInteraction;
+import ldts.terrarialike.controller.itemInteractions.PositionItemInteraction;
 import ldts.terrarialike.exceptions.BlockNotFoundException;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.exceptions.InventoryFullException;
 import ldts.terrarialike.model.*;
-import org.mockito.internal.matchers.Null;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 import static ldts.terrarialike.utils.WorldUtils.getBlock;
 import static ldts.terrarialike.utils.WorldUtils.getChunkID;
 
-public class DefaultDestroyItemInteraction extends ItemInteraction {
+public class DefaultDestroyItemInteraction extends PositionItemInteraction {
     //defaultItemInteraction represents an empty selected item slot or an item that has no interaction
     private static final int DEFAULT_DURABILITY = 1;
     @Override
