@@ -31,9 +31,11 @@ public class AttackActionTest {
 
     public void testAttackAction() {
 
-        AttackAction attackAction = new AttackAction();
+        InputUtils inputUtils = Mockito.mock(InputUtils.class);
+        AttackAction attackAction = new AttackAction(inputUtils);
 
         List<com.googlecode.lanterna.input.KeyStroke> arrowKeys = new ArrayList<>();
+
         Player player = Mockito.mock(Player.class);
         Inventory inventory = Mockito.mock(Inventory.class);
         Mockito.when(player.getInventory()).thenReturn(inventory);
@@ -47,6 +49,8 @@ public class AttackActionTest {
 
 
 
+        Mockito.when(inputUtils.getDirection(arrowKeys)).thenReturn(null);
+
         arrowKeys.add(new com.googlecode.lanterna.input.KeyStroke(KeyType.ArrowUp));
         Assertions.assertEquals(new ArrayList<>(),attackAction.processAction(arrowKeys, player));
 
@@ -56,6 +60,9 @@ public class AttackActionTest {
         Assertions.assertEquals(new ArrayList<>(),attackAction.processAction(arrowKeys, player));
 
         arrowKeys.clear();
+
+
+        Mockito.when(inputUtils.getDirection(arrowKeys)).thenReturn(true);
 
         arrowKeys.add(new com.googlecode.lanterna.input.KeyStroke(KeyType.ArrowRight));
 
@@ -67,6 +74,8 @@ public class AttackActionTest {
         Assertions.assertTrue(((ItemEventExecutorEvent) coringa.get(0)).getItem().getInteraction() instanceof DefaultAttackItem);
 
         arrowKeys.clear();
+
+        Mockito.when(inputUtils.getDirection(arrowKeys)).thenReturn(false);
 
         arrowKeys.add(new com.googlecode.lanterna.input.KeyStroke(KeyType.ArrowLeft));
 
@@ -84,6 +93,8 @@ public class AttackActionTest {
         Mockito.when(item.getInteraction()).thenReturn(swordItemInteraction);
         Mockito.when(inventory.getSelectedItem()).thenReturn(item);
 
+        Mockito.when(inputUtils.getDirection(arrowKeys)).thenReturn(true);
+
         arrowKeys.add(new com.googlecode.lanterna.input.KeyStroke(KeyType.ArrowRight));
 
         coringa = attackAction.processAction(arrowKeys, player);
@@ -93,6 +104,9 @@ public class AttackActionTest {
         Assertions.assertTrue(((ItemEventExecutorEvent) coringa.get(0)).getItem().getInteraction() instanceof SwordItemInteraction);
 
         arrowKeys.clear();
+
+
+        Mockito.when(inputUtils.getDirection(arrowKeys)).thenReturn(false);
 
         arrowKeys.add(new com.googlecode.lanterna.input.KeyStroke(KeyType.ArrowLeft));
 
