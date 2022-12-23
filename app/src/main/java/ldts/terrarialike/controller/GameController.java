@@ -8,12 +8,12 @@ import ldts.terrarialike.model.Enemy;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
 import ldts.terrarialike.statemanager.StateManager;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static ldts.terrarialike.utils.WorldUtils.findMaxHeightOfXPos;
 
 public class GameController extends AbstractStateController{
 
@@ -29,19 +29,22 @@ public class GameController extends AbstractStateController{
 
     private EnemyGeneratorFactory enemyGeneratorFactory;
 
+    private WorldUtils worldUtils;
+
     public GameController(StateManager stateManager, World world, GUILanterna gui) {
         super(stateManager);
         this.world = world;
+        this.worldUtils = new WorldUtils();
         this.gameEventManager = new GameEventManager();
         this.inputHandler = new InputHandler(gui,stateManager,world.getPlayer());
         this.worldGenerator = new WorldGenerator(world.getSeed());
         this.playerController = new PlayerController(world.getPlayer());
-        this.enemyGeneratorFactory = new EnemyGeneratorFactory(world);
+        this.enemyGeneratorFactory = new EnemyGeneratorFactory(world,worldUtils);
         this.aiControllerHashMap = new HashMap<>();
         for(int i = -30; i <= 30; i++){
             world.tryAddChunk(worldGenerator.generateChunk(i));
         }
-        Integer yPos = findMaxHeightOfXPos(0,world);
+        Integer yPos = worldUtils.findMaxHeightOfXPos(0,world);
         try {
             this.world.getPlayer().setPosition(new Position(0, yPos+1));
         } catch (InvalidPositionException e) {
@@ -61,7 +64,7 @@ public class GameController extends AbstractStateController{
     public void tick() {
         gameEventManager.addMultipleGameEvents(inputHandler.handleInput());
         gameEventManager.executeAllEvents(world);
-        playerController.tick(world);
+        playerController.tick(world, worldUtils);
         List<Enemy> enemyToRemoveList = new ArrayList<>();
         for(Enemy e : world.getEnemiesList()){
             AIController aiController = new AIController(e);
@@ -75,7 +78,7 @@ public class GameController extends AbstractStateController{
                 aiControllerHashMap.put(aiController,aiController);
                 aiControllerHash = aiController;
             }
-            aiController.tick(world);
+            aiController.tick(world, worldUtils);
         }
         if(world.getPlayer().getHp() == 0){
             System.out.println("Player died :( - exiting game...");

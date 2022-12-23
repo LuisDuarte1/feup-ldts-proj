@@ -3,6 +3,7 @@ package ldts.terrarialike.controller;
 
 import ldts.terrarialike.exceptions.GameEventsIsNullException;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,15 @@ public class GameEventManager {
     List<GameEvent> gameEvents;
     List<GameEvent> nextFrameGameEvent;
 
+    private WorldUtils worldUtils;
 
     GameEventManager () {
 
         gameEvents = new ArrayList<GameEvent>();
 
         nextFrameGameEvent = new ArrayList<GameEvent>();
+
+        worldUtils = new WorldUtils();
 
     }
 
@@ -63,7 +67,7 @@ public class GameEventManager {
 
         for( int i = 0; i < gameEvents.size(); i++){
 
-            nextEvents = gameEvents.get(i).execute(world);
+            nextEvents = gameEvents.get(i).execute(world, worldUtils);
 
             nextFrameGameEvent.addAll(nextEvents);
 

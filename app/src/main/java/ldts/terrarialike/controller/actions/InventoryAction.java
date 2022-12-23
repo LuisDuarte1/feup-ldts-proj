@@ -7,6 +7,7 @@ import ldts.terrarialike.exceptions.NotInitializedStateException;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.statemanager.State;
 import ldts.terrarialike.statemanager.StateManager;
+import ldts.terrarialike.utils.InputUtils;
 import ldts.terrarialike.view.menus.InventoryMenuView;
 
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ public class InventoryAction extends AbstractAction {
     private StateManager stateManager;
     private GUILanterna guiLanterna;
 
-    public InventoryAction(StateManager stateManager, GUILanterna guiLanterna) {
-        super(false);
+    public InventoryAction(StateManager stateManager, GUILanterna guiLanterna, InputUtils inputUtils) {
+        super(false, inputUtils);
         this.stateManager = stateManager;
         this.guiLanterna = guiLanterna;
     }

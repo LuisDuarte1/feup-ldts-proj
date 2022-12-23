@@ -2,11 +2,11 @@ package ldts.terrarialike.controller.generators;
 
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.model.*;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.List;
 import java.util.Random;
 
-import static ldts.terrarialike.utils.WorldUtils.findMaxHeightOfXPos;
 import static ldts.terrarialike.utils.WorldUtils.getChunkID;
 
 public class EnemyGeneratorFactory {
@@ -18,10 +18,13 @@ public class EnemyGeneratorFactory {
     private World world;
     private Random random;
 
+    private WorldUtils worldUtils;
 
-    public EnemyGeneratorFactory(World world) {
+
+    public EnemyGeneratorFactory(World world, WorldUtils worldUtils) {
         this.world = world;
         this.random = new Random();
+        this.worldUtils = worldUtils;
     }
 
     private List<Enemy> getMobsNearPlayer(){
@@ -44,7 +47,7 @@ public class EnemyGeneratorFactory {
         }
         Block randomBlock = desiredChunk.getBlocks().get(random.nextInt(0, desiredChunk.getBlocks().size()));
         int xPos = randomBlock.getPosition().getX();
-        int yPos = findMaxHeightOfXPos(xPos, world) + 1;
+        int yPos = worldUtils.findMaxHeightOfXPos(xPos, world) + 1;
 
         if(desiredChunk == null) throw new RuntimeException("Couldn't find chunkID");
         if(megaProb <= 0.10){

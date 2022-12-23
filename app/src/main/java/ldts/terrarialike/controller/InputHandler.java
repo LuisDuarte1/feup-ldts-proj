@@ -7,6 +7,7 @@ import ldts.terrarialike.controller.actions.*;
 import ldts.terrarialike.exceptions.InvalidIndexException;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.statemanager.StateManager;
+import ldts.terrarialike.utils.InputUtils;
 import ldts.terrarialike.utils.Pair;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,21 +33,21 @@ public class InputHandler {
         this.player = player;
         this.guiLanterna = guiLanterna;
         actionsMap.put(new KeyStroke('a', false, false),
-                new Pair<>(new UseAction(), false));
+                new Pair<>(new UseAction(new InputUtils()), false));
 
         actionsMap.put(new KeyStroke('d', false, false),
-                new Pair<>(new DestroyAction(), false));
+                new Pair<>(new DestroyAction(new InputUtils()), false));
 
         actionsMap.put(new KeyStroke('s', false, false),
-                new Pair<>(new AttackAction(), false));
+                new Pair<>(new AttackAction(new InputUtils()), false));
         actionsMap.put(new KeyStroke('i', false, false),
-                new Pair<>(new InventoryAction(stateManager, guiLanterna), false));
+                new Pair<>(new InventoryAction(stateManager, guiLanterna, new InputUtils()), false));
 
         actionsMap.put(new KeyStroke('c', false, false),
-                new Pair<>(new CraftingAction(stateManager, guiLanterna), false));
+                new Pair<>(new CraftingAction(stateManager, guiLanterna, new InputUtils()), false));
 
         actionsMap.put(new KeyStroke('e', false, false),
-                new Pair<>(new EmptyAction(), false));
+                new Pair<>(new EmptyAction(new InputUtils()), false));
     }
 
     private void resetActions(){

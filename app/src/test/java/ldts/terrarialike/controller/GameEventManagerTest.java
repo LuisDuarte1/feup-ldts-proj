@@ -1,6 +1,7 @@
 package ldts.terrarialike.controller;
 
 import ldts.terrarialike.exceptions.GameEventsIsNullException;
+import ldts.terrarialike.model.World;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -66,6 +67,8 @@ public class GameEventManagerTest {
 
         gameEventManagerTest = new GameEventManager();
 
+        World world = Mockito.mock(World.class);
+
         gameEvent = Mockito.mock(GameEvent.class);
         GameEvent gameEvent1 = Mockito.mock(GameEvent.class);
         GameEvent gameEvent2 = Mockito.mock(GameEvent.class);
@@ -89,11 +92,11 @@ public class GameEventManagerTest {
 
         gameEventManagerTest.setGameEvents(gameEventstest);
 
-        Mockito.when(gameEvent.execute(Mockito.any())).thenReturn(gameEvents);
-        Mockito.when(gameEvent1.execute(Mockito.any())).thenReturn(gameEvents1);
-        Mockito.when(gameEvent2.execute(Mockito.any())).thenReturn(gameEvents2);
+        Mockito.when(gameEvent.execute(Mockito.any(), Mockito.any())).thenReturn(gameEvents);
+        Mockito.when(gameEvent1.execute(Mockito.any(), Mockito.any())).thenReturn(gameEvents1);
+        Mockito.when(gameEvent2.execute(Mockito.any(), Mockito.any())).thenReturn(gameEvents2);
 
-        gameEventManagerTest.executeAllEvents(Mockito.any());
+        gameEventManagerTest.executeAllEvents(world);
 
             Assertions.assertEquals(3,gameEventManagerTest.gameEvents.size());
             Assertions.assertEquals(gameEvent5,gameEventManagerTest.gameEvents.get(0));

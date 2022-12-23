@@ -3,6 +3,7 @@ package ldts.terrarialike.controller.itemInteractions.direction;
 import ldts.terrarialike.controller.GameEvent;
 import ldts.terrarialike.controller.itemInteractions.DirectionItemInteraction;
 import ldts.terrarialike.model.*;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class SwordItemInteraction extends DirectionItemInteraction {
         }).toList();
     }
     @Override
-    public List<GameEvent> execute(World one, InteractionType interactionType, Item item) {
+    public List<GameEvent> execute(World one, InteractionType interactionType, Item item, WorldUtils worldUtils) {
         if(interactionType == InteractionType.ATTACK){
             if(direction == null){
                 System.err.println("DefaultAttackItem: no direction set.");
