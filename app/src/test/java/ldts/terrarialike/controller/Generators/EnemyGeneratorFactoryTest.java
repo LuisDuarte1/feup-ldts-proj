@@ -6,6 +6,7 @@ import ldts.terrarialike.exceptions.InvalidSizeException;
 import ldts.terrarialike.model.Chunk;
 import ldts.terrarialike.model.Skeleton;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import java.util.List;
 public class EnemyGeneratorFactoryTest {
 
     World world;
+    WorldUtils worldUtils;
 
     @BeforeEach
 
@@ -33,8 +35,8 @@ public class EnemyGeneratorFactoryTest {
 
     public void generateEnemyTest() throws InvalidSizeException, InvalidPositionException {
 
-
-            EnemyGeneratorFactory enemyGeneratorFactory = new EnemyGeneratorFactory(world);
+            worldUtils = Mockito.mock(WorldUtils.class);
+            EnemyGeneratorFactory enemyGeneratorFactory = new EnemyGeneratorFactory(world,worldUtils);
 
             List<Chunk> chunks = world.getChunks();
 
@@ -68,7 +70,8 @@ public class EnemyGeneratorFactoryTest {
 
     public void generateInicialEnemiesTest() throws InvalidSizeException, InvalidPositionException {
 
-        EnemyGeneratorFactory enemyGeneratorFactory = new EnemyGeneratorFactory(world);
+        worldUtils = Mockito.mock(WorldUtils.class);
+        EnemyGeneratorFactory enemyGeneratorFactory = new EnemyGeneratorFactory(world,worldUtils);
 
         enemyGeneratorFactory.generateInitialEnemies();
 
