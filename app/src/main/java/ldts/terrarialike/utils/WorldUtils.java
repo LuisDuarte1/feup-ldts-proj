@@ -20,7 +20,7 @@ public class WorldUtils {
         return desiredChunkID;
     }
 
-    public static Block getBlock(Position blockPosition, World world){
+    public Block getBlock(Position blockPosition, World world){
         int desiredChunkID = getChunkID(blockPosition.getX());
         Chunk desiredChunk = null;
         //we have to do it this way because we can't guarentee that chunks will always be
@@ -41,7 +41,7 @@ public class WorldUtils {
         return null;
     }
 
-    public static Entity getEntity(Position entityPosition, World world) {
+    public Entity getEntity(Position entityPosition, World world) {
         if (world.getPlayer().getPosition().equals(entityPosition)) {
             return world.getPlayer();
         }
@@ -53,7 +53,7 @@ public class WorldUtils {
         return null;
     }
 
-    public static Integer findMaxHeightOfXPos(Integer xPos, World world) {
+    public Integer findMaxHeightOfXPos(Integer xPos, World world) {
         int maxZeroPosition = -1;
         int chunkID = getChunkID(xPos);
         Chunk desiredChunk = null;

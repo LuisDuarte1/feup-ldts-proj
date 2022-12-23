@@ -8,6 +8,7 @@ import ldts.terrarialike.model.Inventory;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.ItemStack;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -44,10 +45,11 @@ public class InventoryEventTest {
             InventoryEvent inventoryEvent = new InventoryEvent(invent1, invent2, 4, 1);
 
             World world = Mockito.mock(World.class);
+            WorldUtils worldUtils = Mockito.mock(WorldUtils.class);
 
 
             // Run the test
-            List<GameEvent> result = inventoryEvent.execute(world);
+            List<GameEvent> result = inventoryEvent.execute(world, worldUtils);
 
 
 
@@ -60,7 +62,7 @@ public class InventoryEventTest {
 
             InventoryEvent inventoryEvent1 = new InventoryEvent(invent1, invent2, 3, 0);
 
-            List<GameEvent> result1 = inventoryEvent1.execute(world);
+            List<GameEvent> result1 = inventoryEvent1.execute(world, worldUtils);
 
             Assertions.assertEquals(0,invent1.getInventory().size());
             Assertions.assertEquals(3, invent2.getInventory().size());

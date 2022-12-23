@@ -8,20 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import ldts.terrarialike.exceptions.InvalidColorStringException;
 
-/*
-public class BlockTest {
-<<<<<<< HEAD
-=======
-    //FIXME: add tests for Block
->>>>>>> origin/main
-    /*
+public class BlockInfoTest {
     @Test
    public void validBlockColorConstructor(){
         Position p = mock(Position.class);
         try {
-            Block b = new Block(p, "#ffffff", 'a');
-            assertEquals(p, b.getPosition());
-            assertEquals("#ffffff", b.getBackgroundColor());
+            BlockInfo b = new BlockInfo(1, BlockType.DIRT, "#ffffff", 'a');
+            assertEquals("#ffffff", b.getBackgroundcolor());
+            assertEquals("#ffffff", b.getForegroundColor());
             assertEquals('a', b.getRepresentation_char());
         } catch (InvalidColorStringException e) {
             fail(e.getMessage());
@@ -30,9 +24,8 @@ public class BlockTest {
 
     @Test
     public void doesntStartWithHastasgColorTest(){
-        Position p = mock(Position.class);
         try {
-            Block b = new Block(p, "fff#fff", 'a');
+            BlockInfo b = new BlockInfo(1, BlockType.DIRT, "fff#fff", 'a');
             fail("InvalidColorStringException not thrown...");
         } catch (InvalidColorStringException e) {
 
@@ -43,14 +36,11 @@ public class BlockTest {
     public void incorretLengthColorTest(){
         Position p = mock(Position.class);
         try {
-            Block b = new Block(p, "#fffffff", 'a');
+            BlockInfo b = new BlockInfo(1, BlockType.DIRT, "#fffffff", 'a');
+
             fail("InvalidColorStringException not thrown...");
         } catch (InvalidColorStringException e) {
-            
+
         }
-<<<<<<< HEAD
     }
-
-
-=======
-    }*/
+}

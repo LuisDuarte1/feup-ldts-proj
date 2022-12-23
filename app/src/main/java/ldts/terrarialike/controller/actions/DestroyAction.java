@@ -10,22 +10,22 @@ import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
+import ldts.terrarialike.utils.InputUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ldts.terrarialike.utils.InputUtils.getDesiredPosition;
 
 public class DestroyAction extends AbstractAction {
-    public DestroyAction() {
-        super(true);
+    public DestroyAction(InputUtils inputUtils) {
+        super(true, inputUtils);
     }
 
     @Override
     public List<GameEvent> processAction(List<KeyStroke> arrowKeys, Player player) {
         Position desiredPosition = null;
         try {
-            desiredPosition = getDesiredPosition(arrowKeys, player);
+            desiredPosition = inputUtils.getDesiredPosition(arrowKeys, player);
         } catch (InvalidPositionException e) {
             System.err.println("Invalid position while getting the desiredPosition...");
             return new ArrayList<>();

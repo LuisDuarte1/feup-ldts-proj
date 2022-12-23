@@ -5,13 +5,12 @@ import ldts.terrarialike.model.Enemy;
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.Temporal;
 
-import static ldts.terrarialike.utils.WorldUtils.getBlock;
-import static ldts.terrarialike.utils.WorldUtils.getEntity;
 
 public class FollowPlayerAI implements EnemyAI {
 
@@ -23,12 +22,14 @@ public class FollowPlayerAI implements EnemyAI {
     private Player player;
     private double range;
 
+    private WorldUtils worldUtils;
     private Temporal lastTimeAttacked;
 
-    public FollowPlayerAI(Player player, int range) {
+    public FollowPlayerAI(Player player, int range, WorldUtils worldUtils) {
         this.player = player;
         this.range = range;
         this.lastTimeAttacked = Instant.now();
+        this.worldUtils = worldUtils;
     }
 
     @Override
@@ -44,13 +45,13 @@ public class FollowPlayerAI implements EnemyAI {
             if(player.getPosition().getX() < thisEnemy.getPosition().getX()) {
                 try {
                     moveLeft(thisEnemy, world);
-                } catch (InvalidPositionException e) {
+                } catch (InvalidPositionException ignored) {
                 }
             }
             else if(player.getPosition().getX() > thisEnemy.getPosition().getX()) {
                 try {
                     moveRight(thisEnemy, world);
-                } catch (InvalidPositionException e) {
+                } catch (InvalidPositionException ignored) {
                 }
             }
 
@@ -65,11 +66,15 @@ public class FollowPlayerAI implements EnemyAI {
     private void moveRight(Enemy thisEnemy, World world) throws InvalidPositionException {
         Position right = new Position(thisEnemy.getPosition().getX() + 1, thisEnemy.getPosition().getY());
         Position upRight =  new Position(thisEnemy.getPosition().getX() + 1, thisEnemy.getPosition().getY() + 1);
+        setNewPosition(thisEnemy, world, right, upRight, worldUtils);
+    }
+
+    private static void setNewPosition(Enemy thisEnemy, World world, Position right, Position upRight, WorldUtils worldUtils) throws InvalidPositionException {
         Position up = new Position(thisEnemy.getPosition().getX(), thisEnemy.getPosition().getY() + 1);
-        if (getBlock(right, world) == null && getEntity(right, world) == null) {
+        if (worldUtils.getBlock(right, world) == null && worldUtils.getEntity(right, world) == null) {
             thisEnemy.setPosition(right);
         }
-        else if (getBlock(upRight, world) == null && getEntity(upRight, world) == null && getBlock(up, world) == null) {
+        else if (worldUtils.getBlock(upRight, world) == null && worldUtils.getEntity(upRight, world) == null && worldUtils.getBlock(up, world) == null) {
             thisEnemy.setPosition(upRight);
         }
     }
@@ -77,13 +82,7 @@ public class FollowPlayerAI implements EnemyAI {
     private void moveLeft(Enemy thisEnemy, World world) throws InvalidPositionException {
         Position left = new Position(thisEnemy.getPosition().getX() - 1, thisEnemy.getPosition().getY());
         Position upLeft =  new Position(thisEnemy.getPosition().getX() - 1, thisEnemy.getPosition().getY() + 1);
-        Position up = new Position(thisEnemy.getPosition().getX(), thisEnemy.getPosition().getY() + 1);
-        if (getBlock(left, world) == null && getEntity(left, world) == null) {
-            thisEnemy.setPosition(left);
-        }
-        else if (getBlock(upLeft, world) == null && getEntity(upLeft, world) == null && getBlock(up, world) == null) {
-            thisEnemy.setPosition(upLeft);
-        }
+        setNewPosition(thisEnemy, world, left, upLeft, worldUtils);
     }
 
 }

@@ -9,15 +9,15 @@ import ldts.terrarialike.controller.itemInteractions.direction.DefaultAttackItem
 import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.Player;
+import ldts.terrarialike.utils.InputUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ldts.terrarialike.utils.InputUtils.getDirection;
 
 public class AttackAction extends AbstractAction {
-    public AttackAction() {
-        super(true);
+    public AttackAction(InputUtils inputUtils) {
+        super(true, inputUtils);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class AttackAction extends AbstractAction {
         if(arrowKeys.size() != 1){
             return new ArrayList<>();
         }
-        Boolean direction = getDirection(arrowKeys);
+        Boolean direction = inputUtils.getDirection(arrowKeys);
         if(direction == null) return  new ArrayList<>();
         Item selectedItem = player.getInventory().getSelectedItem();
         ItemEventExecutorEvent itemEventExecutorEvent = null;

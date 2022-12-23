@@ -6,11 +6,11 @@ import ldts.terrarialike.exceptions.BlockNotFoundException;
 import ldts.terrarialike.exceptions.InvalidQuantityException;
 import ldts.terrarialike.exceptions.InventoryFullException;
 import ldts.terrarialike.model.*;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ldts.terrarialike.utils.WorldUtils.getBlock;
 import static ldts.terrarialike.utils.WorldUtils.getChunkID;
 
 public class PickaxeItemInteraction extends PositionItemInteraction {
@@ -21,7 +21,8 @@ public class PickaxeItemInteraction extends PositionItemInteraction {
     }
 
     @Override
-    public List<GameEvent> execute(World one, InteractionType interactionType, Item item) {        if(interactionType == InteractionType.DESTROY){
+    public List<GameEvent> execute(World one, InteractionType interactionType, Item item, WorldUtils worldUtils) {
+        if(interactionType == InteractionType.DESTROY){
         if(desiredPosition == null){
             System.err.println("DefaultItemInteraction Error: no desiredPosition set.");
             return new ArrayList<>();
@@ -39,7 +40,7 @@ public class PickaxeItemInteraction extends PositionItemInteraction {
         }
 
         try {
-            Block desiredBlock = getBlock(desiredPosition, one);
+            Block desiredBlock = worldUtils.getBlock(desiredPosition, one);
             Item droppedItem = desiredBlock.getBlockInfo().getToDropItem();
             if(desiredBlock.getBlockInfo().getDurability() > durability){
                 one.getPlayer().getPlayerLogs()

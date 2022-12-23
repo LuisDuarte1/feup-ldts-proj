@@ -9,7 +9,7 @@ import ldts.terrarialike.model.Position;
 import java.util.List;
 
 public class InputUtils {
-    public static Boolean getDirection(List<KeyStroke> arrowKeys) {
+    public Boolean getDirection(List<KeyStroke> arrowKeys) {
         switch (arrowKeys.get(0).getKeyType()){
             case ArrowLeft -> {
                 return false;
@@ -23,7 +23,7 @@ public class InputUtils {
         }
     }
 
-    public static Position getDesiredPosition(List<KeyStroke> arrowKeys, Player player) throws InvalidPositionException {
+    public Position getDesiredPosition(List<KeyStroke> arrowKeys, Player player) throws InvalidPositionException {
         if(arrowKeys.size() == 1){
             switch (arrowKeys.get(0).getKeyType()){
                 case ArrowUp -> {
