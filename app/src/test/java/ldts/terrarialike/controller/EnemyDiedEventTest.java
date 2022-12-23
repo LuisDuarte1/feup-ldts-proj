@@ -6,6 +6,7 @@ import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.InvalidSizeException;
 import ldts.terrarialike.model.Enemy;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,6 +25,7 @@ public class EnemyDiedEventTest {
         EnemyDiedEvent enemyDiedEvent = new EnemyDiedEvent(enemy);
 
         World world = new World();
+        WorldUtils worldUtils = Mockito.mock(WorldUtils.class);
 
         List<Enemy> enemies = new ArrayList<Enemy>();
 
@@ -31,7 +33,7 @@ public class EnemyDiedEventTest {
 
         world.setEnemiesList(enemies);
 
-        List<GameEvent> list = enemyDiedEvent.execute(world);
+        List<GameEvent> list = enemyDiedEvent.execute(world,worldUtils);
 
         Assertions.assertEquals(0, world.getEnemiesList().size());
 
