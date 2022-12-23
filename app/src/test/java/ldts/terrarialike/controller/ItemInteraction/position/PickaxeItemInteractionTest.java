@@ -1,32 +1,148 @@
 package ldts.terrarialike.controller.ItemInteraction.position;
 
+import ldts.terrarialike.controller.GameEvent;
+import ldts.terrarialike.controller.itemInteractions.direction.SwordItemInteraction;
 import ldts.terrarialike.controller.itemInteractions.position.PickaxeItemInteraction;
-import ldts.terrarialike.exceptions.InvalidPositionException;
-import ldts.terrarialike.exceptions.InvalidSizeException;
-import ldts.terrarialike.model.InteractionType;
-import ldts.terrarialike.model.Item;
-import ldts.terrarialike.model.World;
+import ldts.terrarialike.exceptions.*;
+import ldts.terrarialike.model.*;
+import ldts.terrarialike.utils.WorldUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PickaxeItemInteractionTest {
 
     @Test
 
-    public void testExecute() throws InvalidSizeException, InvalidPositionException {
+    public void testExecute() throws InvalidSizeException, InvalidPositionException, BlockNotFoundException, InvalidQuantityException, InventoryFullException {
+
+        WorldUtils worldUtils = Mockito.mock(WorldUtils.class);
+        World world = Mockito.mock(World.class);
+
+        Position position = Mockito.mock(Position.class);
+
+        Mockito.when(position.getX()).thenReturn(0);
+        Mockito.when(position.getY()).thenReturn(0);
+
+        Block block = Mockito.mock(Block.class);
+
+
+        List<Chunk> chunks = new ArrayList<>();
+        Chunk chunk = Mockito.mock(Chunk.class);
+
+        chunks.add(chunk);
+
+        Mockito.when(chunk.getChunkID()).thenReturn(0);
+
+
+        Mockito.when(world.getChunks()).thenReturn(chunks);
+        // chunkID = 0
+        Mockito.when(worldUtils.getBlock(position, world)).thenReturn(block);
 
         Item item = Mockito.mock(Item.class);
-        World world = new World();
+        Item item1 = Mockito.mock(Item.class);
 
-        PickaxeItemInteraction pickaxeItemInteraction = new PickaxeItemInteraction(1);
+        BlockInfo blockInfo = Mockito.mock(BlockInfo.class);
+
+        Mockito.when(block.getBlockInfo()).thenReturn(blockInfo);
+
+        Mockito.when(block.getBlockInfo().getToDropItem()).thenReturn(item);
+
+        Mockito.when(block.getBlockInfo().getDurability()).thenReturn(6);
+
+        Inventory inventory = Mockito.mock(Inventory.class);
+
+        Player player = Mockito.mock(Player.class);
+        Mockito.when(world.getPlayer()).thenReturn(player);
+        Mockito.when(player.getInventory()).thenReturn(inventory);
 
 
-        Assertions.assertEquals(new ArrayList<>(),pickaxeItemInteraction.execute(world, InteractionType.ATTACK, item));
-        Assertions.assertEquals(new ArrayList<>(),pickaxeItemInteraction.execute(world, InteractionType.DEFENSE, item));
-        Assertions.assertEquals(new ArrayList<>(),pickaxeItemInteraction.execute(world, InteractionType.USE, item));
+        PlayerLogs playerLogs = Mockito.mock(PlayerLogs.class);
+        Mockito.when(player.getPlayerLogs()).thenReturn(playerLogs);
+
+        PickaxeItemInteraction pickaxeItemInteraction = new PickaxeItemInteraction(5);
+
+        pickaxeItemInteraction.setDesiredPosition(position);
+
+        List<GameEvent> gameEvents = pickaxeItemInteraction.execute(world, InteractionType.DESTROY, item1, worldUtils);
+
+        Assertions.assertEquals(0, gameEvents.size());
+        Mockito.verify(chunk, Mockito.times(0)).removeBlock(position);
+
+    }
+
+    @Test
+
+    public void testExecute2() throws InvalidSizeException, InvalidPositionException, BlockNotFoundException, InvalidQuantityException, InventoryFullException {
+
+        WorldUtils worldUtils = Mockito.mock(WorldUtils.class);
+        World world = Mockito.mock(World.class);
+
+        Position position = Mockito.mock(Position.class);
+
+        Mockito.when(position.getX()).thenReturn(0);
+        Mockito.when(position.getY()).thenReturn(0);
+
+        Block block = Mockito.mock(Block.class);
+
+
+        List<Chunk> chunks = new ArrayList<>();
+        Chunk chunk = Mockito.mock(Chunk.class);
+
+        chunks.add(chunk);
+
+        Mockito.when(chunk.getChunkID()).thenReturn(0);
+
+
+        Mockito.when(world.getChunks()).thenReturn(chunks);
+        // chunkID = 0
+        Mockito.when(worldUtils.getBlock(position,world)).thenReturn(block);
+
+        Item item = Mockito.mock(Item.class);
+        Item item1 = Mockito.mock(Item.class);
+
+        BlockInfo blockInfo = Mockito.mock(BlockInfo.class);
+
+        Mockito.when(block.getBlockInfo()).thenReturn(blockInfo);
+
+        Mockito.when(block.getBlockInfo().getToDropItem()).thenReturn(item);
+
+        Mockito.when(block.getBlockInfo().getDurability()).thenReturn(6);
+
+        Inventory inventory = Mockito.mock(Inventory.class);
+
+        Player player = Mockito.mock(Player.class);
+        Mockito.when(world.getPlayer()).thenReturn(player);
+        Mockito.when(player.getInventory()).thenReturn(inventory);
+
+
+        PlayerLogs playerLogs = Mockito.mock(PlayerLogs.class);
+        Mockito.when(player.getPlayerLogs()).thenReturn(playerLogs);
+
+        PickaxeItemInteraction pickaxeItemInteraction = new PickaxeItemInteraction(8);
+
+        pickaxeItemInteraction.setDesiredPosition(position);
+
+        List<GameEvent> gameEvents = pickaxeItemInteraction.execute(world,InteractionType.DESTROY,item1, worldUtils);
+
+        Mockito.verify(chunk,Mockito.times(1)).removeBlock(position);
+        Mockito.verify(inventory,Mockito.times(1)).add(item,1);
+        Mockito.verify(playerLogs,Mockito.times(1)).addLogString(Mockito.anyString());
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
