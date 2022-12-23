@@ -30,11 +30,17 @@ public class WorldGenerator {
             result[i] = start + i * (end-start)/count;
         }
 
-        
+
         return result;
 
     }
-    
+
+    public WorldGenerator(SimpleNoise1D noise, BlockFactory blockFactory, TreeFactory treeFactory) {
+        this.noise = noise;
+        this.blockFactory = blockFactory;
+        this.treeFactory = treeFactory;
+    }
+
 
     public WorldGenerator(long worldSeed){
         this.noise = new SimpleNoise1D(worldSeed);

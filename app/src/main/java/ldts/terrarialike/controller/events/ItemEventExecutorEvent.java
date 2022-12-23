@@ -22,4 +22,17 @@ public class ItemEventExecutorEvent implements GameEvent{
     public List<GameEvent> execute(World world, WorldUtils worldUtils) {
         return item.getInteraction().execute(world, interactionType, item, worldUtils);
     }
+
+//setters and getters
+
+    public InteractionType getInteractionType() {
+        return interactionType;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+
 }
+

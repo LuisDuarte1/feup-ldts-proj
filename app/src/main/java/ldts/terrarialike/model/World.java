@@ -8,7 +8,7 @@ import java.util.Random;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.InvalidSizeException;
 
-public class World {
+public class    World {
     private List<Chunk> chunksList = new ArrayList<>();
     private int seed = 0;
 
@@ -81,4 +81,9 @@ public class World {
         });
     }
 
+    public void setEnemiesList(List<Enemy> List) {
+
+        enemiesList = List;
+
+    }
 }

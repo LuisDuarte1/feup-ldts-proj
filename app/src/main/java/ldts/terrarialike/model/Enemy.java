@@ -28,4 +28,6 @@ public abstract class  Enemy extends Entity{
     public void setAi(EnemyAI ai) {
         this.ai = ai;
     }
+
+
 }

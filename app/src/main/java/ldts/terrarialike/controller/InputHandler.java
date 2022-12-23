@@ -17,7 +17,7 @@ import static ldts.terrarialike.utils.InputUtils.*;
 
 public class InputHandler {
 
-    private static final HashMap<KeyStroke, Pair<AbstractAction,Boolean>> actionsMap = new HashMap<>();
+    private HashMap<KeyStroke, Pair<AbstractAction,Boolean>> actionsMap = new HashMap<>();
 
 
     private final Player player;
@@ -115,5 +115,13 @@ public class InputHandler {
 
 
         return gameEvents;
+    }
+
+    public HashMap<KeyStroke, Pair<AbstractAction, Boolean>> getActionsMap() {
+        return actionsMap;
+    }
+
+    public void setActionsMap(HashMap<KeyStroke, Pair<AbstractAction, Boolean>> actionsMap) {
+        this.actionsMap = actionsMap;
     }
 }

@@ -3,6 +3,7 @@ package ldts.terrarialike.statemanager;
 import ldts.terrarialike.exceptions.NotInitializedStateException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 ///The state manager is a simple state machine but it saves previous state's memory, by default.
 ///It's an improvement compared to the normal state machine, because if we pause the game and want to transition to
@@ -30,7 +31,7 @@ public class StateManager {
             states.remove(t);
     }
 
-    public ArrayList<State> getStates(){
+    public List<State> getStates(){
         //TODO: maybe create a copy of states? To avoid direct mutation
         return states;
     }

@@ -31,7 +31,7 @@ public class DefaultAttackItem extends DirectionItemInteraction {
             int count = 0;
             for(Enemy enemy : findNearEnemies(one)){
                 if(direction){
-                    if(enemy.getPosition().getX() >= one.getPlayer().getPosition().getX()){
+                    if(enemy.getPosition().getX() >= one.getPlayer().getPosition().getX()){  // z < p -> z
                         enemy.setHp(enemy.getHp()-DAMAGE);
                         count++;
 
