@@ -19,7 +19,7 @@ import java.util.List;
 
 import static ldts.terrarialike.utils.WorldUtils.getChunkID;
 
-public class UseBlockItemInteraction extends PositionItemInteraction {
+public class  UseBlockItemInteraction extends PositionItemInteraction {
 
     private BlockInfo blockInfo;
 
