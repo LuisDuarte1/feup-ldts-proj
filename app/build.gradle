@@ -10,6 +10,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     id 'info.solidsoft.pitest' version '1.9.0'
+    id 'jacoco'
 }
 
 repositories {
@@ -28,6 +29,12 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.0.1-jre'
     implementation group: 'com.googlecode.lanterna', name:'lanterna', version: '3.1.1'
+}
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
 }
 
 application {
