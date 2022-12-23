@@ -14,8 +14,8 @@ import java.time.temporal.Temporal;
 
 public class FollowPlayerAI implements EnemyAI {
 
-    private static final int WAIT_FRAMES = 4;
-    private static final Duration ATTACK_TIMEOUT = Duration.ofSeconds(5);
+    public static final int WAIT_FRAMES = 3;
+    public static final Duration ATTACK_TIMEOUT = Duration.ofSeconds(5);
 
 
     private int frameTimeout;
@@ -36,7 +36,7 @@ public class FollowPlayerAI implements EnemyAI {
     public void tick(Enemy thisEnemy, World world) {
         frameTimeout = (frameTimeout + 1) % WAIT_FRAMES;
         Instant ripTimeout = (Instant) lastTimeAttacked.plus(ATTACK_TIMEOUT);
-        if(frameTimeout % WAIT_FRAMES == 0){
+        if(frameTimeout % WAIT_FRAMES != 0){
             return;
         }
         double distance = Math.sqrt(Math.pow(player.getPosition().getX() - thisEnemy.getPosition().getX(), 2) +

@@ -10,6 +10,8 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 public class ChunkTest {
 
 
@@ -34,22 +36,10 @@ public class ChunkTest {
         Assertions.assertEquals(list, chunk.getBlocks());
     }
 
-    public void setBlocktest(){
 
-        Chunk chunk = new Chunk(0);
-        Block block = Mockito.mock(Block.class);
-        Block block1 = Mockito.mock(Block.class);
-        Block block2 = Mockito.mock(Block.class);
-        List<Block> list = new ArrayList<>();
-        list.add(block);
-        list.add(block1);
-        list.add(block2);
 
-        chunk.setBlocks(list);
 
-        Assertions.assertEquals(list, chunk.getBlocks());
 
-    }
     @Test
     public void getPositiontest() {
 
@@ -72,17 +62,20 @@ public class ChunkTest {
         //testing
         try {
             chunk.addBlock(block);
+            chunk.addBlock(block);
             chunk.addBlock(block2);
 
 
         } catch (InvalidPositionException e) {
-            Assertions.fail(e.getStackTrace().toString());
+            fail(e.getStackTrace().toString());
         }
+
+        Assertions.assertEquals(1,chunk.getBlocks().stream().filter((b1)->b1.equals(block)).count());
 
 
         try {
             chunk.addBlock(block1);
-            Assertions.fail("InvalidPositionException not thrown");
+            fail("InvalidPositionException not thrown");
 
         } catch (InvalidPositionException ignored) {
 
@@ -117,7 +110,7 @@ public class ChunkTest {
             Assertions.assertEquals(block, chunk.getBlocks().get(0));
             Assertions.assertEquals(block1, chunk.getBlocks().get(1));
         } catch (BlockNotFoundException e) {
-            Assertions.fail(e.getStackTrace().toString());
+            fail(e.getStackTrace().toString());
         }
     }
 
@@ -170,6 +163,22 @@ public class ChunkTest {
         Assertions.assertFalse(chunk.validCoords(block5));
         Assertions.assertFalse(chunk.validCoords(block6));
 
+
+    }
+
+    @Test
+    public void chunkEqualsTest(){
+        Chunk chunk1 = new Chunk(1);
+        Chunk chunk2 = new Chunk(1);
+        Chunk chunk3 = new Chunk(3);
+
+        Assertions.assertEquals(chunk1,chunk1);
+        Assertions.assertEquals(chunk1,chunk2);
+        Assertions.assertNotEquals(chunk1,chunk3);
+
+        if((chunk1.equals(null) || chunk1.equals(Mockito.mock(Block.class)))){
+            fail("Chunk equals method is wrong...");
+        }
 
     }
 }

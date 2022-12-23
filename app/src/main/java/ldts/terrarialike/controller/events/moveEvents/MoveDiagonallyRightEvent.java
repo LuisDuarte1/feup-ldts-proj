@@ -21,7 +21,6 @@ public class MoveDiagonallyRightEvent extends MoveEvent {
     @Override
     public List<GameEvent> execute(World world, WorldUtils worldUtils) {
 
-        List<GameEvent> list  = new ArrayList<>();
 
         Position newPosition = null;
         try {
@@ -31,10 +30,9 @@ public class MoveDiagonallyRightEvent extends MoveEvent {
                 entity.setPosition(newPosition);
             }
 
-            return list;
 
-        } catch (InvalidPositionException e) {
-            return list;
+        } catch (InvalidPositionException ignored) {
         }
+        return new ArrayList<>();
     }
 }

@@ -15,9 +15,8 @@ public class EnemyDiedEvent implements GameEvent{
     }
     @Override
     public List<GameEvent> execute(World world, WorldUtils worldUtils) {
-        List<GameEvent> list = new ArrayList<>();
         world.removeEnemy(enemy);
-        return list;
+        return new ArrayList<>();
     }
 
 }

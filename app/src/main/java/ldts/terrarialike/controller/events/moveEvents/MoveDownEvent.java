@@ -23,7 +23,6 @@ public class MoveDownEvent extends MoveEvent {
 
     public List<GameEvent> execute(World world, WorldUtils worldUtils) {
 
-        List<GameEvent> list  = new ArrayList<>();
 
         Position newPosition = null;
         try {
@@ -33,10 +32,9 @@ public class MoveDownEvent extends MoveEvent {
                 entity.setPosition(newPosition);
             }
 
-            return list;
 
         } catch (InvalidPositionException e) {
-            throw new RuntimeException(e);
         }
+        return  new ArrayList<>();
     }
 }

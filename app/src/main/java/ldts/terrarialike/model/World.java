@@ -68,7 +68,7 @@ public class World {
         return enemiesList;
     }
 
-    private void sortChunks(){
+    public void sortChunks(){
         chunksList.sort(new Comparator<Chunk>() {
             @Override
             public int compare(Chunk arg0, Chunk arg1) {
