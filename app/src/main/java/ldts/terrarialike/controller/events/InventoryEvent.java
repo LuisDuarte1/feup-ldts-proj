@@ -5,6 +5,7 @@ import ldts.terrarialike.exceptions.*;
 import ldts.terrarialike.model.Inventory;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class InventoryEvent implements GameEvent {
     }
 
     @Override
-    public List<GameEvent> execute(World world) {
+    public List<GameEvent> execute(World world, WorldUtils worldUtils) {
 
         List<GameEvent> list = new ArrayList<>();
 

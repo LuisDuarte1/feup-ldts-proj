@@ -5,16 +5,17 @@ import ldts.terrarialike.model.Block;
 import ldts.terrarialike.model.Entity;
 import ldts.terrarialike.model.Position;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.Objects;
 
-import static ldts.terrarialike.utils.WorldUtils.getBlock;
 
 public abstract class EntityController {
 
     private Integer startFallingHeight;
 
     protected Entity entity;
+
 
     public EntityController(Entity entity){
         this.entity = entity;
@@ -32,7 +33,7 @@ public abstract class EntityController {
     }
 
 
-    protected void applyGravity(World world){
+    protected void applyGravity(World world, WorldUtils worldUtils){
         Position blockBelowPosition = null;
         try {
             blockBelowPosition = new Position(entity.getPosition().getX(), entity.getPosition().getY()-1);
@@ -46,7 +47,7 @@ public abstract class EntityController {
             return;
         }
 
-        Block blockBelow = getBlock(blockBelowPosition, world);
+        Block blockBelow = worldUtils.getBlock(blockBelowPosition, world);
         if(blockBelow == null){
             entity.setPosition(blockBelowPosition);
             startFallingHeight += 1;
@@ -58,7 +59,7 @@ public abstract class EntityController {
     }
 
 
-    abstract void tick(World world);
+    abstract void tick(World world, WorldUtils worldUtils);
 
     @Override
     public boolean equals(Object o) {

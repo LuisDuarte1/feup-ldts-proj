@@ -5,6 +5,7 @@ import ldts.terrarialike.controller.itemInteractions.ItemInteraction;
 import ldts.terrarialike.model.InteractionType;
 import ldts.terrarialike.model.Item;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -21,7 +22,9 @@ public class ItemEventExecutorEventTest {
         Mockito.when(item.getInteraction()).thenReturn(itemInteraction);
         World world  = Mockito.mock(World.class);
         ItemEventExecutorEvent itemEventExecutorEvent = new ItemEventExecutorEvent(interactionType, item);
-        itemEventExecutorEvent.execute(world);
+        WorldUtils worldUtils = Mockito.mock(WorldUtils.class);
+
+        itemEventExecutorEvent.execute(world, worldUtils);
         Mockito.verify(item, Mockito.times(1)).getInteraction();
     }
 

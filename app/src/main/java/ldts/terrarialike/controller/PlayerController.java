@@ -2,6 +2,7 @@ package ldts.terrarialike.controller;
 
 import ldts.terrarialike.model.Player;
 import ldts.terrarialike.model.World;
+import ldts.terrarialike.utils.WorldUtils;
 
 public class PlayerController extends EntityController {
 
@@ -17,9 +18,9 @@ public class PlayerController extends EntityController {
     }
     
 
-    public void tick(World world){
+    public void tick(World world, WorldUtils worldUtils){
         int old_hp = entity.getHp();
-        applyGravity(world);
+        applyGravity(world, worldUtils);
         int new_hp = entity.getHp();
         if(new_hp < old_hp){
             Player player = (Player) entity;

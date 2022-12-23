@@ -2,6 +2,7 @@ package ldts.terrarialike.controller.events;
 
 import ldts.terrarialike.controller.GameEvent;
 import ldts.terrarialike.model.*;
+import ldts.terrarialike.utils.WorldUtils;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class ItemEventExecutorEvent implements GameEvent{
 
     }
     @Override
-    public List<GameEvent> execute(World world) {
-        return item.getInteraction().execute(world, interactionType, item);
+    public List<GameEvent> execute(World world, WorldUtils worldUtils) {
+        return item.getInteraction().execute(world, interactionType, item, worldUtils);
     }
 }
