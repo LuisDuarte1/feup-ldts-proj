@@ -23,7 +23,7 @@ public class EnemyGeneratorFactory {
 
     public EnemyGeneratorFactory(World world, WorldUtils worldUtils) {
         this.world = world;
-        this.random = new Random();
+        this.random = new Random(world.getSeed());
         this.worldUtils = worldUtils;
     }
 
@@ -50,7 +50,7 @@ public class EnemyGeneratorFactory {
         int yPos = worldUtils.findMaxHeightOfXPos(xPos, world) + 1;
 
         if(desiredChunk == null) throw new RuntimeException("Couldn't find chunkID");
-        if(megaProb <= 0.10){
+        if(megaProb <= 0.25){
             return new Skeleton(new Position(xPos, yPos),world.getPlayer());
         }
         return new Zombie(new Position(xPos,yPos),world.getPlayer());

@@ -3,15 +3,16 @@ package ldts.terrarialike.controller.Generators;
 import ldts.terrarialike.controller.generators.EnemyGeneratorFactory;
 import ldts.terrarialike.exceptions.InvalidPositionException;
 import ldts.terrarialike.exceptions.InvalidSizeException;
-import ldts.terrarialike.model.Chunk;
-import ldts.terrarialike.model.Skeleton;
-import ldts.terrarialike.model.World;
+import ldts.terrarialike.model.*;
 import ldts.terrarialike.utils.WorldUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EnemyGeneratorFactoryTest {
@@ -22,11 +23,41 @@ public class EnemyGeneratorFactoryTest {
     @BeforeEach
 
     public void setUp() {
+         world = Mockito.mock(World.class);
+         Block testBlock = Mockito.mock(Block.class);
         try {
-             world = new World();
-        } catch (InvalidSizeException | InvalidPositionException e) {
+            Mockito.when(testBlock.getPosition()).thenReturn(new Position(2,3));
+        } catch (InvalidPositionException e) {
             throw new RuntimeException(e);
         }
+
+        Chunk c0 = Mockito.mock(Chunk.class);
+         Mockito.when(c0.getChunkID()).thenReturn(0);
+         Mockito.when(c0.getBlocks()).thenReturn(List.of(testBlock));
+         Chunk c1 = Mockito.mock(Chunk.class);
+         Mockito.when(c1.getChunkID()).thenReturn(1);
+         Mockito.when(c1.getBlocks()).thenReturn(List.of(testBlock));
+
+         Chunk c2 = Mockito.mock(Chunk.class);
+         Mockito.when(c2.getChunkID()).thenReturn(2);
+         Mockito.when(c2.getBlocks()).thenReturn(List.of(testBlock));
+
+         Chunk c3 = Mockito.mock(Chunk.class);
+         Mockito.when(c3.getChunkID()).thenReturn(3);
+         Mockito.when(c3.getBlocks()).thenReturn(List.of(testBlock));
+
+         Chunk c4 = Mockito.mock(Chunk.class);
+         Mockito.when(c4.getChunkID()).thenReturn(4);
+         Mockito.when(c4.getBlocks()).thenReturn(List.of(testBlock));
+
+
+         Mockito.when(world.getChunks()).thenReturn(List.of(c0,c1,c2,c3,c4));
+
+         Mockito.when(world.getSeed()).thenReturn(0);
+         worldUtils = Mockito.mock(WorldUtils.class);
+        Mockito.when(worldUtils.getBlock(Mockito.any(), Mockito.eq(world))).thenReturn(testBlock);
+        Mockito.when(worldUtils.findMaxHeightOfXPos(Mockito.any(), Mockito.eq(world))).thenReturn(20);
+
     }
 
 
@@ -35,32 +66,24 @@ public class EnemyGeneratorFactoryTest {
 
     public void generateEnemyTest() throws InvalidSizeException, InvalidPositionException {
 
-            worldUtils = Mockito.mock(WorldUtils.class);
             EnemyGeneratorFactory enemyGeneratorFactory = new EnemyGeneratorFactory(world,worldUtils);
 
-            List<Chunk> chunks = world.getChunks();
+            Block block = Mockito.mock(Block.class);
+            Mockito.when(block.getPosition()).thenReturn(new Position(2,3));
 
-            Chunk chunk = chunks.get(0);
+            List<Enemy> enemies = new ArrayList<>();
 
-            Chunk sus = Mockito.mock(chunk.getClass());
+            for(int i = 0; i < 5; i++){
+                enemies.add(enemyGeneratorFactory.generateEnemy(i));
+            }
 
-            Mockito.when(sus.getChunkID()).thenReturn(-1);
+            Assertions.assertTrue(enemies.get(0) instanceof Zombie);
+            Assertions.assertTrue(enemies.get(1) instanceof Skeleton);
+            Assertions.assertTrue(enemies.get(2) instanceof Zombie);
+            Assertions.assertTrue(enemies.get(3) instanceof Zombie);
+            Assertions.assertTrue(enemies.get(4) instanceof Zombie);
 
-            enemyGeneratorFactory.generateEnemy(chunk.getChunkID());
-
-            Assertions.assertEquals(1, world.getEnemiesList().size());
-            //como fazer para testar se o inimigo é do tipo certo?
-
-          //  Assertions.assertTrue(world.getEnemiesList().get(0).getClass().isInstance(Zombie , Skeleton));
-        try {
-            enemyGeneratorFactory.generateEnemy(sus.getChunkID());
-
-            Assertions.fail("Should have thrown an exception");
-
-        }catch (RuntimeException e) {
-
-        Assertions.assertEquals("Couldn't find chunkID", e.getMessage());
-    }
+            Assertions.assertEquals(new Position(2,21),enemies.get(0).getPosition());
 
     }
 
@@ -70,22 +93,22 @@ public class EnemyGeneratorFactoryTest {
 
     public void generateInicialEnemiesTest() throws InvalidSizeException, InvalidPositionException {
 
-        worldUtils = Mockito.mock(WorldUtils.class);
         EnemyGeneratorFactory enemyGeneratorFactory = new EnemyGeneratorFactory(world,worldUtils);
 
         enemyGeneratorFactory.generateInitialEnemies();
 
-        Assertions.assertEquals(3, world.getEnemiesList().size());
+        ArgumentCaptor<Enemy> enemies = ArgumentCaptor.forClass(Enemy.class);
+
+        Mockito.verify(world, Mockito.times(2)).addEnemy(enemies.capture());
+
+        List<Enemy> enemyList = enemies.getAllValues();
+        Assertions.assertTrue(enemyList.get(0) instanceof Zombie);
+        Assertions.assertTrue(enemyList.get(1) instanceof Zombie);
+        Assertions.assertEquals(new Position(2,21),enemyList.get(0).getPosition());
+
 
     }
 
-    @Test
-
-    public void getMobsNearPlayerTest(){
-
-
-
-    }
 
 
 

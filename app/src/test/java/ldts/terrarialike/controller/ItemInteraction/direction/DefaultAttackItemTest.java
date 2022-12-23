@@ -92,6 +92,10 @@ public class DefaultAttackItemTest {
 
         gameEvents = defaultAttackItem.execute(world, InteractionType.ATTACK, item, worldUtils);
 
+        defaultAttackItem = new DefaultAttackItem();
+        gameEvents = defaultAttackItem.execute(world, InteractionType.ATTACK, item, worldUtils);
+
+
         Mockito.verify(enemy3, Mockito.times(0)).setHp(Mockito.anyInt());
         Mockito.verify(enemy4, Mockito.times(0)).setHp(Mockito.anyInt());
 
