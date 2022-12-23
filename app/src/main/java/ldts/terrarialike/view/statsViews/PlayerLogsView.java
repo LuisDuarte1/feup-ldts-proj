@@ -18,14 +18,14 @@ public class PlayerLogsView implements ElementView{
         //clear last logs
         graphics.fill(' ');
         TerminalSize drawableSize = graphics.getSize();
+        graphics.setBackgroundColor(TextColor.ANSI.BLACK);
+        graphics.setForegroundColor(TextColor.ANSI.WHITE);
         for(int i = 0; i < drawableSize.getRows(); i++){
             String log_message = playerLogs.getLogString(i);
             //truncate message if necessary
             if(log_message.length() > drawableSize.getColumns()){
                 log_message = log_message.substring(0,drawableSize.getColumns()-3) + "...";
             }
-            graphics.setBackgroundColor(TextColor.ANSI.BLACK);
-            graphics.setForegroundColor(TextColor.ANSI.WHITE);
             graphics.putString(0,i,log_message);
         }
     }

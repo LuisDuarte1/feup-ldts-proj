@@ -34,10 +34,9 @@ public class MoveRightEvent extends MoveEvent {
                 entity.setPosition(newPosition);
             }
 
-            return list;
 
-        } catch (InvalidPositionException e) {
-            return list;
+        } catch (InvalidPositionException ignored) {
         }
+        return  new ArrayList<>();
     }
 }

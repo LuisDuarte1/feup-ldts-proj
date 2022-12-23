@@ -29,7 +29,6 @@ public class InventoryEvent implements GameEvent {
     @Override
     public List<GameEvent> execute(World world, WorldUtils worldUtils) {
 
-        List<GameEvent> list = new ArrayList<>();
 
 
         try {
@@ -42,9 +41,8 @@ public class InventoryEvent implements GameEvent {
             }
         catch( InvalidIndexException | ItemNotFoundException | InventoryFullException | InvalidQuantityException e){
             e.printStackTrace();
-            return new ArrayList<>();
     }
-        return list;
+        return new ArrayList<>();
     }
 
 }

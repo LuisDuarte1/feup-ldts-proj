@@ -3,8 +3,11 @@ package ldts.terrarialike.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import ldts.terrarialike.exceptions.InvalidSizeException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import ldts.terrarialike.exceptions.InvalidPositionException;
@@ -79,5 +82,31 @@ public class WorldTest {
 
         assertEquals(0, w.getEnemiesList().size());
     }
-    
+
+    @Test
+    public void worldChunksSortTest() throws InvalidSizeException, InvalidPositionException {
+        World w = new World();
+
+        Chunk c1 = Mockito.mock(Chunk.class);
+        Chunk c2 = Mockito.mock(Chunk.class);
+        Chunk c3 = Mockito.mock(Chunk.class);
+
+        Mockito.when(c1.getChunkID()).thenReturn(0);
+        Mockito.when(c2.getChunkID()).thenReturn(1);
+        Mockito.when(c3.getChunkID()).thenReturn(-1);
+
+        w.tryAddChunk(c1);
+        w.tryAddChunk(c2);
+        w.tryAddChunk(c3);
+
+        Collections.swap(w.getChunks(),0,2);
+
+        w.sortChunks();
+
+        Assertions.assertEquals(List.of(c3,c2,c1),w.getChunks());
+
+
+
+
+    }
 }

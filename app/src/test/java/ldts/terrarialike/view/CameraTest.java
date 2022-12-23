@@ -27,28 +27,12 @@ public class CameraTest {
 
         Position newCameraPosition = camera.getPosition();
 
-        Assertions.assertEquals(new Position(6,0), camera.getPosition());
+        Assertions.assertEquals(new Position(51,0), camera.getPosition());
         camera.setNewPositionRelativeToPosition(new Position(-51,0));
 
         newCameraPosition = camera.getPosition();
-        Assertions.assertEquals(new Position(-6,0), camera.getPosition());
+        Assertions.assertEquals(new Position(-51,0), camera.getPosition());
 
-
-    }
-
-    @Test
-    public void moveByOneCameraTest() throws InvalidPositionException{
-        camera.setNewPositionRelativeToPosition(new Position((int) (50-(50*Camera.SPACE_LEFT)),0));
-
-        Position newCameraPosition = camera.getPosition();
-
-        Assertions.assertEquals(new Position(0,0), newCameraPosition);
-
-        camera.setNewPositionRelativeToPosition(new Position((int) (50-(50*Camera.SPACE_LEFT)) + 1,0));
-
-        newCameraPosition = camera.getPosition();
-
-        Assertions.assertEquals(new Position(1,0), newCameraPosition);
 
     }
 
@@ -73,6 +57,40 @@ public class CameraTest {
         visible = camera.isVisibleInCamera(new Position(0,51));
         Assertions.assertEquals(false, visible);
 
+
+
+    }
+
+    @Test
+    public void checkVisibleChunkTest(){
+        Assertions.assertTrue(camera.isChunkVisible(-2));
+
+        Assertions.assertTrue(camera.isChunkVisible(-1));
+
+        Assertions.assertTrue(camera.isChunkVisible(0));
+
+        Assertions.assertTrue(camera.isChunkVisible(1));
+
+        Assertions.assertFalse(camera.isChunkVisible(-100));
+        Assertions.assertFalse(camera.isChunkVisible(100));
+
+
+    }
+
+    @Test
+    public void invertYPositionTest() {
+        Assertions.assertEquals(new BoundlessPosition(1,1), camera.invertYPosition(new BoundlessPosition(1,99)));
+        Assertions.assertEquals(new BoundlessPosition(1,99), camera.invertYPosition(new BoundlessPosition(1,1)));
+        Assertions.assertEquals(new BoundlessPosition(1,50), camera.invertYPosition(new BoundlessPosition(1,50)));
+
+
+    }
+
+    @Test
+    public void getPositionRelativeToCameraTest() throws InvalidPositionException {
+        Assertions.assertEquals(new BoundlessPosition(50, 51), camera.getRelativePositionToCamera(new Position(0, 1)));
+        Assertions.assertEquals(new BoundlessPosition(50, 50), camera.getRelativePositionToCamera(new Position(0, 0)));
+        Assertions.assertEquals(new BoundlessPosition(49, 51), camera.getRelativePositionToCamera(new Position(-1, 1)));
 
 
     }

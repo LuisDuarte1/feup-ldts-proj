@@ -1,6 +1,8 @@
 package ldts.terrarialike.model;
 
 
+import java.util.Objects;
+
 public class BoundlessPosition {
     private int x;
     private int y;
@@ -29,5 +31,18 @@ public class BoundlessPosition {
     public void add(BoundlessPosition boundlessPosition){
         x += boundlessPosition.getX();
         y += boundlessPosition.getY();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BoundlessPosition that = (BoundlessPosition) o;
+        return x == that.x && y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

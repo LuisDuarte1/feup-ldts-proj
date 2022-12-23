@@ -1,5 +1,6 @@
 package ldts.terrarialike.view;
 
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import ldts.terrarialike.exceptions.InvalidPositionException;
@@ -51,7 +52,8 @@ public class PlayerViewTest {
         playerView.draw(textGraphics,player);
 
 
-        Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.GREEN);
+        Mockito.verify(textGraphics).setForegroundColor(TextColor.ANSI.MAGENTA);
+        Mockito.verify(textGraphics).enableModifiers(SGR.BOLD, SGR.BORDERED);
         Mockito.verify(textGraphics).setCharacter(1, 99, 'P');
     }
 }

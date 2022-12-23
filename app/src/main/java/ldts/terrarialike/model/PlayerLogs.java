@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PlayerLogs {
 
-    private static final int MAX_PLAYER_LOGS_ENTRIES=1000;
+    public static final int MAX_PLAYER_LOGS_ENTRIES=1000;
 
     private List<String> logList;
 

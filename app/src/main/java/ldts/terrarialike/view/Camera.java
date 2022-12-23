@@ -35,15 +35,6 @@ public class Camera {
     private Pair<Integer, Integer> getEdgesX(){
         return new Pair<Integer,Integer>(abs(position.getX())+getGameScreenMiddle().getX(),-(abs(position.getX())+getGameScreenMiddle().getX()));
     }
-
-    private int getBoundariesX() {
-        return (int) (getGameScreenMiddle().getX() - (getGameScreenMiddle().getX() * SPACE_LEFT));
-    }
-
-    private int getBoundariesY(){
-        return (int) (getGameScreenMiddle().getY() - ( getGameScreenMiddle().getY() * SPACE_LEFT));
-    }
-
     // we consider that the position will be centered in the gameScreen
     public void setNewPositionRelativeToPosition(Position relativePlayer) throws InvalidPositionException {
         this.position = relativePlayer;

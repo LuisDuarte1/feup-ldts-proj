@@ -45,6 +45,7 @@ public class Chunk {
                         +Integer.toString(block.getPosition().getX())+
                         " y:"+Integer.toString(block.getPosition().getY())
                         +" chunk_id:"+Integer.toString(position));
+                return;
             }
             blocks.add(block);
         }

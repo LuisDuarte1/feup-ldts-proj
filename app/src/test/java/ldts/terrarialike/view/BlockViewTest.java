@@ -13,12 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 public class BlockViewTest {
-    /*
-=======
-
-    //FIXME: add tests for BlockView
-
->>>>>>> origin/main
     private Camera camera;
     private TextGraphics textGraphics;
 
@@ -78,6 +72,5 @@ public class BlockViewTest {
         Mockito.verify(textGraphics, Mockito.never()).putString(1,99, "a");
 
     }
-    */
 
 }

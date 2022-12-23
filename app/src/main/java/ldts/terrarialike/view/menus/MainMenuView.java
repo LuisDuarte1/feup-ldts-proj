@@ -29,7 +29,7 @@ public class MainMenuView extends AbstractMenuView {
 
         componentList.add(new Button("Create World!", () -> {
             State worldState = new State(World.class, GameView.class, GameController.class);
-            if(world_seed != null){
+            if(world_seed != null || world_seed != ""){
                 int seedint = Integer.parseInt(world_seed);
                 worldState.initializeDataClass((int) seedint);
             } else{
