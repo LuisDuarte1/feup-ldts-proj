@@ -33,7 +33,7 @@ public class EnemyGeneratorFactory {
         }).toList();
     }
 
-    private Enemy generateEnemy(Integer chunkID) throws InvalidPositionException {
+    public Enemy generateEnemy(Integer chunkID) throws InvalidPositionException {
         float megaProb = random.nextFloat();
         Chunk desiredChunk = null;
         for(Chunk chunk: world.getChunks()){

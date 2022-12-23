@@ -27,7 +27,7 @@ public class MoveEventTest {
         Mockito.when(entity.getPosition()).thenReturn(new Position(5,5));
 
         World worldtest = Mockito.mock(World.class);
-        Mockito.when(worldtest.getBlock(Mockito.any())).thenReturn(null);
+       // Mockito.when(worldtest.getBlock(Mockito.any())).thenReturn(null); fdsafdsafdasfsafdasfdsaffdsdfsdfsdfsdfsdfs
 
 
 
@@ -49,7 +49,7 @@ public class MoveEventTest {
 
         //when he cant move
         Block blocktest = Mockito.mock(Block.class);
-        Mockito.when(worldtest.getBlock(Mockito.any())).thenReturn(blocktest);
+        //Mockito.when(worldtest.getBlock(Mockito.any())).thenReturn(blocktest);
 
         moveEvent = new MoveUpEvent(entity);
         moveEvent.execute(worldtest);
